@@ -6,15 +6,35 @@ void ofApp::setup(){
     ofBackground(0);
     ofSetLogLevel(OF_LOG_VERBOSE);
     
-    players.push_back(Player());
-    players.back().setup(300,200);
-    players.back().setBackground(ofColor(255));
+    players.assign(2, Player());
     
-    MediaImage * media0 = players.back().addContent<MediaImage>(LOOP_BY_TIME,2);
+    Player& player0(players[0]);
+    player0.setup(300,200);
+    player0.setBackground(ofColor(255));
+    
+    MediaImage * media0 = player0.addContent<MediaImage>();
     media0->load("test.png");
+    media0->setup(LOOP_BY_TIME,2);
     
-    MediaImage * media1 = players.back().addContent<MediaImage>(LOOP_BY_TIME,2);
-    media1->load("logo.png");
+    MediaVideo * media1 = player0.addContent<MediaVideo>();
+    media1->load("fingers.mov");
+    media1->setup(LOOP_BY_REP,2);
+    
+    player0.play();
+    
+    Player& player1(players[1]);
+    player1.setup(200,300);
+    player1.setBackground(ofColor(255));
+    
+    MediaImage * media2 = player1.addContent<MediaImage>();
+    media2->load("logo.png");
+    media2->setup(LOOP_BY_TIME,2);
+    
+    MediaVideo * media3 = player1.addContent<MediaVideo>();
+    media3->load("fingers.mov");
+    media3->setup(LOOP_BY_TIME,3);
+    
+    player1.play();
 
     time=ofGetElapsedTimef();
 }

@@ -19,25 +19,32 @@ class Media {
 public:
     virtual ~Media(){}
     
-    void setup(LoopType l,float p){
+    virtual void setup(LoopType l, float p){}
+    
+    void setupPlaytime(LoopType l,float p){
         playtime=0.0f;
         repetitions=0;
         loop=l;
         loopParameter=p;
     }
     
-    void update(float dt){
+    virtual void update(float dt){}
+    
+    void updatePlaytime(float dt){
         playtime+=dt;
     }
     
     virtual void draw(){}
     
-    void play(){
+    virtual void play(){}
+    virtual void stop(){}
+    
+    void startPlaytime(){
         playtime=0.0f;
         repetitions=0;
     }
     
-    void stop(){
+    void stopPlaytime(){
         playtime=0.0f;
         repetitions=0;
     }

@@ -10,6 +10,7 @@
 
 #include "ofMain.h"
 #include "MediaImage.hpp"
+#include "MediaVideo.hpp"
 
 class Player {
     
@@ -24,18 +25,18 @@ public:
     void setBackground(ofColor color);
     
     template<class M>
-    M* addContent(LoopType loop, float parameter){
+    M* addContent(){
         current=0;
         contents.push_back(new M());
-        contents.back()->setup(loop,parameter);
         return (M*) contents.back();
     }
     
     void update(float dt);
-    void draw();
     
     void play();
     void stop();
+    
+    void draw();
     
     vector< Media * > contents;
     int current;

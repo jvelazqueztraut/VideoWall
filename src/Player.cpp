@@ -54,24 +54,24 @@ void Player::update(float dt){
         }
         ofTranslate(x,y);
         ofScale(scale,scale);
-        ofLog()<<width<<","<<height;
-        ofLog()<<contents[current]->getWidth();
-        ofLog()<<x<<","<<y;
-        ofLog()<<scale;
         contents[current]->draw();
         ofPopMatrix();
     }
     fbo.end();
 }
 
-void Player::draw(){
-    fbo.draw(pos);
-}
-
 void Player::play(){
-    
+    stop();
+    if(current>=0){
+        contents[current]->play();
+    }
 }
 
 void Player::stop(){
-    
+    for(int i=0; i<contents.size(); i++)
+        contents[i]->stop();
+}
+
+void Player::draw(){
+    fbo.draw(pos);
 }

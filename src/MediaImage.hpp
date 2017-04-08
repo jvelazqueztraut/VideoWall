@@ -14,6 +14,21 @@
 class MediaImage : public Media, public ofImage {
     
 public:
+    void setup(LoopType l, float p){
+        Media::setupPlaytime(l,p);
+    }
+    
+    void update(float dt){
+        Media::updatePlaytime(dt);
+    }
+    
+    void play(){
+        Media::startPlaytime();
+    }
+    
+    void stop(){
+        Media::stopPlaytime();
+    }
     
     void draw(){
         ofImage::draw(0,0);
