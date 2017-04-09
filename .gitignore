@@ -73,3 +73,6 @@ ipch/
 
 # don't ignore the .gitignore file
 !.gitignore
+
+# Project specific
+bin/data/SessionData/*

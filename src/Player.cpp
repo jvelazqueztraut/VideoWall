@@ -25,7 +25,7 @@ void Player::setBackground(ofColor color){
 void Player::update(float dt){
     if(current>=0){
         contents[current]->update(dt);
-        if(contents[current]->isDone()){
+        if(contents.size()>1 && contents[current]->isDone()){
             contents[current]->stop();
             current++;
             if(current>=contents.size())

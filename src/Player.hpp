@@ -11,6 +11,7 @@
 #include "ofMain.h"
 #include "MediaImage.hpp"
 #include "MediaVideo.hpp"
+#include "MediaWeb.hpp"
 
 class Player {
     

@@ -16,7 +16,7 @@
                     "type": "image",
                     "load": "test.png",
                     "loop": "time",
-                    "loopParameter": 10
+                    "loopParameter": 2
                 },
                 {
                     "type": "video",
@@ -27,8 +27,8 @@
             ]
         },
         {
-            "width": 150,
-            "height": 300,
+            "width": 500,
+            "height": 200,
             "x": 20,
             "y": 20,
             "background":[ 150, 150, 255],
@@ -40,10 +40,10 @@
                     "loopParameter": 2
                 },
                 {
-                    "type": "image",
-                    "load": "logo.png",
+                    "type": "web",
+                    "load": "http://www.google.com",
                     "loop": "time",
-                    "loopParameter": 4
+                    "loopParameter": 10
                 }
             ]
         }

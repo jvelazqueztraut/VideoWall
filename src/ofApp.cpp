@@ -42,6 +42,12 @@ void ofApp::setup(){
                         video->load(settings["players"][i]["contents"][m]["load"].asString());
                         media = video;
                     }
+                    else if(settings["players"][i]["contents"][m]["type"].asString() == "web"){
+                        MediaWeb * web = player.addContent<MediaWeb>();
+                        web->ofxAwesomium::setup(player.width,player.height);
+                        web->loadURL(settings["players"][i]["contents"][m]["load"].asString());
+                        media = web;
+                    }
                     else{
                         MediaImage * image = player.addContent<MediaImage>();
                         image->load("logo.png");
