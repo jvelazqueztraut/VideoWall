@@ -40,8 +40,8 @@
                     "loopParameter": 2
                 },
                 {
-                    "type": "web",
-                    "load": "http://www.google.com",
+                    "type": "youtube",
+                    "load": "Uv8wJlvBqgQ",
                     "loop": "time",
                     "loopParameter": 10
                 }

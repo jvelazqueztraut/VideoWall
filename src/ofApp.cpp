@@ -48,6 +48,14 @@ void ofApp::setup(){
                         web->loadURL(settings["players"][i]["contents"][m]["load"].asString());
                         media = web;
                     }
+                    else if(settings["players"][i]["contents"][m]["type"].asString() == "youtube"){
+                        MediaWeb * web = player.addContent<MediaWeb>();
+                        web->ofxAwesomium::setup(player.width,player.height);
+                        string videoId = settings["players"][i]["contents"][m]["load"].asString();
+                        string URL = "https://www.youtube.com/embed/"+ videoId + "?autoplay=1&loop=1&controls=0&modestbranding=1&showinfo=0";
+                        web->loadURL(URL);
+                        media = web;
+                    }
                     else{
                         MediaImage * image = player.addContent<MediaImage>();
                         image->load("logo.png");
