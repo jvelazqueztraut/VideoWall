@@ -52,7 +52,7 @@ void ofApp::setup(){
                         MediaWeb * web = player.addContent<MediaWeb>();
                         web->ofxAwesomium::setup(player.width,player.height);
                         string videoId = settings["players"][i]["contents"][m]["load"].asString();
-                        string URL = "https://www.youtube.com/embed/"+ videoId + "?autoplay=1&loop=1&controls=0&modestbranding=1&showinfo=0";
+                        string URL = "https://www.youtube.com/embed/"+ videoId + "?version=3&playlist=" + videoId + "&autoplay=1&loop=1&controls=0&modestbranding=1&showinfo=0";
                         web->loadURL(URL);
                         media = web;
                     }
