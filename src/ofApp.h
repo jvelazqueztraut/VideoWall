@@ -2,6 +2,7 @@
 
 #include "ofMain.h"
 #include "Player.hpp"
+#include "ofxJSON.h"
 
 class ofApp : public ofBaseApp{
 
@@ -23,6 +24,8 @@ class ofApp : public ofBaseApp{
 		void gotMessage(ofMessage msg);
     
     vector< Player > players;
+    
+    ofxJSONElement settings;
     
     float time;
 };

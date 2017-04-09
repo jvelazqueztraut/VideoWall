@@ -6,35 +6,65 @@ void ofApp::setup(){
     ofBackground(0);
     ofSetLogLevel(OF_LOG_VERBOSE);
     
-    players.assign(2, Player());
+    std::string file = "settings.json";
     
-    Player& player0(players[0]);
-    player0.setup(300,200);
-    player0.setBackground(ofColor(255));
-    
-    MediaImage * media0 = player0.addContent<MediaImage>();
-    media0->load("test.png");
-    media0->setup(LOOP_BY_TIME,2);
-    
-    MediaVideo * media1 = player0.addContent<MediaVideo>();
-    media1->load("fingers.mov");
-    media1->setup(LOOP_BY_REP,2);
-    
-    player0.play();
-    
-    Player& player1(players[1]);
-    player1.setup(200,300);
-    player1.setBackground(ofColor(255));
-    
-    MediaImage * media2 = player1.addContent<MediaImage>();
-    media2->load("logo.png");
-    media2->setup(LOOP_BY_TIME,2);
-    
-    MediaVideo * media3 = player1.addContent<MediaVideo>();
-    media3->load("fingers.mov");
-    media3->setup(LOOP_BY_TIME,3);
-    
-    player1.play();
+    // Now parse the settings
+    if (settings.open(file)){
+        ofLogNotice("ofApp::setup") << settings.getRawString();
+        
+        if(settings.isMember("width") && settings.isMember("height"))
+            ofSetWindowShape(settings["width"].asInt(),settings["height"].asInt());
+        if(settings.isMember("fullscreen"))
+            ofSetFullscreen(settings["fullscreen"].asBool());
+        if(settings.isMember("framerate"))
+            ofSetFrameRate(settings["framerate"].asInt());
+        if(settings.isMember("background"))
+            ofBackground(settings["background"][0].asInt(),settings["background"][1].asInt(),settings["background"][2].asInt());
+        
+        if(settings.isMember("players")){
+            players.assign(settings["players"].size(), Player());
+            
+            for(int i=0; i<settings["players"].size();i++){
+                Player& player(players[i]);
+                player.setup(settings["players"][i]["width"].asInt(),settings["players"][i]["height"].asInt());
+                player.setPos(settings["players"][i]["x"].asInt(),settings["players"][i]["y"].asInt());
+                player.setBackground(ofColor(settings["players"][i]["background"][0].asInt(),settings["players"][i]["background"][1].asInt(),settings["players"][i]["background"][2].asInt()));
+                
+                for(int m=0; m<settings["players"][i]["contents"].size(); m++){
+                    Media * media;
+                    if(settings["players"][i]["contents"][m]["type"].asString() == "image"){
+                        MediaImage * image = player.addContent<MediaImage>();
+                        image->load(settings["players"][i]["contents"][m]["load"].asString());
+                        media = image;
+                    }
+                    else if(settings["players"][i]["contents"][m]["type"].asString() == "video"){
+                        MediaVideo * video = player.addContent<MediaVideo>();
+                        video->load(settings["players"][i]["contents"][m]["load"].asString());
+                        media = video;
+                    }
+                    else{
+                        MediaImage * image = player.addContent<MediaImage>();
+                        image->load("logo.png");
+                        media = image;
+                    }
+                    if(settings["players"][i]["contents"][m]["loop"].asString() == "time"){
+                        media->setup(LOOP_BY_TIME,settings["players"][i]["contents"][m]["loopParameter"].asFloat());
+                    }
+                    else if(settings["players"][i]["contents"][m]["loop"].asString() == "repetitions"){
+                        media->setup(LOOP_BY_REP,settings["players"][i]["contents"][m]["loopParameter"].asInt());
+                    }
+                    else{
+                        media->setup(PLAY_ONCE,0);
+                    }
+                }
+                
+                player.play();
+            }
+        }
+    }
+    else{
+        ofLogError("ofApp::setup")  << "Failed to parse settings" << endl;
+    }
 
     time=ofGetElapsedTimef();
 }

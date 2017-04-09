@@ -1,0 +1,51 @@
+{
+    "width": 1024,
+    "height": 768,
+    "fullscreen": false,
+    "framerate": 60,
+    "background":[ 0, 0, 0],
+    "players": [
+        {
+            "width": 300,
+            "height": 200,
+            "x": 0,
+            "y": 0,
+            "background":[ 255, 255, 255],
+            "contents": [
+                {
+                    "type": "image",
+                    "load": "test.png",
+                    "loop": "time",
+                    "loopParameter": 10
+                },
+                {
+                    "type": "video",
+                    "load": "fingers.mov",
+                    "loop": "none",
+                    "loopParameter": 0
+                }
+            ]
+        },
+        {
+            "width": 150,
+            "height": 300,
+            "x": 20,
+            "y": 20,
+            "background":[ 150, 150, 255],
+            "contents": [
+                {
+                    "type": "image",
+                    "load": "test.png",
+                    "loop": "time",
+                    "loopParameter": 2
+                },
+                {
+                    "type": "image",
+                    "load": "logo.png",
+                    "loop": "time",
+                    "loopParameter": 4
+                }
+            ]
+        }
+    ]
+}
