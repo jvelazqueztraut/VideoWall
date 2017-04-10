@@ -1,0 +1,19 @@
+<ion-header>
+  <ion-navbar>
+    <button ion-button menuToggle>
+      <ion-icon name="menu"></ion-icon>
+    </button>
+    <ion-title>Configurations</ion-title>
+  </ion-navbar>
+</ion-header>
+
+<ion-content>
+  <ion-list>
+    <button ion-item *ngFor="let config of configurations" (click)="configTapped($event, config)">
+      {{config.title}}
+      <div class="config-note" item-right>
+        {{config.note}}
+      </div>
+    </button>
+  </ion-list>
+</ion-content>

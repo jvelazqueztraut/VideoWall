@@ -1,0 +1,17 @@
+<ion-header>
+  <ion-navbar>
+    <button menuToggle *ngIf="!selectedItem">
+      <ion-icon name="menu"></ion-icon>
+    </button>
+    <ion-title>Configuration Details</ion-title>
+  </ion-navbar>
+</ion-header>
+
+<ion-content>
+  <h3 text-center *ngIf="selectedConfig">
+    {{selectedConfig.title}}
+  </h3>
+  <h4 text-center *ngIf="selectedConfig">
+    You navigated here from <b>{{selectedConfig.title}}</b>
+  </h4>
+</ion-content>
