@@ -25,8 +25,16 @@ public:
         ofxAwesomium::update();
     }
     
+    void load(string u,bool r=false){
+        URL=u;
+        ofxAwesomium::loadURL(URL);
+        reload=r;
+    }
+    
     void play(){
         Media::startPlaytime();
+        if(reload)
+            ofxAwesomium::loadURL(URL);
     }
     
     void stop(){
@@ -53,4 +61,7 @@ public:
     
     float getWidth(){return ofxAwesomium::getWidth();}
     float getHeight(){return ofxAwesomium::getHeight();}
+    
+    bool reload;
+    string URL;
 };

@@ -46,6 +46,28 @@
                     "loopParameter": 10
                 }
             ]
+        },
+        {
+            "width": 500,
+            "height": 200,
+            "x": 320,
+            "y": 320,
+            "background":[ 150, 150, 255],
+            "contents": [
+                {
+                    "type": "image",
+                    "load": "test.png",
+                    "loop": "time",
+                    "loopParameter": 2
+                },
+                {
+                    "type": "web",
+                    "load": "http://www.mapcrunch.com/",
+                    "reload": true,
+                    "loop": "time",
+                    "loopParameter": 5
+                }
+            ]
         }
     ]
 }

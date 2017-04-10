@@ -45,7 +45,7 @@ void ofApp::setup(){
                     else if(settings["players"][i]["contents"][m]["type"].asString() == "web"){
                         MediaWeb * web = player.addContent<MediaWeb>();
                         web->ofxAwesomium::setup(player.width,player.height);
-                        web->loadURL(settings["players"][i]["contents"][m]["load"].asString());
+                        web->load(settings["players"][i]["contents"][m]["load"].asString(),settings["players"][i]["contents"][m]["reload"].asBool());
                         media = web;
                     }
                     else if(settings["players"][i]["contents"][m]["type"].asString() == "youtube"){
@@ -53,9 +53,9 @@ void ofApp::setup(){
                         web->ofxAwesomium::setup(player.width,player.height);
                         string videoId = settings["players"][i]["contents"][m]["load"].asString();
                         if(videoId.substr(0,2) == "PL") //Youtube playlist
-                            web->loadURL("https://www.youtube.com/embed?listType=playlist&list="+ videoId + "&version=3&autoplay=1&loop=1&controls=0&modestbranding=1&showinfo=0");
+                            web->load("https://www.youtube.com/embed?listType=playlist&list="+ videoId + "&version=3&autoplay=1&loop=1&controls=0&modestbranding=1&showinfo=0");
                         else //Youtube video in loop mode
-                            web->loadURL("https://www.youtube.com/embed/"+ videoId + "?version=3&playlist=" + videoId + "&autoplay=1&loop=1&controls=0&modestbranding=1&showinfo=0");
+                            web->load("https://www.youtube.com/embed/"+ videoId + "?version=3&playlist=" + videoId + "&autoplay=1&loop=1&controls=0&modestbranding=1&showinfo=0");
                         media = web;
                     }
                     else{
