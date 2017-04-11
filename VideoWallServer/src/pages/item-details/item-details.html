@@ -30,7 +30,7 @@
     <br>Background: {{selectedConfig.background.r}}, {{selectedConfig.background.b}}, {{selectedConfig.background.b}}
   -->
   </ion-list>
-
+  <ion-content padding>
   <ion-list>
     <ion-item *ngFor="let player of selectedConfig.players">
       <ion-list>
@@ -38,14 +38,18 @@
         <ion-item *ngFor="let content of player.contents">
           <ion-icon name="leaf" item-left></ion-icon>
           <h2>{{content.load}}</h2>
-          <p>{{content.type}} • {{content.loop}} • {{content.loopParameter}}</p>
-          <button ion-button clear item-right (click)="openModal($event,content)">Edit</button>
+          <p>{{content.type}} • {{content.loop}}</p>
+          <button ion-button clear item-right (click)="openContent($event,content)">Edit</button>
         </ion-item>
-        <a ion-item (click)="addContent()">
+        <a ion-item (click)="addContent($event,player)">
           <ion-icon name="rose" item-left></ion-icon>
-          <h2>Nuevo item</h2>
+          <h2>Add content</h2>
         </a>
       </ion-list>
     </ion-item>
+    <a ion-item (click)="addPlayer($event,selectedConfig)">
+      <ion-icon name="rose" item-left></ion-icon>
+      <h2>New player</h2>
+    </a>
   </ion-list>
 </ion-content>

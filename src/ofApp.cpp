@@ -64,10 +64,10 @@ void ofApp::setup(){
                         media = image;
                     }
                     if(settings["players"][i]["contents"][m]["loop"].asString() == "time"){
-                        media->setup(LOOP_BY_TIME,settings["players"][i]["contents"][m]["loopParameter"].asFloat());
+                        media->setup(LOOP_BY_TIME,settings["players"][i]["contents"][m]["time"].asFloat());
                     }
                     else if(settings["players"][i]["contents"][m]["loop"].asString() == "repetitions"){
-                        media->setup(LOOP_BY_REP,settings["players"][i]["contents"][m]["loopParameter"].asInt());
+                        media->setup(LOOP_BY_REP,settings["players"][i]["contents"][m]["repetitions"].asInt());
                     }
                     else{
                         media->setup(PLAY_ONCE,0);

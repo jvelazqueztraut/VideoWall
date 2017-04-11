@@ -17,9 +17,32 @@ export class ItemDetailsPage {
     this.selectedConfig = this.navParams.get('config');
   }
 
-  openModal(event,content) {
+  addPlayer(event, config) {
+    config.players.push({
+      id: config.players.length+1,
+      zones : [],
+      background:{ r: 0, g: 0, b: 0 },
+      contents: []
+    });
+  }
+
+  openContent(event,content) {
     this.navCtrl.push(ContentPage,{
       content: content
+    });
+  }
+
+  addContent(event, player) {
+    player.contents.push({
+      type: "image",
+      load: "",
+      reload: false,
+      loop: "none",
+      time: 0,
+      repetitions: 0
+    });
+    this.navCtrl.push(ContentPage,{
+      content: player.contents[player.contents.length-1]
     });
   }
 }

@@ -9,7 +9,7 @@
 
 <ion-content>
   <ion-list>
-    <button ion-item *ngFor="let config of configurations" (click)="configTapped($event, config)">
+    <button ion-item *ngFor="let config of configurations" (click)="openConfig($event, config)">
       {{config.title}}
       <div class="config-note" item-right>
         {{config.note}}

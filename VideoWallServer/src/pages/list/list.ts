@@ -26,7 +26,8 @@ export class ListPage {
         load: string,
         reload: boolean,
         loop: string,
-        loopParameter: number
+        time: number,
+        repetitions: number
       }>
     }>
   }>;
@@ -51,14 +52,16 @@ export class ListPage {
             load: "test.png",
             reload: false,
             loop: "time",
-            loopParameter: 10
+            time: 10,
+            repetitions: 5
           },
           {
             type: "image",
             load: "test.png",
             reload: false,
             loop: "time",
-            loopParameter: 10
+            time: 10,
+            repetitions: 5
           } ] 
         },
         {
@@ -70,14 +73,15 @@ export class ListPage {
             load: "test.png",
             reload: false,
             loop: "time",
-            loopParameter: 10
+            time: 10,
+            repetitions: 5
           } ]
         } ]
       });
     }
   }
 
-  configTapped(event, config) {
+  openConfig(event, config) {
     this.navCtrl.push(ItemDetailsPage, {
       config: config
     });
