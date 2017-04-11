@@ -1,17 +1,51 @@
 <ion-header>
   <ion-navbar>
-    <button menuToggle *ngIf="!selectedItem">
+    <button menuToggle *ngIf="!selectedConfig">
       <ion-icon name="menu"></ion-icon>
     </button>
-    <ion-title>Configuration Details</ion-title>
+    <ion-title>{{selectedConfig.title}}</ion-title>
   </ion-navbar>
 </ion-header>
 
 <ion-content>
-  <h3 text-center *ngIf="selectedConfig">
-    {{selectedConfig.title}}
-  </h3>
-  <h4 text-center *ngIf="selectedConfig">
-    You navigated here from <b>{{selectedConfig.title}}</b>
-  </h4>
+  <ion-list *ngIf="selectedConfig">
+    <ion-list-header> Settings </ion-list-header>
+    <ion-item>
+      <ion-label>Width</ion-label>
+      <ion-input type="number" [(ngModel)]="selectedConfig.width"></ion-input>
+    </ion-item>
+    <ion-item>
+      <ion-label>Height</ion-label>
+      <ion-input type="number" [(ngModel)]="selectedConfig.height"></ion-input>
+    </ion-item>
+    <ion-item>
+      <ion-label>Framerate</ion-label>
+      <ion-input type="number" [(ngModel)]="selectedConfig.framerate"></ion-input>
+    </ion-item>
+    <ion-item>
+      <ion-label>Fullscreen</ion-label>
+      <ion-toggle [(ngModel)]="selectedConfig.fullscreen"></ion-toggle>
+    </ion-item>
+<!-- 
+    <br>Background: {{selectedConfig.background.r}}, {{selectedConfig.background.b}}, {{selectedConfig.background.b}}
+  -->
+  </ion-list>
+
+  <ion-list>
+    <ion-item *ngFor="let player of selectedConfig.players">
+      <ion-list>
+        <ion-list-header> Player Id: {{player.id}} Zones: {{player.zones}} Background: {{player.background.r}}, {{player.background.b}}, {{player.background.b}}</ion-list-header>
+        <ion-item *ngFor="let content of player.contents">
+          <ion-icon name="leaf" item-left></ion-icon>
+          <h2>{{content.load}}</h2>
+          <p>{{content.type}} • {{content.loop}} • {{content.loopParameter}}</p>
+          <button ion-button clear item-right (click)="openModal($event,content)">Edit</button>
+        </ion-item>
+        <a ion-item (click)="addContent()">
+          <ion-icon name="rose" item-left></ion-icon>
+          <h2>Nuevo item</h2>
+        </a>
+      </ion-list>
+    </ion-item>
+  </ion-list>
 </ion-content>

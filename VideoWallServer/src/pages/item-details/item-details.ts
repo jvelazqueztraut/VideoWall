@@ -1,6 +1,8 @@
 import { Component } from '@angular/core';
 
-import { NavController, NavParams } from 'ionic-angular';
+import { NavController, NavParams, ModalController } from 'ionic-angular';
+
+import { ContentPage } from '../content/content';
 
 
 @Component({
@@ -10,8 +12,14 @@ import { NavController, NavParams } from 'ionic-angular';
 export class ItemDetailsPage {
   selectedConfig: any;
 
-  constructor(public navCtrl: NavController, public navParams: NavParams) {
+  constructor(public navCtrl: NavController, public navParams: NavParams, public modalCtrl: ModalController) {
     // If we navigated to this page, we will have an item available as a nav param
-    this.selectedConfig = navParams.get('config');
+    this.selectedConfig = this.navParams.get('config');
+  }
+
+  openModal(event,content) {
+    this.navCtrl.push(ContentPage,{
+      content: content
+    });
   }
 }

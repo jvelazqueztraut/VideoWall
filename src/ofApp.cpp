@@ -19,7 +19,7 @@ void ofApp::setup(){
         if(settings.isMember("framerate"))
             ofSetFrameRate(settings["framerate"].asInt());
         if(settings.isMember("background"))
-            ofBackground(settings["background"][0].asInt(),settings["background"][1].asInt(),settings["background"][2].asInt());
+            ofBackground(settings["background"]["r"].asInt(),settings["background"]["g"].asInt(),settings["background"]["b"].asInt());
         
         if(settings.isMember("players")){
             players.assign(settings["players"].size(), Player());
@@ -28,7 +28,7 @@ void ofApp::setup(){
                 Player& player(players[i]);
                 player.setup(settings["players"][i]["width"].asInt(),settings["players"][i]["height"].asInt());
                 player.setPos(settings["players"][i]["x"].asInt(),settings["players"][i]["y"].asInt());
-                player.setBackground(ofColor(settings["players"][i]["background"][0].asInt(),settings["players"][i]["background"][1].asInt(),settings["players"][i]["background"][2].asInt()));
+                player.setBackground(ofColor(settings["players"][i]["background"]["r"].asInt(),settings["players"][i]["background"]["g"].asInt(),settings["players"][i]["background"]["b"].asInt()));
                 
                 for(int m=0; m<settings["players"][i]["contents"].size(); m++){
                     Media * media;

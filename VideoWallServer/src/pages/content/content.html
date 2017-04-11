@@ -1,0 +1,42 @@
+<ion-header>
+  <ion-navbar>
+    <button menuToggle *ngIf="!selectedConfig">
+      <ion-icon name="menu"></ion-icon>
+    </button>
+    <ion-title>Content</ion-title>
+  </ion-navbar>
+</ion-header>
+
+<ion-content>
+  <ion-list *ngIf="selectedContent">
+      <ion-item>
+        <ion-label>Type</ion-label>
+        <ion-select [(ngModel)]="selectedContent.type">
+          <ion-option value="image">Image</ion-option>
+          <ion-option value="video">Video</ion-option>
+          <ion-option value="web">Web</ion-option>
+          <ion-option value="youtube">Youtube</ion-option>
+        </ion-select>
+      </ion-item>
+      <ion-item>
+        <ion-label>Load/file</ion-label>
+        <ion-input type="text" [(ngModel)]="selectedContent.load"></ion-input>
+      </ion-item>
+      <ion-item>
+        <ion-label>Reload</ion-label>
+        <ion-toggle [(ngModel)]="selectedContent.reload"></ion-toggle>
+      </ion-item>
+      <ion-item>
+        <ion-label>Loop</ion-label>
+        <ion-select [(ngModel)]="selectedContent.loop">
+          <ion-option value="none">None</ion-option>
+          <ion-option value="time">By time</ion-option>
+          <ion-option value="repetitions">By repetitions</ion-option>
+        </ion-select>
+      </ion-item>
+      <ion-item>
+        <ion-label>Loop Parameter</ion-label>
+        <ion-input type="number" [(ngModel)]="selectedContent.loopParameter"></ion-input>
+      </ion-item>
+    </ion-list>
+</ion-content>

@@ -16,13 +16,11 @@ export class ListPage {
     height: number,
     fullscreen: boolean,
     framerate: number,
-    background: { red: number, green: number, blue: number },
+    background: { r: number, g: number, b: number },
     players: Array<{
-      width: number,
-      height: number,
-      x: number,
-      y: number,
-      background:{ red: number, green: number, blue: number },
+      id: number,
+      zones: number[],
+      background:{ r: number, g: number, b: number },
       contents: Array<{
         type: string,
         load: string,
@@ -43,13 +41,30 @@ export class ListPage {
         height: 1080,
         fullscreen: true,
         framerate: 60,
-        background: { red: 0, green: 0, blue: 0 },
+        background: { r: 0, g: 0, b: 0 },
         players: [ {
-          width: 500,
-          height: 300,
-          x: 0,
-          y: 0,
-          background:{ red: 255, green: 255, blue: 255 },
+          id: 1,
+          zones : [0,1,2],
+          background:{ r: 255, g: 255, b: 255 },
+          contents: [ {
+            type: "image",
+            load: "test.png",
+            reload: false,
+            loop: "time",
+            loopParameter: 10
+          },
+          {
+            type: "image",
+            load: "test.png",
+            reload: false,
+            loop: "time",
+            loopParameter: 10
+          } ] 
+        },
+        {
+          id: 2,
+          zones : [4,5,7,8],
+          background:{ r: 255, g: 255, b: 255 },
           contents: [ {
             type: "image",
             load: "test.png",
