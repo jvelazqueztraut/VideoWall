@@ -45,4 +45,19 @@ export class ItemDetailsPage {
       content: player.contents[player.contents.length-1]
     });
   }
+
+  changeZonePlayer(zone) {
+    this.selectedConfig.zones[zone]++;
+    if(this.selectedConfig.zones[zone]>=this.selectedConfig.players.length)
+      this.selectedConfig.zones[zone]=0;
+  }
+
+  getPlayerZones(player) {
+    let zones: Array<number> = [];
+    for(let i =0; i < this.selectedConfig.zones.length; i++){
+      if(this.selectedConfig.zones[i] == player)
+        zones.push(i);
+    }
+    return zones;
+  }
 }

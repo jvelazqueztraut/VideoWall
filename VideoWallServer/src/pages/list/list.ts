@@ -17,9 +17,9 @@ export class ListPage {
     fullscreen: boolean,
     framerate: number,
     background: { r: number, g: number, b: number },
+    zones: number[],
     players: Array<{
       id: number,
-      zones: number[],
       background:{ r: number, g: number, b: number },
       contents: Array<{
         type: string,
@@ -43,9 +43,9 @@ export class ListPage {
         fullscreen: true,
         framerate: 60,
         background: { r: 0, g: 0, b: 0 },
+        zones: [ 0, 0, 0, 0, 0, 0, 0 , 0, 0 ],
         players: [ {
-          id: 1,
-          zones : [0,1,2],
+          id: 0,
           background:{ r: 255, g: 255, b: 255 },
           contents: [ {
             type: "image",
@@ -65,8 +65,7 @@ export class ListPage {
           } ] 
         },
         {
-          id: 2,
-          zones : [4,5,7,8],
+          id: 1,
           background:{ r: 255, g: 255, b: 255 },
           contents: [ {
             type: "image",

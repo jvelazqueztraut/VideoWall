@@ -9,7 +9,7 @@
 
 <ion-content>
   <ion-list *ngIf="selectedConfig">
-    <ion-list-header> Settings </ion-list-header>
+    <ion-list-header>Settings</ion-list-header>
     <ion-item>
       <ion-label>Width</ion-label>
       <ion-input type="number" [(ngModel)]="selectedConfig.width"></ion-input>
@@ -26,29 +26,73 @@
       <ion-label>Fullscreen</ion-label>
       <ion-toggle [(ngModel)]="selectedConfig.fullscreen"></ion-toggle>
     </ion-item>
-<!-- 
-    <br>Background: {{selectedConfig.background.r}}, {{selectedConfig.background.b}}, {{selectedConfig.background.b}}
-  -->
+    <ion-item>
+      <ion-label>Background Color</ion-label>
+      <ion-input type="number" [(ngModel)]="selectedConfig.background.r"></ion-input>
+      <ion-input type="number" [(ngModel)]="selectedConfig.background.g"></ion-input>
+      <ion-input type="number" [(ngModel)]="selectedConfig.background.b"></ion-input>
+    </ion-item>
   </ion-list>
-  <ion-content padding>
+  <ion-grid class="videowall-grid">
+    <ion-row>
+      <ion-col offset-3 col-2>
+        <a (click)="changeZonePlayer(0)">{{selectedConfig.zones[0]}}</a>
+      </ion-col>
+      <ion-col col-2>
+        <a (click)="changeZonePlayer(1)">{{selectedConfig.zones[1]}}</a>
+      </ion-col>      
+      <ion-col col-2>
+        <a (click)="changeZonePlayer(2)">{{selectedConfig.zones[2]}}</a>
+      </ion-col>
+    </ion-row>
+    <ion-row>
+      <ion-col offset-3 col-2>
+        <a (click)="changeZonePlayer(3)">{{selectedConfig.zones[3]}}</a>
+      </ion-col>
+      <ion-col col-2>
+        <a (click)="changeZonePlayer(4)">{{selectedConfig.zones[4]}}</a>
+      </ion-col>      
+      <ion-col col-2>
+        <a (click)="changeZonePlayer(5)">{{selectedConfig.zones[5]}}</a>
+      </ion-col>
+    </ion-row>
+    <ion-row>
+      <ion-col offset-3 col-2>
+        <a (click)="changeZonePlayer(6)">{{selectedConfig.zones[6]}}</a>
+      </ion-col>
+      <ion-col col-2>
+        <a (click)="changeZonePlayer(7)">{{selectedConfig.zones[7]}}</a>
+      </ion-col>      
+      <ion-col col-2>
+        <a (click)="changeZonePlayer(8)">{{selectedConfig.zones[8]}}</a>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
   <ion-list>
     <ion-item *ngFor="let player of selectedConfig.players">
       <ion-list>
-        <ion-list-header> Player Id: {{player.id}} Zones: {{player.zones}} Background: {{player.background.r}}, {{player.background.b}}, {{player.background.b}}</ion-list-header>
+        <ion-list-header>
+          <h2>Player Id: {{player.id}}</h2>
+          <p>Zones: {{getPlayerZones(player.id)}}</p>
+          <p>Background: {{player.background.r}}, {{player.background.g}}, {{player.background.b}}</p>
+        </ion-list-header>
         <ion-item *ngFor="let content of player.contents">
-          <ion-icon name="leaf" item-left></ion-icon>
+          <ion-icon *ngIf="content.type=='image'" name="image" item-left></ion-icon>
+          <ion-icon *ngIf="content.type=='video'" name="play" item-left></ion-icon>
+          <ion-icon *ngIf="content.type=='web'" name="globe" item-left></ion-icon>
+          <ion-icon *ngIf="content.type=='youtube'" name="youtube" item-left></ion-icon>
           <h2>{{content.load}}</h2>
           <p>{{content.type}} • {{content.loop}}</p>
           <button ion-button clear item-right (click)="openContent($event,content)">Edit</button>
         </ion-item>
         <a ion-item (click)="addContent($event,player)">
-          <ion-icon name="rose" item-left></ion-icon>
+          <ion-icon name="add" item-left></ion-icon>
           <h2>Add content</h2>
         </a>
       </ion-list>
     </ion-item>
     <a ion-item (click)="addPlayer($event,selectedConfig)">
-      <ion-icon name="rose" item-left></ion-icon>
+      <ion-icon name="add" item-left></ion-icon>
       <h2>New player</h2>
     </a>
   </ion-list>
