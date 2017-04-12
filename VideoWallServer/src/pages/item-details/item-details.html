@@ -3,13 +3,20 @@
     <button menuToggle *ngIf="!selectedConfig">
       <ion-icon name="menu"></ion-icon>
     </button>
-    <ion-title>{{selectedConfig.title}}</ion-title>
+    <ion-title>Configuration Details</ion-title>
   </ion-navbar>
 </ion-header>
 
 <ion-content>
   <ion-list *ngIf="selectedConfig">
-    <ion-list-header>Settings</ion-list-header>
+    <ion-item>
+      <ion-label>Active</ion-label>
+      <ion-toggle [(ngModel)]="selectedConfig.active" block (click)="setConfig()"></ion-toggle>
+    </ion-item>
+    <ion-item>
+      <ion-label>Title</ion-label>
+      <ion-input type="text" [(ngModel)]="selectedConfig.title"></ion-input>
+    </ion-item>
     <ion-item>
       <ion-label>Width</ion-label>
       <ion-input type="number" [(ngModel)]="selectedConfig.width"></ion-input>
@@ -71,27 +78,44 @@
   <ion-list>
     <ion-item *ngFor="let player of selectedConfig.players">
       <ion-list>
-        <ion-list-header>
-          <h2>Player Id: {{player.id}}</h2>
-          <p>Zones: {{getPlayerZones(player.id)}}</p>
-          <p>Background: {{player.background.r}}, {{player.background.g}}, {{player.background.b}}</p>
-        </ion-list-header>
-        <ion-item *ngFor="let content of player.contents">
-          <ion-icon *ngIf="content.type=='image'" name="image" item-left></ion-icon>
-          <ion-icon *ngIf="content.type=='video'" name="play" item-left></ion-icon>
-          <ion-icon *ngIf="content.type=='web'" name="globe" item-left></ion-icon>
-          <ion-icon *ngIf="content.type=='youtube'" name="youtube" item-left></ion-icon>
-          <h2>{{content.load}}</h2>
-          <p>{{content.type}} • {{content.loop}}</p>
-          <button ion-button clear item-right (click)="openContent($event,content)">Edit</button>
-        </ion-item>
+        <ion-item-sliding>
+          <ion-item>
+            <h2>Player Id: {{player.id}}</h2>
+            <p>TVs: {{getPlayerZones(player.id)}}</p>
+            <p>Background: {{player.background.r}}, {{player.background.g}}, {{player.background.b}}</p>
+          </ion-item>
+          <ion-item-options side="right">
+            <button ion-button color="danger" (click)="deletePlayer($event,player)">
+              <ion-icon name="trash"></ion-icon>
+              Delete
+            </button>
+          </ion-item-options>
+        </ion-item-sliding>
+      </ion-list>
+      <ion-list>
+        <ion-item-sliding *ngFor="let content of player.contents">
+          <button ion-item (click)="openContent($event,content)">
+            <ion-icon *ngIf="content.type=='image'" name="image" item-left></ion-icon>
+            <ion-icon *ngIf="content.type=='video'" name="play" item-left></ion-icon>
+            <ion-icon *ngIf="content.type=='web'" name="globe" item-left></ion-icon>
+            <ion-icon *ngIf="content.type=='youtube'" name="youtube" item-left></ion-icon>
+            <h2>{{content.load}}</h2>
+            <p>{{content.type}} • {{content.loop}}</p>
+          </button>
+          <ion-item-options side="right">
+            <button ion-button color="danger" (click)="deleteContent($event,player,content)">
+              <ion-icon name="trash" small></ion-icon>
+              Delete
+            </button>
+          </ion-item-options>
+        </ion-item-sliding>
         <a ion-item (click)="addContent($event,player)">
           <ion-icon name="add" item-left></ion-icon>
           <h2>Add content</h2>
         </a>
       </ion-list>
     </ion-item>
-    <a ion-item (click)="addPlayer($event,selectedConfig)">
+    <a ion-item *ngIf="selectedConfig.players.length<9" (click)="addPlayer($event,selectedConfig)">
       <ion-icon name="add" item-left></ion-icon>
       <h2>New player</h2>
     </a>

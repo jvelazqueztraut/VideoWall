@@ -19,7 +19,7 @@
       </ion-select>
     </ion-item>
     <ion-item>
-      <ion-label>Load/file</ion-label>
+      <ion-label>File/URL</ion-label>
       <ion-input type="text" [(ngModel)]="selectedContent.load"></ion-input>
     </ion-item>
     <ion-item *ngIf="selectedContent.type=='web'">
@@ -43,6 +43,5 @@
       <ion-input type="number" [(ngModel)]="selectedContent.repetitions"></ion-input>
     </ion-item>
   </ion-list>
-  <ion-content padding>
   <button ion-button block color="dark" (click)="dismiss()">Done</button>
 </ion-content>

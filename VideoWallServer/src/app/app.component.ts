@@ -16,7 +16,7 @@ export class MyApp {
   @ViewChild(Nav) nav: Nav;
 
   // make StatusPage the root (or first) page
-  rootPage = StatusPage;
+  rootPage = ListPage;
   pages: Array<{title: string, component: any}>;
 
   constructor(
@@ -29,8 +29,8 @@ export class MyApp {
 
     // set our app's pages
     this.pages = [
-      { title: 'Status', component: StatusPage },
-      { title: 'Configurations', component: ListPage }
+      { title: 'Configurations', component: ListPage },
+      { title: 'Status', component: StatusPage }
     ];
   }
 
