@@ -1,71 +1,21 @@
 {
-    "width": 1024,
-    "height": 768,
+    "width": 1920,
+    "height": 1080,
     "fullscreen": true,
     "framerate": 60,
     "background":{ "r": 0, "g": 0, "b": 0 },
     "players": [
         {
-            "width": 300,
-            "height": 200,
+            "width": 1920,
+            "height": 1080,
             "x": 0,
             "y": 0,
             "background":{ "r": 255, "g": 255, "b": 255 },
             "contents": [
                 {
                     "type": "image",
-                    "load": "test.png",
-                    "loop": "time",
-                    "time": 2
-                },
-                {
-                    "type": "video",
-                    "load": "fingers.mov",
-                    "loop": "repetitions",
-                    "repetitions": 2
-                }
-            ]
-        },
-        {
-            "width": 500,
-            "height": 200,
-            "x": 20,
-            "y": 20,
-            "background":{ "r": 150, "g": 150, "b": 255 },
-            "contents": [
-                {
-                    "type": "image",
-                    "load": "test.png",
-                    "loop": "time",
-                    "time": 2
-                },
-                {
-                    "type": "youtube",
-                    "load": "PLnsTUgMW5W__4eI0349Lu64ljXsrRjhwJ",
-                    "loop": "time",
-                    "time": 10
-                }
-            ]
-        },
-        {
-            "width": 500,
-            "height": 200,
-            "x": 320,
-            "y": 320,
-            "background":{ "r": 150, "g": 150, "b": 255 },
-            "contents": [
-                {
-                    "type": "image",
-                    "load": "test.png",
-                    "loop": "time",
-                    "time": 2
-                },
-                {
-                    "type": "web",
-                    "load": "http://twitter-stream-globe.herokuapp.com/",
-                    "reload": true,
-                    "loop": "time",
-                    "time": 5
+                    "load": "logo.png",
+                    "loop": "none"
                 }
             ]
         }

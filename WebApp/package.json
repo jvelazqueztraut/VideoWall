@@ -1,5 +1,5 @@
 {
-  "name": "videowall-server",
+  "name": "videowall-webapp",
   "author": "Javier Velazquez Traut",
   "homepage": "http://j.velazqueztraut.com",
   "private": false,
@@ -48,5 +48,5 @@
       "locator": "ios"
     }
   ],
-  "description": "VideoWallServer: An Ionic project"
+  "description": "VideoWall WebApp: An Ionic project"
 }
