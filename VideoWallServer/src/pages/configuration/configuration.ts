@@ -5,10 +5,10 @@ import { NavController, NavParams, AlertController } from 'ionic-angular';
 import { ContentPage } from '../content/content';
 
 @Component({
-  selector: 'page-item-details',
-  templateUrl: 'item-details.html'
+  selector: 'page-configuration',
+  templateUrl: 'configuration.html'
 })
-export class ItemDetailsPage {
+export class ConfigPage {
   selectedConfig: any;
   listPage: any;
 

@@ -5,7 +5,7 @@ import { IonicStorageModule } from '@ionic/storage';
 import { MyApp } from './app.component';
 
 import { StatusPage } from '../pages/status/status';
-import { ItemDetailsPage } from '../pages/item-details/item-details';
+import { ConfigPage } from '../pages/configuration/configuration';
 import { ListPage } from '../pages/list/list';
 import { ContentPage } from '../pages/content/content';
 
@@ -16,7 +16,7 @@ import { SplashScreen } from '@ionic-native/splash-screen';
   declarations: [
     MyApp,
     StatusPage,
-    ItemDetailsPage,
+    ConfigPage,
     ContentPage,
     ListPage
   ],
@@ -29,7 +29,7 @@ import { SplashScreen } from '@ionic-native/splash-screen';
   entryComponents: [
     MyApp,
     StatusPage,
-    ItemDetailsPage,
+    ConfigPage,
     ContentPage,
     ListPage
   ],

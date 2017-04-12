@@ -3,7 +3,7 @@ import { Component } from '@angular/core';
 import { NavController, NavParams, AlertController} from 'ionic-angular';
 import { Storage } from '@ionic/storage';
 
-import { ItemDetailsPage } from '../item-details/item-details';
+import { ConfigPage } from '../configuration/configuration';
 
 @Component({
   selector: 'page-list',
@@ -46,7 +46,7 @@ export class ListPage {
   }
 
   openConfig(event, config) {
-    this.navCtrl.push(ItemDetailsPage, {
+    this.navCtrl.push(ConfigPage, {
       config: config,
       list: this
     });
