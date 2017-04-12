@@ -113,8 +113,8 @@ export class ConfigPage {
     return zones;
   }
 
-  setConfig() {
-    if(this.selectedConfig.active){
+  setActive(event) {
+    if(event){
       let confirm = this.alertCtrl.create({
         title: "Are you sure you want to enable this configuration?",
         message: "Doing this will replace the current configuration",
@@ -128,8 +128,9 @@ export class ConfigPage {
           {
             text: "OK",
             handler: () => {
-              this.listPage.enableConfiguration(this.selectedConfig.id);
+              this.selectedConfig.active = true;
               this.sendConfiguration();
+              this.listPage.enableConfiguration(this.selectedConfig.id);
             }
           }
         ]
@@ -140,14 +141,18 @@ export class ConfigPage {
       let alert = this.alertCtrl.create({
         title: "You cant disable the current configuration",
         subTitle: "To replace the configuration you should enable another one",
-        buttons: ["OK"]
+        buttons: [ {
+          text: "OK",
+          handler: () => {
+            this.selectedConfig.active = true;
+          }
+        } ]
       });
       alert.present();
-      this.selectedConfig.active=true;
     }
   }
 
   sendConfiguration() {
-    this.selectedConfig.active = true;
+    console.log('Send config',this.selectedConfig);
   }
 }

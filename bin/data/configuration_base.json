@@ -1,0 +1,23 @@
+{
+    "width": 1920,
+    "height": 1080,
+    "fullscreen": true,
+    "framerate": 60,
+    "background":{ "r": 0, "g": 0, "b": 0 },
+    "players": [
+        {
+            "width": 1920,
+            "height": 1080,
+            "x": 0,
+            "y": 0,
+            "background":{ "r": 255, "g": 255, "b": 255 },
+            "contents": [
+                {
+                    "type": "image",
+                    "load": "logo.png",
+                    "loop": "none"
+                }
+            ]
+        }
+    ]
+}

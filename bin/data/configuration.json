@@ -1,7 +1,7 @@
 {
     "width": 1024,
     "height": 768,
-    "fullscreen": false,
+    "fullscreen": true,
     "framerate": 60,
     "background":{ "r": 0, "g": 0, "b": 0 },
     "players": [
@@ -62,7 +62,7 @@
                 },
                 {
                     "type": "web",
-                    "load": "http://www.mapcrunch.com/",
+                    "load": "http://twitter-stream-globe.herokuapp.com/",
                     "reload": true,
                     "loop": "time",
                     "time": 5

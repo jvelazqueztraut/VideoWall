@@ -104,7 +104,7 @@ export class ListPage {
 
   enableConfiguration(id){
     for(let i = 0; i < this.configurations.length; i++)
-      this.configurations[i].active = (this.configurations[i]==id);
+      this.configurations[i].active = (this.configurations[i].id==id);
     this.storage.set('configurations',this.configurations);
   }
 }
