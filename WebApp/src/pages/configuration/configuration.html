@@ -36,6 +36,7 @@
       <ion-input type="number" [(ngModel)]="selectedConfig.background.b"></ion-input>
     </ion-item>
   </ion-list>
+  <ion-item-divider color="light">Zones</ion-item-divider>
   <ion-grid class="videowall-grid">
     <ion-row>
       <ion-col offset-3 col-2>
@@ -71,54 +72,50 @@
       </ion-col>
     </ion-row>
   </ion-grid>
-  <ion-list>
-    <ion-item *ngFor="let player of selectedConfig.players">
-      <ion-list>
-        <ion-item-sliding>
-          <ion-item>
-            <h2>Player Id: {{player.id}}</h2>
-            <p>TVs: {{getPlayerZones(player.id)}}</p>
-            <p>Background: {{player.background.r}}, {{player.background.g}}, {{player.background.b}}</p>
-          </ion-item>
-          <ion-item-options side="right">
-            <button ion-button color="danger" (click)="deletePlayer($event,player)">
-              <ion-icon name="trash"></ion-icon>
-              Delete
-            </button>
-          </ion-item-options>
-        </ion-item-sliding>
-      </ion-list>
-      <ion-list>
-        <ion-item-sliding *ngFor="let content of player.contents">
-          <button ion-item (click)="openContent($event,content)">
-            <ion-icon *ngIf="content.type=='image'" name="image" item-left></ion-icon>
-            <ion-icon *ngIf="content.type=='video'" name="play" item-left></ion-icon>
-            <ion-icon *ngIf="content.type=='web'" name="globe" item-left></ion-icon>
-            <ion-icon *ngIf="content.type=='youtube'" name="youtube" item-left></ion-icon>
-            <h2>{{content.load}}</h2>
-            <p *ngIf="content.loop=='none'">No loop</p>
-            <p *ngIf="content.loop=='time'">{{content.time}} seconds</p>
-            <p *ngIf="content.loop=='repetitions'">{{content.repetitions}} repetitions</p>
+  <ion-item-divider color="light">Players</ion-item-divider>
+  <ion-list *ngFor="let player of selectedConfig.players">
+    <ion-item-sliding>
+      <ion-item>
+        <h2>Player {{player.id}}</h2>
+        <p>TVs: {{getPlayerZones(player.id)}}</p>
+        <p>Background: {{player.background.r}}, {{player.background.g}}, {{player.background.b}}</p>
+      </ion-item>
+      <ion-item-options side="right">
+        <button ion-button color="danger" (click)="deletePlayer($event,player)">
+          <ion-icon name="trash"></ion-icon>
+          Delete
+        </button>
+      </ion-item-options>
+    </ion-item-sliding>
+    <ion-list>
+      <ion-item-sliding *ngFor="let content of player.contents">
+        <button ion-item (click)="openContent($event,content)">
+          <ion-icon *ngIf="content.type=='image'" name="image" item-left></ion-icon>
+          <ion-icon *ngIf="content.type=='video'" name="play" item-left></ion-icon>
+          <ion-icon *ngIf="content.type=='web'" name="globe" item-left></ion-icon>
+          <ion-icon *ngIf="content.type=='youtube'" name="youtube" item-left></ion-icon>
+          <h2>{{content.load}}</h2>
+          <p *ngIf="content.loop=='none'">No loop</p>
+          <p *ngIf="content.loop=='time'">{{content.time}} seconds</p>
+          <p *ngIf="content.loop=='repetitions'">{{content.repetitions}} repetitions</p>
+        </button>
+        <ion-item-options side="right">
+          <button ion-button color="danger" (click)="deleteContent($event,player,content)">
+            <ion-icon name="trash" small></ion-icon>
+            Delete
           </button>
-          <ion-item-options side="right">
-            <button ion-button color="danger" (click)="deleteContent($event,player,content)">
-              <ion-icon name="trash" small></ion-icon>
-              Delete
-            </button>
-          </ion-item-options>
-        </ion-item-sliding>
-        <a ion-item (click)="addContent($event,player)">
-          <ion-icon name="add" item-left></ion-icon>
-          <h2>Add content</h2>
-        </a>
-      </ion-list>
-    </ion-item>
-    <a ion-item *ngIf="selectedConfig.players.length<9" (click)="addPlayer($event,selectedConfig)">
-      <ion-icon name="add" item-left></ion-icon>
-      <h2>New player</h2>
-    </a>
-    <ion-item *ngIf="selectedConfig.active"> </ion-item>
+        </ion-item-options>
+      </ion-item-sliding>
+      <button ion-item (click)="addContent($event,player)">
+        <ion-icon name="add" item-left></ion-icon>
+        <h2>Add content</h2>
+      </button>
+    </ion-list>
   </ion-list>
+  <button ion-item *ngIf="selectedConfig.players.length<9" (click)="addPlayer($event,selectedConfig)">
+    <ion-icon name="add" item-left></ion-icon>
+    <h2>New player</h2>
+  </button>
 </ion-content>
 <ion-footer>
   <ion-toolbar *ngIf="selectedConfig.active">

@@ -11,7 +11,7 @@
   <ion-list>
     <ion-item-sliding *ngFor="let config of configurations">
       <button ion-item (click)="openConfig($event, config)">
-        {{config.title}}
+        <h1>{{config.title}}</h1>
         <ion-icon *ngIf="config.active" name="checkbox" item-right></ion-icon>
       </button>
       <ion-item-options side="right">
