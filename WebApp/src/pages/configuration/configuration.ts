@@ -107,9 +107,11 @@ export class ConfigPage {
 
   getPlayerZones(player) {
     let zones: Array<number> = [];
-    for(let i =0; i < this.selectedConfig.zones.length; i++){
-      if(this.selectedConfig.zones[i] == player)
-        zones.push(i);
+    for(let x =0; x < this.selectedConfig.zones.length; x++){
+      for(let y =0; y < this.selectedConfig.zones[x].length; y++){
+        if(this.selectedConfig.zones[x][y] == player)
+          zones.push(y+x*this.selectedConfig.rows);
+      }
     }
     return zones;
   }
