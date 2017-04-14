@@ -19,7 +19,9 @@ export class ListPage {
     fullscreen: boolean,
     framerate: number,
     background: { r: number, g: number, b: number },
-    zones: number[],
+    rows: number,
+    cols: number,
+    zones: number[][],
     players: Array<{
       id: number,
       background:{ r: number, g: number, b: number },
@@ -40,8 +42,11 @@ export class ListPage {
 
     storage.ready().then(() => {
       storage.get('configurations').then((data) => {
-        this.configurations = data;
-      },this.addConfiguration);
+        if(data)
+          this.configurations = data;
+        else
+          this.addConfiguration(data);
+      });
     });
   }
 
@@ -84,7 +89,9 @@ export class ListPage {
       fullscreen: true,
       framerate: 60,
       background: { r: 0, g: 0, b: 0 },
-      zones: [ 0, 0, 0, 0, 0, 0, 0 , 0, 0 ],
+      rows: 3,
+      cols: 3,
+      zones: [ [ 0, 0, 0], [0, 0, 0], [0 , 0, 0] ],
       players: [ {
         id: 0,
         background:{ r: 255, g: 255, b: 255 },

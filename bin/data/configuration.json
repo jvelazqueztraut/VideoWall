@@ -1,21 +1,43 @@
 {
-    "width": 1920,
-    "height": 1080,
-    "fullscreen": true,
+    "id": 0,
+    "title": "Configuration 0",
+    "active": true,
+    "width": 500,
+    "height": 400,
+    "fullscreen": false,
     "framerate": 60,
     "background":{ "r": 0, "g": 0, "b": 0 },
+    "rows": 3,
+    "cols": 3,
+    "zones": [ [ 1, 0, 0], [0, 1, 0], [0 , 0, 0] ],
     "players": [
         {
-            "width": 1920,
-            "height": 1080,
-            "x": 0,
-            "y": 0,
+            "id": 0,
             "background":{ "r": 255, "g": 255, "b": 255 },
             "contents": [
                 {
+                    "id": 0,
+                    "type": "image",
+                    "load": "test.png",
+                    "reload": false,
+                    "loop": "none",
+                    "time": 0,
+                    "repetitions": 0
+                }
+            ]
+        },
+        {
+            "id": 1,
+            "background":{ "r": 255, "g": 255, "b": 255 },
+            "contents": [
+                {
+                    "id": 0,
                     "type": "image",
                     "load": "logo.png",
-                    "loop": "none"
+                    "reload": false,
+                    "loop": "none",
+                    "time": 0,
+                    "repetitions": 0
                 }
             ]
         }

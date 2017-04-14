@@ -43,35 +43,35 @@
   <ion-grid class="videowall-grid">
     <ion-row>
       <ion-col offset-3 col-2>
-        <a (click)="changeZonePlayer(0)">{{selectedConfig.zones[0]}}</a>
+        <a (click)="changeZonePlayer(0,0)">{{selectedConfig.zones[0][0]}}</a>
       </ion-col>
       <ion-col col-2>
-        <a (click)="changeZonePlayer(1)">{{selectedConfig.zones[1]}}</a>
+        <a (click)="changeZonePlayer(0,1)">{{selectedConfig.zones[0][1]}}</a>
       </ion-col>      
       <ion-col col-2>
-        <a (click)="changeZonePlayer(2)">{{selectedConfig.zones[2]}}</a>
+        <a (click)="changeZonePlayer(0,2)">{{selectedConfig.zones[0][2]}}</a>
       </ion-col>
     </ion-row>
     <ion-row>
       <ion-col offset-3 col-2>
-        <a (click)="changeZonePlayer(3)">{{selectedConfig.zones[3]}}</a>
+        <a (click)="changeZonePlayer(1,0)">{{selectedConfig.zones[1][0]}}</a>
       </ion-col>
       <ion-col col-2>
-        <a (click)="changeZonePlayer(4)">{{selectedConfig.zones[4]}}</a>
+        <a (click)="changeZonePlayer(1,1)">{{selectedConfig.zones[1][1]}}</a>
       </ion-col>      
       <ion-col col-2>
-        <a (click)="changeZonePlayer(5)">{{selectedConfig.zones[5]}}</a>
+        <a (click)="changeZonePlayer(1,2)">{{selectedConfig.zones[1][2]}}</a>
       </ion-col>
     </ion-row>
     <ion-row>
       <ion-col offset-3 col-2>
-        <a (click)="changeZonePlayer(6)">{{selectedConfig.zones[6]}}</a>
+        <a (click)="changeZonePlayer(2,0)">{{selectedConfig.zones[2][0]}}</a>
       </ion-col>
       <ion-col col-2>
-        <a (click)="changeZonePlayer(7)">{{selectedConfig.zones[7]}}</a>
+        <a (click)="changeZonePlayer(2,1)">{{selectedConfig.zones[2][1]}}</a>
       </ion-col>      
       <ion-col col-2>
-        <a (click)="changeZonePlayer(8)">{{selectedConfig.zones[8]}}</a>
+        <a (click)="changeZonePlayer(2,2)">{{selectedConfig.zones[2][2]}}</a>
       </ion-col>
     </ion-row>
   </ion-grid>

@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
+import { Http } from '@angular/http';
 
-import { NavController, NavParams, AlertController } from 'ionic-angular';
+import { NavController, NavParams, AlertController, ToastController } from 'ionic-angular';
 
 import { ContentPage } from '../content/content';
 
@@ -12,7 +13,7 @@ export class ConfigPage {
   selectedConfig: any;
   listPage: any;
 
-  constructor(public navCtrl: NavController, public navParams: NavParams, public alertCtrl: AlertController) {
+  constructor(public navCtrl: NavController, public navParams: NavParams, public alertCtrl: AlertController, public toastCtrl: ToastController, public http: Http) {
     // If we navigated to this page, we will have an item available as a nav param
     this.selectedConfig = this.navParams.get('config');
     this.listPage = this.navParams.get('list');
@@ -98,10 +99,10 @@ export class ConfigPage {
     }
   }
 
-  changeZonePlayer(zone) {
-    this.selectedConfig.zones[zone]++;
-    if(this.selectedConfig.zones[zone]>=this.selectedConfig.players.length)
-      this.selectedConfig.zones[zone]=0;
+  changeZonePlayer(r,c) {
+    this.selectedConfig.zones[r][c]++;
+    if(this.selectedConfig.zones[r][c]>=this.selectedConfig.players.length)
+      this.selectedConfig.zones[r][c]=0;
   }
 
   getPlayerZones(player) {
@@ -153,6 +154,34 @@ export class ConfigPage {
   }
 
   sendConfiguration() {
-    console.log('Send config',this.selectedConfig);
+    var link = 'http://localhost:7890/post';
+    var data = JSON.stringify(this.selectedConfig);
+    
+    this.http.post(link, data).subscribe(data => {
+      console.log(data.status);
+      if(data.ok){
+        let toast = this.toastCtrl.create({
+          message: 'Configuration enabled successfully',
+          duration: 2000
+        });
+        toast.present();
+      }
+      else{
+        let toast = this.toastCtrl.create({
+          message: 'There was an error sending the configuration',
+          showCloseButton: true,
+          closeButtonText: 'Ok',
+          duration: 5000
+        });
+        toast.present();
+      }
+    }, error => {
+      let alert = this.alertCtrl.create({
+        title: "Error:",
+        subTitle: "Server seems to be offline. Please restart the VideoWall main app.",
+        buttons: ["OK"]
+      });
+      alert.present();
+    });
   }
 }

@@ -11,6 +11,13 @@ typedef struct{
     Player * player;
 }WebPlayer;
 
+typedef struct{
+    int playerId;
+    float x,y;
+    float width, height;
+    bool added;
+}PlayerSize;
+
 class ofApp : public ofBaseApp{
 
 	public:
@@ -24,6 +31,10 @@ class ofApp : public ofBaseApp{
 		void mouseDragged(int x, int y, int button);
 		void mousePressed(int x, int y, int button);
 		void mouseReleased(int x, int y, int button);
+    
+    ofxJSONElement configuration;
+    void applyConfiguration();
+    bool newConfiguration;
     
     vector< Player > players;
     
