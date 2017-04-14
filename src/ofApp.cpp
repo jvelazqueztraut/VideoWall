@@ -2,10 +2,12 @@
 
 //--------------------------------------------------------------
 void ofApp::setup(){
-    ofSetFrameRate(60);
+    ofSetFrameRate(30);
     ofBackground(0);
     ofSetLogLevel(OF_LOG_VERBOSE);
     
+    fullscreen=false;
+
     ofx::HTTP::SimplePostServerSettings settings;
     // Many other settings are available.
     settings.setPort(7890);
@@ -17,8 +19,6 @@ void ofApp::setup(){
     server.getPostRoute().registerPostEvents(this);
     
     std::string file = "configuration.json";
-    
-    // Now parse the settings
     if (configuration.open(file)){
         applyConfiguration();
     }
@@ -36,17 +36,17 @@ void ofApp::setup(){
 }
 
 //--------------------------------------------------------------
-void ofApp::applyConfiguration(){
+void ofApp::applyConfiguration(bool save){
     
-    if(configuration.isMember("width") && configuration.isMember("height"))
-        ofSetWindowShape(configuration["width"].asInt(),configuration["height"].asInt());
+    if(configuration.isMember("fullscreen")){
+        fullscreen=configuration["fullscreen"].asBool();
+        ofSetFullscreen(fullscreen);
+    }
     ofSleepMillis(500);
-    if(configuration.isMember("fullscreen"))
-        ofSetFullscreen(configuration["fullscreen"].asBool());
-    if(configuration.isMember("framerate"))
-        ofSetFrameRate(configuration["framerate"].asInt());
+    if(!fullscreen && configuration.isMember("width") && configuration.isMember("height"))
+        ofSetWindowShape(ofToInt(configuration["width"].asString()),ofToInt(configuration["height"].asString()));
     if(configuration.isMember("background"))
-        ofBackground(configuration["background"]["r"].asInt(),configuration["background"]["g"].asInt(),configuration["background"]["b"].asInt());
+        ofBackground(ofToInt(configuration["background"]["r"].asString()),ofToInt(configuration["background"]["g"].asString()),ofToInt(configuration["background"]["b"].asString()));
     
     if(configuration.isMember("players")){
         
@@ -54,8 +54,8 @@ void ofApp::applyConfiguration(){
         float height = ofGetHeight();
         
         ///////////////////////////////////////////////////
-        int rows = configuration["rows"].asInt();
-        int cols = configuration["cols"].asInt();
+        int rows = ofToInt(configuration["rows"].asString());
+        int cols = ofToInt(configuration["cols"].asString());
         bool taken[rows][cols];
         for(int r=0; r<rows; r++){
             for(int c=0; c<cols; c++){
@@ -67,15 +67,16 @@ void ofApp::applyConfiguration(){
             for(int c=0; c<cols; c++){
                 if(!taken[r][c]){
                     int z = configuration["zones"][r][c].asInt();
+                    taken[r][c] = true;
                     newPlayers.push_back(PlayerSize());
                     newPlayers.back().playerId = z;
-                    newPlayers.back().x = r;
-                    newPlayers.back().y = c;
+                    newPlayers.back().x = c;
+                    newPlayers.back().y = r;
                     newPlayers.back().width = 1;
                     newPlayers.back().height = 1;
                     newPlayers.back().added = false;
-                    for(int cc=c; cc<cols; cc++){
-                        for(int rr=r; rr<rows; rr++){
+                    for(int rr=r; rr<rows; rr++){
+                        for(int cc=c; cc<cols; cc++){
                             if(!taken[rr][cc] && (z==configuration["zones"][rr][cc].asInt())){
                                 if(((rr-1)>=0 && z==configuration["zones"][rr-1][cc].asInt()) || ((cc-1)>=0 && z==configuration["zones"][rr][cc-1].asInt())){
                                     taken[rr][cc] = true;
@@ -91,6 +92,7 @@ void ofApp::applyConfiguration(){
         ofLogNotice("ofApp::applyConfiguration") << "Adding players: " << newPlayers.size();
         ///////////////////////////////////////////////////
         
+        webs.clear();
         players.clear();
         players.assign(newPlayers.size(), Player());
         
@@ -101,7 +103,7 @@ void ofApp::applyConfiguration(){
             for(int i=0; !newPlayers[p].added && i<configuration["players"].size();i++){
                 if(newPlayers[p].playerId == configuration["players"][i]["id"].asInt()){
                     ofLogNotice("ofApp::applyConfiguration") << "Pos:"<< player.pos.x << "," << player.pos.y << " Size:"<< player.width << "," << player.height;
-                    player.setBackground(ofColor(configuration["players"][i]["background"]["r"].asInt(),configuration["players"][i]["background"]["g"].asInt(),configuration["players"][i]["background"]["b"].asInt()));
+                    player.setBackground(ofColor(ofToInt(configuration["players"][i]["background"]["r"].asString()),ofToInt(configuration["players"][i]["background"]["g"].asString()),ofToInt(configuration["players"][i]["background"]["b"].asString())));
                     for(int m=0; m<configuration["players"][i]["contents"].size(); m++){
                         Media * media;
                         if(configuration["players"][i]["contents"][m]["type"].asString() == "image"){
@@ -145,10 +147,10 @@ void ofApp::applyConfiguration(){
                             media = image;
                         }
                         if(configuration["players"][i]["contents"][m]["loop"].asString() == "time"){
-                            media->setup(LOOP_BY_TIME,configuration["players"][i]["contents"][m]["time"].asFloat());
+                            media->setup(LOOP_BY_TIME,ofToFloat(configuration["players"][i]["contents"][m]["time"].asString()));
                         }
                         else if(configuration["players"][i]["contents"][m]["loop"].asString() == "repetitions"){
-                            media->setup(LOOP_BY_REP,configuration["players"][i]["contents"][m]["repetitions"].asInt());
+                            media->setup(LOOP_BY_REP,ofToInt(configuration["players"][i]["contents"][m]["repetitions"].asString()));
                         }
                         else{
                             media->setup(PLAY_ONCE,0);
@@ -166,7 +168,7 @@ void ofApp::applyConfiguration(){
 //--------------------------------------------------------------
 void ofApp::update(){
     if(newConfiguration){
-        applyConfiguration();
+        applyConfiguration(true);
         newConfiguration = false;
     }
     

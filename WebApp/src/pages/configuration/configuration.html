@@ -18,20 +18,16 @@
       <ion-input type="text" [(ngModel)]="selectedConfig.title"></ion-input>
     </ion-item>
     <ion-item>
+      <ion-label>Fullscreen</ion-label>
+      <ion-toggle [(ngModel)]="selectedConfig.fullscreen"></ion-toggle>
+    </ion-item>
+    <ion-item *ngIf="!selectedConfig.fullscreen">
       <ion-label>Width</ion-label>
       <ion-input type="number" [(ngModel)]="selectedConfig.width"></ion-input>
     </ion-item>
-    <ion-item>
+    <ion-item *ngIf="!selectedConfig.fullscreen">
       <ion-label>Height</ion-label>
       <ion-input type="number" [(ngModel)]="selectedConfig.height"></ion-input>
-    </ion-item>
-    <ion-item>
-      <ion-label>Framerate</ion-label>
-      <ion-input type="number" [(ngModel)]="selectedConfig.framerate"></ion-input>
-    </ion-item>
-    <ion-item>
-      <ion-label>Fullscreen</ion-label>
-      <ion-toggle [(ngModel)]="selectedConfig.fullscreen"></ion-toggle>
     </ion-item>
     <ion-item>
       <ion-label>Background Color</ion-label>
@@ -119,5 +115,11 @@
       <ion-icon name="add" item-left></ion-icon>
       <h2>New player</h2>
     </a>
+    <ion-item *ngIf="selectedConfig.active"> </ion-item>
   </ion-list>
 </ion-content>
+<ion-footer>
+  <ion-toolbar *ngIf="selectedConfig.active">
+    <button ion-button block color="dark" (click)="sendConfiguration()">Update</button>
+  </ion-toolbar>
+</ion-footer>

@@ -33,13 +33,14 @@ class ofApp : public ofBaseApp{
 		void mouseReleased(int x, int y, int button);
     
     ofxJSONElement configuration;
-    void applyConfiguration();
+    void applyConfiguration(bool save=false);
     bool newConfiguration;
     
     vector< Player > players;
     
     vector< WebPlayer > webs;
         
+    bool fullscreen;
     float time;
     
     void onHTTPPostEvent(ofx::HTTP::PostEventArgs& evt);

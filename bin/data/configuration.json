@@ -2,14 +2,13 @@
     "id": 0,
     "title": "Configuration 0",
     "active": true,
+    "fullscreen": false,
     "width": 500,
     "height": 400,
-    "fullscreen": false,
-    "framerate": 60,
     "background":{ "r": 0, "g": 0, "b": 0 },
     "rows": 3,
     "cols": 3,
-    "zones": [ [ 1, 0, 0], [0, 1, 0], [0 , 0, 0] ],
+    "zones": [ [ 0, 0, 0], [0, 0, 0], [0 , 0, 0] ],
     "players": [
         {
             "id": 0,

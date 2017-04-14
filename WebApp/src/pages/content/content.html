@@ -11,7 +11,7 @@
   <ion-list *ngIf="selectedContent">
     <ion-item>
       <ion-label>Type</ion-label>
-      <ion-select [(ngModel)]="selectedContent.type">
+      <ion-select [(ngModel)]="selectedContent.type" interface='action-sheet'>
         <ion-option value="image">Image</ion-option>
         <ion-option value="video">Video</ion-option>
         <ion-option value="web">Web</ion-option>
@@ -19,7 +19,10 @@
       </ion-select>
     </ion-item>
     <ion-item>
-      <ion-label>File/URL</ion-label>
+      <ion-label *ngIf="selectedContent.type=='image'">File</ion-label>
+      <ion-label *ngIf="selectedContent.type=='video'">File</ion-label>
+      <ion-label *ngIf="selectedContent.type=='web'">URL</ion-label>
+      <ion-label *ngIf="selectedContent.type=='youtube'">Video/Playlist ID</ion-label>
       <ion-input type="text" [(ngModel)]="selectedContent.load"></ion-input>
     </ion-item>
     <ion-item *ngIf="selectedContent.type=='web'">
@@ -28,7 +31,7 @@
     </ion-item>
     <ion-item>
       <ion-label>Loop</ion-label>
-      <ion-select [(ngModel)]="selectedContent.loop">
+      <ion-select [(ngModel)]="selectedContent.loop" interface='action-sheet'>
         <ion-option value="none">None</ion-option>
         <ion-option value="time">By time</ion-option>
         <ion-option value="repetitions">By repetitions</ion-option>
@@ -42,6 +45,8 @@
       <ion-label>Repetitions</ion-label>
       <ion-input type="number" [(ngModel)]="selectedContent.repetitions"></ion-input>
     </ion-item>
+    <ion-item>
+      <button ion-button block color="dark" (click)="dismiss()">Done</button>
+    </ion-item>
   </ion-list>
-  <button ion-button block color="dark" (click)="dismiss()">Done</button>
 </ion-content>

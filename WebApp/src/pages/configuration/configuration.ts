@@ -23,7 +23,7 @@ export class ConfigPage {
     config.players.push({
       id: config.players.length,
       zones : [ 0, 0, 0, 0, 0, 0, 0, 0, 0],
-      background:{ r: 0, g: 0, b: 0 },
+      background:{ r: 255, g: 255, b: 255 },
       contents: [ {
         id: 0,
         type: "image",
@@ -162,26 +162,31 @@ export class ConfigPage {
       if(data.ok){
         let toast = this.toastCtrl.create({
           message: 'Configuration enabled successfully',
-          duration: 2000
+          duration: 2000,
+          position: 'top'
         });
         toast.present();
+        this.selectedConfig.active = true;
       }
       else{
         let toast = this.toastCtrl.create({
           message: 'There was an error sending the configuration',
           showCloseButton: true,
           closeButtonText: 'Ok',
-          duration: 5000
+          duration: 5000,
+          position: 'top'
         });
         toast.present();
+        this.selectedConfig.active = false;
       }
     }, error => {
       let alert = this.alertCtrl.create({
-        title: "Error:",
+        title: "Error",
         subTitle: "Server seems to be offline. Please restart the VideoWall main app.",
         buttons: ["OK"]
       });
       alert.present();
+      this.selectedConfig.active = false;
     });
   }
 }
