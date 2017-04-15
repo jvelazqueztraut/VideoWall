@@ -9,17 +9,25 @@
 
 
 <ion-content padding>
-
-  <h3>Welcome to your first Ionic app!</h3>
-
-  <p>
-    This starter project is our way of helping you get a functional app running in record time.
-  </p>
-  <p>
-    Follow along on the tutorial section of the Ionic docs!
-  </p>
-  <p>
-    <button ion-button color="primary" menuToggle>Toggle Menu</button>
-  </p>
-
+  <ion-list>
+    <ion-item *ngIf="server">
+      <ion-label>VideoWall Server URL</ion-label>
+      <ion-input type="text" [(ngModel)]="server" (ngModelChange)="saveServer($event)"></ion-input>
+    </ion-item>
+    <ion-item>
+      <ion-label *ngIf="online">Server Online</ion-label>
+      <ion-icon *ngIf="online" name="checkmark-circle" color="secondary" item-right></ion-icon>
+      <ion-label *ngIf="!online">Server Offline</ion-label>
+      <ion-icon *ngIf="!online" name="close-circle" color="danger" item-right></ion-icon>
+    </ion-item>
+    <ion-item>
+      <ion-label>Framerate</ion-label>
+      <ion-note item-right>{{framerate}}</ion-note>
+    </ion-item>
+  </ion-list>
 </ion-content>
+<ion-footer>
+  <ion-toolbar>
+    <button ion-button block color="dark" (click)="getStatus()">Get status</button>
+  </ion-toolbar>
+</ion-footer>
