@@ -10,6 +10,10 @@
 <ion-content>
   <ion-list *ngIf="selectedContent">
     <ion-item>
+      <ion-label>Title</ion-label>
+      <ion-input type="text" [(ngModel)]="selectedContent.title"></ion-input>
+    </ion-item>
+    <ion-item>
       <ion-label>Type</ion-label>
       <ion-select [(ngModel)]="selectedContent.type" interface='action-sheet'>
         <ion-option value="image">Image</ion-option>

@@ -36,7 +36,7 @@
       <ion-input type="number" [(ngModel)]="selectedConfig.background.b"></ion-input>
     </ion-item>
   </ion-list>
-  <ion-item-divider color="light">Zones</ion-item-divider>
+  <ion-item-divider color="light">TVs</ion-item-divider>
   <ion-grid class="videowall-grid">
     <ion-row>
       <ion-col offset-3 col-2>
@@ -94,10 +94,10 @@
           <ion-icon *ngIf="content.type=='video'" name="play" item-left></ion-icon>
           <ion-icon *ngIf="content.type=='web'" name="globe" item-left></ion-icon>
           <ion-icon *ngIf="content.type=='youtube'" name="youtube" item-left></ion-icon>
-          <h2>{{content.load}}</h2>
-          <p *ngIf="content.loop=='none'">No loop</p>
-          <p *ngIf="content.loop=='time'">{{content.time}} seconds</p>
-          <p *ngIf="content.loop=='repetitions'">{{content.repetitions}} repetitions</p>
+          <h2>{{content.title}}</h2>
+          <p *ngIf="content.loop=='none'">{{content.load}} · No loop</p>
+          <p *ngIf="content.loop=='time'">{{content.load}} · {{content.time}} seconds</p>
+          <p *ngIf="content.loop=='repetitions'">{{content.load}} · {{content.repetitions}} repetitions</p>
         </button>
         <ion-item-options side="right">
           <button ion-button color="danger" (click)="deleteContent($event,player,content)">

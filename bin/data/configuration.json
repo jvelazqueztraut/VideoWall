@@ -16,6 +16,7 @@
             "contents": [
                 {
                     "id": 0,
+                    "title": "Content 0",
                     "type": "image",
                     "load": "test.png",
                     "reload": false,
@@ -31,6 +32,7 @@
             "contents": [
                 {
                     "id": 0,
+                    "title": "Content 1",
                     "type": "image",
                     "load": "logo.png",
                     "reload": false,

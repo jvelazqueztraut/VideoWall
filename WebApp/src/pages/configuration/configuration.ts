@@ -26,6 +26,7 @@ export class ConfigPage {
       background:{ r: 255, g: 255, b: 255 },
       contents: [ {
         id: 0,
+        title: "Content 0",
         type: "image",
         load: "logo.png",
         reload: false,
@@ -66,6 +67,7 @@ export class ConfigPage {
   addContent(event, player) {
     player.contents.push({
       id: player.contents.length,
+      title: 'Content ' + player.contents.length,
       type: "image",
       load: "logo.png",
       reload: false,
@@ -132,8 +134,8 @@ export class ConfigPage {
             text: "OK",
             handler: () => {
               this.selectedConfig.active = true;
-              this.sendConfiguration();
               this.listPage.enableConfiguration(this.selectedConfig.id);
+              this.sendConfiguration();
             }
           }
         ]
@@ -190,5 +192,7 @@ export class ConfigPage {
       alert.present();
       this.selectedConfig.active = false;
     });
+
+    this.listPage.saveConfigurations();
   }
 }

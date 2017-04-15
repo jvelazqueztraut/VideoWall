@@ -26,6 +26,7 @@ export class ListPage {
       background:{ r: number, g: number, b: number },
       contents: Array<{
         id: number,
+        title: string,
         type: string,
         load: string,
         reload: boolean,
@@ -76,6 +77,7 @@ export class ListPage {
       });
       alert.present();
     }
+    this.saveConfigurations();
   }
 
   addConfiguration(event){
@@ -95,6 +97,7 @@ export class ListPage {
         background:{ r: 255, g: 255, b: 255 },
         contents: [ {
           id: 0,
+          title: "Content 0",
           type: "image",
           load: "logo.png",
           reload: false,
@@ -104,12 +107,15 @@ export class ListPage {
         } ] 
       } ]
     });
-    this.storage.set('configurations',this.configurations);
+    this.saveConfigurations();
   }
 
   enableConfiguration(id){
     for(let i = 0; i < this.configurations.length; i++)
       this.configurations[i].active = (this.configurations[i].id==id);
+  }
+
+  saveConfigurations(){
     this.storage.set('configurations',this.configurations);
   }
 }
