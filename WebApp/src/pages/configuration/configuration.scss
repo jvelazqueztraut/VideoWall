@@ -1,11 +1,10 @@
 page-configuration {
-	.videowall-grid{
-		.a {
-		    background-color: #F9FAFB;
-		    padding: 5px;
-		    border: 1px solid #ddd;
-		    border-radius: 2px;
-		    text-align: center;
-		}
-	}
+	ion-col a{
+	    background-color: #F9FAFB;
+	    padding: 3px 20px;
+	    border: 2px solid #ddd;
+	    border-radius: 5px;
+	    text-align: center;
+	    color: #000;
+	  }
 }
