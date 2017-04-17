@@ -17,9 +17,9 @@ void ofApp::setup(){
     applyShader=true;
     rows=3;
     cols=3;
-    rowDisplacement=5;
-    colDisplacement=5;
-    screen.allocate(ofGetWidth() + colDisplacement*2*(cols-1),ofGetHeight() + rowDisplacement*2*(rows-1));
+    rowDisplacement=10;
+    colDisplacement=10;
+    screen.allocate(ofGetWidth() + colDisplacement*(cols-1),ofGetHeight() + rowDisplacement*(rows-1));
     
     ofx::HTTP::SimplePostServerSettings settings;
     // Many other settings are available.
@@ -75,7 +75,7 @@ void ofApp::applyConfiguration(bool save){
         colDisplacement = ofToFloat(configuration["colDisplacement"].asString());
     }
     
-    screen.allocate(ofGetWidth() + colDisplacement*2*(cols-1),ofGetHeight() + rowDisplacement*2*(rows-1));
+    screen.allocate(ofGetWidth() + colDisplacement*(cols-1),ofGetHeight() + rowDisplacement*(rows-1));
     
     if(configuration.isMember("players")){
         
@@ -224,8 +224,8 @@ void ofApp::draw(){
     
     if(applyShader){
         shader.begin();
-        shader.setUniform1f("colInterval", screen.getWidth()/(float)cols);
-        shader.setUniform1f("rowInterval", screen.getHeight()/(float)rows);
+        shader.setUniform1f("colInterval", ofGetWidth()/(float)cols);
+        shader.setUniform1f("rowInterval", ofGetHeight()/(float)rows);
         shader.setUniform1f("colDisplacement", colDisplacement);
         shader.setUniform1f("rowDisplacement", rowDisplacement);
     }
@@ -238,9 +238,9 @@ void ofApp::draw(){
     
     ofSetColor(255,0,255);
     for(int c=1; c<cols; c++)
-        ofDrawLine(c*ceil(ofGetWidth()/cols), 0, c*ceil(ofGetWidth()/cols), ofGetHeight());
+        ofDrawLine(c*ofGetWidth()/cols, 0, c*ofGetWidth()/cols, ofGetHeight());
     for(int r=1; r<rows; r++)
-        ofDrawLine(0, r*ceil(ofGetHeight()/rows), ofGetWidth(), r*ceil(ofGetHeight()/rows));
+        ofDrawLine(0, r*ofGetHeight()/rows, ofGetWidth(), r*ofGetHeight()/rows);
     
     ofDrawBitmapStringHighlight("See " + server.getURL(), 10, 16);
     ofDrawBitmapStringHighlight("colDisplacement " + ofToString(colDisplacement), 10, 32);
@@ -263,10 +263,10 @@ void ofApp::keyPressed(int key){
     else if(key==OF_KEY_DOWN){
         rowDisplacement-=1;
     }
-    if(key==OF_KEY_LEFT){
+    if(key==OF_KEY_RIGHT){
         colDisplacement+=1;
     }
-    else if(key==OF_KEY_RIGHT){
+    else if(key==OF_KEY_LEFT){
         colDisplacement-=1;
     }
     if(key=='s'){

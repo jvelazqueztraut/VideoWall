@@ -11,8 +11,8 @@ uniform float colDisplacement;
 void main() {
 	vec2 pos = texCoordVarying;
 
-	pos.x = pos.x + floor(pos.x/(colInterval-colDisplacement))*2*colDisplacement;
-	pos.y = pos.y + floor(pos.y/(rowInterval-rowDisplacement))*2*rowDisplacement;
+	pos.x = pos.x + floor(pos.x/colInterval)*colDisplacement;
+	pos.y = pos.y + floor(pos.y/rowInterval)*rowDisplacement;
 	
     // Get color value from texture
     gl_FragColor = texture2DRect(tex0, pos);
