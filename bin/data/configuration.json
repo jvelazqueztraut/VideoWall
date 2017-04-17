@@ -8,6 +8,8 @@
     "background":{ "r": 0, "g": 0, "b": 0 },
     "rows": 3,
     "cols": 3,
+    "rowDisplacement": 5,
+    "colDisplacement": 5,
     "zones": [ [ 0, 0, 0], [0, 0, 0], [0 , 0, 0] ],
     "players": [
         {
@@ -17,22 +19,6 @@
                 {
                     "id": 0,
                     "title": "Content 0",
-                    "type": "image",
-                    "load": "test.png",
-                    "reload": false,
-                    "loop": "none",
-                    "time": 0,
-                    "repetitions": 0
-                }
-            ]
-        },
-        {
-            "id": 1,
-            "background":{ "r": 255, "g": 255, "b": 255 },
-            "contents": [
-                {
-                    "id": 0,
-                    "title": "Content 1",
                     "type": "image",
                     "load": "logo.png",
                     "reload": false,

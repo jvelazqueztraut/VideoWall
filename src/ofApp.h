@@ -41,6 +41,11 @@ class ofApp : public ofBaseApp{
     vector< WebPlayer > webs;
     
     ofFbo screen;
+    ofShader shader;
+    bool applyShader;
+    
+    int rows,cols;
+    float rowDisplacement,colDisplacement;
     
     ofColor background;
     bool fullscreen;

@@ -89,7 +89,7 @@
       </button>
     </ion-list>
   </ion-list>
-  <button ion-item *ngIf="selectedConfig.players.length<9" (click)="addPlayer($event,selectedConfig)">
+  <button ion-item *ngIf="selectedConfig.players.length<(selectedConfig.rows*selectedConfig.cols)" (click)="addPlayer($event,selectedConfig)">
     <ion-icon name="add" item-left></ion-icon>
     <h2>New player</h2>
   </button>
