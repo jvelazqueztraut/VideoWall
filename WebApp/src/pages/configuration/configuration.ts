@@ -163,7 +163,6 @@ export class ConfigPage {
     var data = JSON.stringify(this.selectedConfig);
     
     this.http.post(link, data).subscribe(data => {
-      console.log(data);
       if(data.ok){
         let toast = this.toastCtrl.create({
           message: 'Configuration enabled successfully',

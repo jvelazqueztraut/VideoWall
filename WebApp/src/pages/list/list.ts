@@ -15,6 +15,9 @@ export class ListPage {
 
   constructor(public navCtrl: NavController, public navParams: NavParams, public alertCtrl: AlertController, public dataBase: DataBaseService) {
     this.configurations = dataBase.configurations;
+    dataBase.dataBase.subscribe(data => {
+      this.configurations = dataBase.configurations;
+    });
   }
 
   openConfig(event, config) {

@@ -13,6 +13,9 @@ export class StatusPage {
 	players: number;
 
   constructor(public dataBase: DataBaseService, public http: Http) {
+    dataBase.dataBase.subscribe(data => {
+      this.server = dataBase.server;
+    });
     this.server = dataBase.server;
 
     this.getStatus();

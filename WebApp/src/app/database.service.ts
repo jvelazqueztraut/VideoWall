@@ -1,10 +1,10 @@
 import { Injectable } from "@angular/core";
+import { Observable } from 'rxjs/Observable';
 import { Storage } from '@ionic/storage';
 
 @Injectable()
 export class DataBaseService {
 	server: string;
-
 	configurations: Array<{
 	    id: number,
 	    title: string, 
@@ -32,13 +32,21 @@ export class DataBaseService {
 	    }>
 	  }>;
 
+	dataBase: any;
+    dataBaseObserver: any;
+
     constructor(public storage: Storage) {
+    	this.dataBase = Observable.create(observer => {
+      		this.dataBaseObserver = observer;
+    	});
+
 		storage.ready().then(() => {
 	      storage.get('server').then((data) => {
 	        if(data)
 	          this.server = data;
 	        else
 	          this.server = 'http://localhost:7890';
+	      	this.dataBaseObserver.next(true);
 	      });
 
 	      storage.get('configurations').then((data) => {
@@ -46,6 +54,7 @@ export class DataBaseService {
           		this.configurations = data;
 	        else
 	          	this.configurations = [];
+	        this.dataBaseObserver.next(true);
 	      });
 	    });
     }
@@ -53,10 +62,12 @@ export class DataBaseService {
     saveServer(newServer) {
     	this.server = newServer;
   		this.storage.set('server',this.server);
+  		this.dataBaseObserver.next(true);
   	}
 
 	saveConfigurations(newConfigurations){
 		this.configurations = newConfigurations;
     	this.storage.set('configurations',this.configurations);
+    	this.dataBaseObserver.next(true);
   	}
 }
