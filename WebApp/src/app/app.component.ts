@@ -5,6 +5,8 @@ import { Platform, MenuController, Nav } from 'ionic-angular';
 import { StatusPage } from '../pages/status/status';
 import { ListPage } from '../pages/list/list';
 
+import { DataBaseService } from './database.service';
+
 import { StatusBar } from '@ionic-native/status-bar';
 import { SplashScreen } from '@ionic-native/splash-screen';
 
@@ -22,7 +24,8 @@ export class MyApp {
     public platform: Platform,
     public menu: MenuController,
     public statusBar: StatusBar,
-    public splashScreen: SplashScreen
+    public splashScreen: SplashScreen,
+    public dataBase: DataBaseService
   ) {
     this.initializeApp();
 

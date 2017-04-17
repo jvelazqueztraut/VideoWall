@@ -12,7 +12,7 @@
   <ion-list>
     <ion-item *ngIf="server">
       <ion-label>VideoWall Server URL</ion-label>
-      <ion-input type="text" [(ngModel)]="server" (ngModelChange)="saveServer($event)"></ion-input>
+      <ion-input type="text" [(ngModel)]="server" (ngModelChange)="changeServer($event)"></ion-input>
     </ion-item>
     <ion-item>
       <ion-label *ngIf="online">Server Online</ion-label>

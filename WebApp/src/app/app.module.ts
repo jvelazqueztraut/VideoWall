@@ -5,6 +5,8 @@ import { IonicStorageModule } from '@ionic/storage';
 import { HttpModule } from '@angular/http';
 import { MyApp } from './app.component';
 
+import { DataBaseService } from './database.service';
+
 import { StatusPage } from '../pages/status/status';
 import { ConfigPage } from '../pages/configuration/configuration';
 import { ListPage } from '../pages/list/list';
@@ -36,6 +38,7 @@ import { SplashScreen } from '@ionic-native/splash-screen';
     ListPage
   ],
   providers: [
+    DataBaseService,
     StatusBar,
     SplashScreen,
     {provide: ErrorHandler, useClass: IonicErrorHandler}

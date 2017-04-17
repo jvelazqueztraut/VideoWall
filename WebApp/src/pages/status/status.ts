@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { Storage } from '@ionic/storage';
+import { DataBaseService } from '../../app/database.service';
 import { Http } from '@angular/http';
 
 @Component({
@@ -12,17 +12,11 @@ export class StatusPage {
 	framerate: number;
 	players: number;
 
-  constructor(public storage: Storage, public http: Http) {
-  	storage.ready().then(() => {
-      storage.get('server').then((data) => {
-        if(data)
-          this.server = data;
-        else
-          this.server = 'http://localhost:7890';
-      	this.getStatus();
-      	setInterval(() => this.getStatus(), 5000);
-      });
-    });
+  constructor(public dataBase: DataBaseService, public http: Http) {
+    this.server = dataBase.server;
+
+    this.getStatus();
+    setInterval(() => this.getStatus(), 5000);
   }
 
   getStatus() {
@@ -45,7 +39,7 @@ export class StatusPage {
     });
   }
 
-  saveServer() {
-  	this.storage.set('server',this.server);
+  changeServer(event){
+    this.dataBase.saveServer(this.server);
   }
 }

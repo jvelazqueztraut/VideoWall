@@ -3,6 +3,7 @@ import { Http } from '@angular/http';
 
 import { NavController, NavParams, AlertController, ToastController } from 'ionic-angular';
 
+import { DataBaseService } from '../../app/database.service';
 import { ContentPage } from '../content/content';
 
 @Component({
@@ -11,12 +12,12 @@ import { ContentPage } from '../content/content';
 })
 export class ConfigPage {
   selectedConfig: any;
-  listPage: any;
+  configurations: any;
 
-  constructor(public navCtrl: NavController, public navParams: NavParams, public alertCtrl: AlertController, public toastCtrl: ToastController, public http: Http) {
+  constructor(public navCtrl: NavController, public navParams: NavParams, public alertCtrl: AlertController, public toastCtrl: ToastController, public dataBase: DataBaseService, public http: Http) {
     // If we navigated to this page, we will have an item available as a nav param
-    this.selectedConfig = this.navParams.get('config');
-    this.listPage = this.navParams.get('list');
+    this.selectedConfig = this.navParams.get('selected');
+    this.configurations = this.navParams.get('all');
   }
 
   addPlayer(event, config) {
@@ -134,7 +135,7 @@ export class ConfigPage {
             text: "OK",
             handler: () => {
               this.selectedConfig.active = true;
-              this.listPage.enableConfiguration(this.selectedConfig.id);
+              this.enableConfiguration(this.selectedConfig.id);
               this.sendConfiguration();
             }
           }
@@ -158,11 +159,11 @@ export class ConfigPage {
   }
 
   sendConfiguration() {
-    var link = 'http://localhost:7890/post';
+    var link = this.dataBase.server + '/post';
     var data = JSON.stringify(this.selectedConfig);
     
     this.http.post(link, data).subscribe(data => {
-      console.log(data.status);
+      console.log(data);
       if(data.ok){
         let toast = this.toastCtrl.create({
           message: 'Configuration enabled successfully',
@@ -193,6 +194,11 @@ export class ConfigPage {
       this.selectedConfig.active = false;
     });
 
-    this.listPage.saveConfigurations();
+    this.dataBase.saveConfigurations(this.configurations);
+  }
+
+  enableConfiguration(id){
+      for(let i = 0; i < this.configurations.length; i++)
+        this.configurations[i].active = (this.configurations[i].id==id);
   }
 }
