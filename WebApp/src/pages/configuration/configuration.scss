@@ -1,10 +1,14 @@
 page-configuration {
 	ion-col a{
-	    background-color: #F9FAFB;
-	    padding: 3px 20px;
-	    border: 2px solid #ddd;
-	    border-radius: 5px;
-	    text-align: center;
-	    color: #000;
-	  }
+		background-color: #F9FAFB;
+		padding: 3px 20px;
+		border: 2px solid #ddd;
+		border-radius: 5px;
+		text-align: center;
+		color: #000;
+	}
+	
+	input{
+  		text-align:right;
+	}
 }

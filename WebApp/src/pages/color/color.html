@@ -1,0 +1,22 @@
+<ion-list class="popover-page">
+  <ion-row class="row-dots">
+    <ion-col>
+      <button ion-button="dot" (click)="changeColor(colors.white)" class="dot-white"></button>
+    </ion-col>
+    <ion-col>
+      <button ion-button="dot" (click)="changeColor(colors.tan)" class="dot-tan"></button>
+    </ion-col>
+    <ion-col>
+      <button ion-button="dot" (click)="changeColor(colors.grey)" class="dot-grey"></button>
+    </ion-col>
+    <ion-col>
+      <button ion-button="dot" (click)="changeColor(colors.black)" class="dot-black"></button>
+    </ion-col>
+  </ion-row>
+  <ion-item>
+      <ion-label>Color</ion-label>
+      <ion-input type="number" [(ngModel)]="color.r"></ion-input>
+      <ion-input type="number" [(ngModel)]="color.g"></ion-input>
+      <ion-input type="number" [(ngModel)]="color.b"></ion-input>
+  </ion-item>
+</ion-list>

@@ -1,10 +1,12 @@
 import { Component } from '@angular/core';
 import { Http } from '@angular/http';
 
-import { NavController, NavParams, AlertController, ToastController } from 'ionic-angular';
+import { NavController, NavParams, AlertController, ToastController, PopoverController } from 'ionic-angular';
 
 import { DataBaseService } from '../../app/database.service';
 import { ContentPage } from '../content/content';
+
+import { ColorPopover } from '../color/color';
 
 @Component({
   selector: 'page-configuration',
@@ -14,7 +16,7 @@ export class ConfigPage {
   selectedConfig: any;
   configurations: any;
 
-  constructor(public navCtrl: NavController, public navParams: NavParams, public alertCtrl: AlertController, public toastCtrl: ToastController, public dataBase: DataBaseService, public http: Http) {
+  constructor(public navCtrl: NavController, public navParams: NavParams, public alertCtrl: AlertController, public toastCtrl: ToastController, public popoverCtrl: PopoverController, public dataBase: DataBaseService, public http: Http) {
     // If we navigated to this page, we will have an item available as a nav param
     this.selectedConfig = this.navParams.get('selected');
     this.configurations = this.navParams.get('all');
@@ -102,7 +104,7 @@ export class ConfigPage {
     }
   }
 
-  changeZonePlayer(r,c) {
+  changeZonePlayer(c,r) {
     this.selectedConfig.zones[r][c]++;
     if(this.selectedConfig.zones[r][c]>=this.selectedConfig.players.length)
       this.selectedConfig.zones[r][c]=0;
@@ -200,4 +202,19 @@ export class ConfigPage {
       for(let i = 0; i < this.configurations.length; i++)
         this.configurations[i].active = (this.configurations[i].id==id);
   }
+
+  getColor(color){
+    return 'rgb('+color.r+','+color.g+','+color.b+')';
+  }
+
+  chooseColor(event,c) {
+    let popover = this.popoverCtrl.create(ColorPopover, {
+      color: c
+    });
+
+    popover.present({
+      ev: event
+    });
+  }
+
 }

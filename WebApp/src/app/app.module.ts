@@ -12,6 +12,8 @@ import { ConfigPage } from '../pages/configuration/configuration';
 import { ListPage } from '../pages/list/list';
 import { ContentPage } from '../pages/content/content';
 
+import { ColorPopover } from '../pages/color/color';
+
 import { StatusBar } from '@ionic-native/status-bar';
 import { SplashScreen } from '@ionic-native/splash-screen';
 
@@ -21,7 +23,8 @@ import { SplashScreen } from '@ionic-native/splash-screen';
     StatusPage,
     ConfigPage,
     ContentPage,
-    ListPage
+    ListPage,
+    ColorPopover
   ],
   imports: [
     BrowserModule,
@@ -35,7 +38,8 @@ import { SplashScreen } from '@ionic-native/splash-screen';
     StatusPage,
     ConfigPage,
     ContentPage,
-    ListPage
+    ListPage,
+    ColorPopover
   ],
   providers: [
     DataBaseService,

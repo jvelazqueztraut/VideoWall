@@ -1,0 +1,39 @@
+page-color {
+	.text-to-change div {
+		margin: 10px auto;
+	}
+
+	ion-row,
+	ion-col {
+		padding: 0;
+	}
+
+	.row-dots {
+	    text-align: center;
+
+		.dot {
+			height: 30px;
+			width: 30px;
+			margin: 10px auto;
+			position: relative;
+    		border: 2px solid #ccc;
+			border-radius: 50%;
+		}
+	}
+
+	.dot-white {
+		background-color: rgb(255,255,255);
+	}
+
+	.dot-tan {
+		background-color: rgb(249,241,228);
+	}
+
+	.dot-grey {
+		background-color: rgb(76,75,80);
+	}
+
+	.dot-black {
+		background-color: rgb(0,0,0);
+	}
+}
