@@ -7,7 +7,9 @@ void ofApp::setup(){
     ofSetLogLevel(OF_LOG_VERBOSE);
     
     fullscreen=false;
-
+    screen.allocate(ofGetWidth(),ofGetHeight());
+    background.set(0);
+    
     ofx::HTTP::SimplePostServerSettings settings;
     // Many other settings are available.
     settings.setPort(7890);
@@ -43,10 +45,16 @@ void ofApp::applyConfiguration(bool save){
         ofSetFullscreen(fullscreen);
     }
     ofSleepMillis(500);
-    if(!fullscreen && configuration.isMember("width") && configuration.isMember("height"))
+    
+    if(!fullscreen && configuration.isMember("width") && configuration.isMember("height")){
         ofSetWindowShape(ofToInt(configuration["width"].asString()),ofToInt(configuration["height"].asString()));
-    if(configuration.isMember("background"))
-        ofBackground(ofToInt(configuration["background"]["r"].asString()),ofToInt(configuration["background"]["g"].asString()),ofToInt(configuration["background"]["b"].asString()));
+    }
+    
+    if(configuration.isMember("background")){
+        background.set(ofToInt(configuration["background"]["r"].asString()),ofToInt(configuration["background"]["g"].asString()),ofToInt(configuration["background"]["b"].asString()));
+    }
+    
+    screen.allocate(ofGetWidth(),ofGetHeight());
     
     if(configuration.isMember("players")){
         
@@ -179,14 +187,20 @@ void ofApp::update(){
     for(int i=0; i<players.size(); i++){
         players[i].update(dt);
     }
+    
+    screen.begin();
+    ofClear(background);
+    ofSetColor(255);
+    for(int i=0; i<players.size(); i++){
+        players[i].draw();
+    }
+    screen.end();
 }
 
 //--------------------------------------------------------------
 void ofApp::draw(){
     ofSetColor(255);
-    for(int i=0; i<players.size(); i++){
-        players[i].draw();
-    }
+    screen.draw(0,0);
     ofDrawBitmapStringHighlight("See " + server.getURL(), 10, 16);
 }
 

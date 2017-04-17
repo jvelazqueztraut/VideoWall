@@ -39,7 +39,10 @@ class ofApp : public ofBaseApp{
     vector< Player > players;
     
     vector< WebPlayer > webs;
-        
+    
+    ofFbo screen;
+    
+    ofColor background;
     bool fullscreen;
     float time;
     
