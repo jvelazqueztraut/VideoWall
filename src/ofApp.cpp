@@ -321,12 +321,17 @@ void ofApp::mouseReleased(int x, int y, int button){
 void ofApp::onHTTPPostEvent(ofx::HTTP::PostEventArgs& args){
     ofLogNotice("ofApp::onHTTPPostEvent") << "Data: " << args.getBuffer().getText();
     // Now try to parse the configuration
-    if (configuration.parse(args.getBuffer().getText())){
-        newConfiguration = true;
+    if(!args.getBuffer().getText().empty()){
+        if (configuration.parse(args.getBuffer().getText())){
+            newConfiguration = true;
+        }
+        else{
+            ofLogError("ofApp::onHTTPPostEvent")  << "Failed to parse configuration" << endl;
+        }
     }
-    else{
-        ofLogError("ofApp::onHTTPPostEvent")  << "Failed to parse configuration" << endl;
-    }
+    Poco::Net::HTTPServerResponse& response(args.getResponse());
+    response.setReason(ofToString(ofGetFrameRate(),2));
+    response.send();
 }
 
 

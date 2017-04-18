@@ -9,7 +9,7 @@ import { Http } from '@angular/http';
 export class StatusPage {
 	server: string;
 	online: boolean;
-	framerate: number;
+	framerate: string;
 	players: number;
 
   constructor(public dataBase: DataBaseService, public http: Http) {
@@ -30,15 +30,15 @@ export class StatusPage {
       console.log(data);
       if(data.ok){
         this.online = true;
-        this.framerate = 30;
+        this.framerate = data.statusText;
       }
       else{
         this.online = false;
-        this.framerate = 0;
+        this.framerate = data.statusText;
       }
     }, error => {
       this.online = false;
-      this.framerate = 0;
+      this.framerate = "";
     });
   }
 
