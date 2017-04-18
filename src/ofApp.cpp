@@ -31,8 +31,8 @@ void ofApp::setup(){
     // The user is responsible for protecting shared resources (e.g. ofMutex).
     server.getPostRoute().registerPostEvents(this);
     
-    std::string file = "configuration.json";
-    if (configuration.open(file)){
+    configurationFile = "configuration.json";
+    if (configuration.open(configurationFile)){
         applyConfiguration();
     }
     else{
@@ -191,6 +191,10 @@ void ofApp::applyConfiguration(bool save){
                 }
             }
         }
+        
+        if(save)
+            configuration.save(configurationFile, true);
+        
     }
 }
 

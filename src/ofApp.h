@@ -35,6 +35,7 @@ class ofApp : public ofBaseApp{
     ofxJSONElement configuration;
     void applyConfiguration(bool save=false);
     bool newConfiguration;
+    string configurationFile;
     
     vector< Player > players;
     
