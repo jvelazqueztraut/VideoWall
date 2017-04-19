@@ -12,6 +12,7 @@
 #include "MediaImage.hpp"
 #include "MediaVideo.hpp"
 #include "MediaWeb.hpp"
+#include "MediaTwitter.hpp"
 
 class Player {
     

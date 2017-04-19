@@ -19,13 +19,13 @@
             "contents": [
                 {
                     "id": 0,
-                    "load": "logo.png",
+                    "load": "#boca",
                     "loop": "none",
                     "reload": false,
                     "repetitions": "0",
                     "time": "0",
                     "title": "Content 0",
-                    "type": "image"
+                    "type": "twitter"
                 }
             ],
             "id": 0

@@ -20,6 +20,7 @@
         <ion-option value="video">Video</ion-option>
         <ion-option value="web">Web</ion-option>
         <ion-option value="youtube">Youtube</ion-option>
+        <ion-option value="twitter">Twitter</ion-option>
       </ion-select>
     </ion-item>
     <ion-item>
@@ -27,6 +28,7 @@
       <ion-label *ngIf="selectedContent.type=='video'">File</ion-label>
       <ion-label *ngIf="selectedContent.type=='web'">URL</ion-label>
       <ion-label *ngIf="selectedContent.type=='youtube'">Video/Playlist ID</ion-label>
+      <ion-label *ngIf="selectedContent.type=='twitter'">Tracks/Hashtags</ion-label>
       <ion-input type="text" [(ngModel)]="selectedContent.load"></ion-input>
     </ion-item>
     <ion-item *ngIf="selectedContent.type=='web'">

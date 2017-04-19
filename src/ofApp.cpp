@@ -171,6 +171,12 @@ void ofApp::applyConfiguration(bool save){
                             webs.push_back(webPlayer);
                             media = web;
                         }
+                        else if(configuration["players"][i]["contents"][m]["type"] == "twitter"){
+                            ofLogNotice("ofApp::applyConfiguration") << "Adding twitter content";
+                            MediaTwitter * twitter = player.addContent<MediaTwitter>();
+                            twitter->load(configuration["players"][i]["contents"][m]["load"],player.width,player.height);
+                            media = twitter;
+                        }
                         else{
                             ofLogNotice("ofApp::applyConfiguration") << "Adding NULL player.";
                             MediaImage * image = player.addContent<MediaImage>();
