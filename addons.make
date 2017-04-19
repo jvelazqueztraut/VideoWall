@@ -1,8 +1,7 @@
-ofxAwesomium
+ofxAwesomiumPlus
 ofxHTTP
 ofxIO
-ofxJSON
 ofxMediaType
 ofxNetworkUtils
+ofxPoco
 ofxSSLManager
-ofxTaskQueue

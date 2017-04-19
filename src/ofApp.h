@@ -2,7 +2,6 @@
 
 #include "ofMain.h"
 #include "Player.hpp"
-#include "ofxJSON.h"
 
 #include "ofxHTTP.h"
 
@@ -32,10 +31,10 @@ class ofApp : public ofBaseApp{
 		void mousePressed(int x, int y, int button);
 		void mouseReleased(int x, int y, int button);
     
-    ofxJSONElement configuration;
+    ofJson configuration;
     void applyConfiguration(bool save=false);
     bool newConfiguration;
-    string configurationFile;
+    ofFile configurationFile;
     
     vector< Player > players;
     

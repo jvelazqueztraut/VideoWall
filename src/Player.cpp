@@ -73,5 +73,5 @@ void Player::stop(){
 }
 
 void Player::draw(){
-    fbo.draw(pos);
+    fbo.draw(pos.x,pos.y);
 }

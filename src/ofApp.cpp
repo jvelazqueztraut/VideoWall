@@ -29,10 +29,11 @@ void ofApp::setup(){
     // The client can listen for POST form and multi-part upload events.
     // User be aware, these methods are called from other threads.
     // The user is responsible for protecting shared resources (e.g. ofMutex).
-    server.getPostRoute().registerPostEvents(this);
+    server.postRoute().registerPostEvents(this);
     
-    configurationFile = "configuration.json";
-    if (configuration.open(configurationFile)){
+    configurationFile = ofFile("configuration.json");
+    if (configurationFile.exists()){
+        configurationFile >> configuration;
         applyConfiguration();
     }
     else{
@@ -51,40 +52,40 @@ void ofApp::setup(){
 //--------------------------------------------------------------
 void ofApp::applyConfiguration(bool save){
     
-    if(configuration.isMember("fullscreen")){
-        fullscreen=configuration["fullscreen"].asBool();
+    if(!configuration["fullscreen"].is_null()){
+        fullscreen=configuration["fullscreen"];
         ofSetFullscreen(fullscreen);
     }
     ofSleepMillis(500);
     
-    if(!fullscreen && configuration.isMember("width") && configuration.isMember("height")){
-        ofSetWindowShape(ofToInt(configuration["width"].asString()),ofToInt(configuration["height"].asString()));
+    if(!fullscreen && !configuration["width"].is_null() && !configuration["height"].is_null()){
+        ofSetWindowShape(ofToInt(configuration["width"]),ofToInt(configuration["height"]));
     }
     
-    if(configuration.isMember("background")){
-        background.set(ofToInt(configuration["background"]["r"].asString()),ofToInt(configuration["background"]["g"].asString()),ofToInt(configuration["background"]["b"].asString()));
+    if(!configuration["background"].is_null()){
+        background.set(ofToInt(configuration["background"]["r"]),ofToInt(configuration["background"]["g"]),ofToInt(configuration["background"]["b"]));
     }
     
-    if(configuration.isMember("rows") && configuration.isMember("cols")){
-        rows = ofToInt(configuration["rows"].asString());
-        cols = ofToInt(configuration["cols"].asString());
+    if(!configuration["rows"].is_null() && !configuration["cols"].is_null()){
+        rows = ofToInt(configuration["rows"]);
+        cols = ofToInt(configuration["cols"]);
     }
     
-    if(configuration.isMember("rowDisplacement") && configuration.isMember("colDisplacement")){
-        rowDisplacement = ofToFloat(configuration["rowDisplacement"].asString());
-        colDisplacement = ofToFloat(configuration["colDisplacement"].asString());
+    if(!configuration["rowDisplacement"].is_null() && !configuration["colDisplacement"].is_null()){
+        rowDisplacement = ofToFloat(configuration["rowDisplacement"]);
+        colDisplacement = ofToFloat(configuration["colDisplacement"]);
     }
     
     screen.allocate(ofGetWidth() + colDisplacement*(cols-1),ofGetHeight() + rowDisplacement*(rows-1));
     
-    if(configuration.isMember("players")){
+    if(!configuration["players"].is_null()){
         
         float width = screen.getWidth();
         float height = screen.getHeight();
         
         ///////////////////////////////////////////////////
-        int rows = ofToInt(configuration["rows"].asString());
-        int cols = ofToInt(configuration["cols"].asString());
+        int rows = ofToInt(configuration["rows"]);
+        int cols = ofToInt(configuration["cols"]);
         bool taken[rows][cols];
         for(int r=0; r<rows; r++){
             for(int c=0; c<cols; c++){
@@ -95,7 +96,7 @@ void ofApp::applyConfiguration(bool save){
         for(int r=0; r<rows; r++){
             for(int c=0; c<cols; c++){
                 if(!taken[r][c]){
-                    int z = configuration["zones"][r][c].asInt();
+                    int z = configuration["zones"][r][c];
                     taken[r][c] = true;
                     newPlayers.push_back(PlayerSize());
                     newPlayers.back().playerId = z;
@@ -106,8 +107,8 @@ void ofApp::applyConfiguration(bool save){
                     newPlayers.back().added = false;
                     for(int rr=r; rr<rows; rr++){
                         for(int cc=c; cc<cols; cc++){
-                            if(!taken[rr][cc] && (z==configuration["zones"][rr][cc].asInt())){
-                                if(((rr-1)>=0 && z==configuration["zones"][rr-1][cc].asInt()) || ((cc-1)>=0 && z==configuration["zones"][rr][cc-1].asInt())){
+                            if(!taken[rr][cc] && (z==(int)configuration["zones"][rr][cc])){
+                                if(((rr-1)>=0 && z==(int)configuration["zones"][rr-1][cc]) || ((cc-1)>=0 && z==(int)configuration["zones"][rr][cc-1])){
                                     taken[rr][cc] = true;
                                     newPlayers.back().width = cc-c+1;
                                     newPlayers.back().height = rr-r+1;
@@ -130,37 +131,38 @@ void ofApp::applyConfiguration(bool save){
             player.setup(newPlayers[p].width*(width/cols),newPlayers[p].height*(height/rows));
             player.setPos(newPlayers[p].x*(width/cols),newPlayers[p].y*(height/rows));
             for(int i=0; !newPlayers[p].added && i<configuration["players"].size();i++){
-                if(newPlayers[p].playerId == configuration["players"][i]["id"].asInt()){
+                if(newPlayers[p].playerId == (int)configuration["players"][i]["id"]){
                     ofLogNotice("ofApp::applyConfiguration") << "Pos:"<< player.pos.x << "," << player.pos.y << " Size:"<< player.width << "," << player.height;
-                    player.setBackground(ofColor(ofToInt(configuration["players"][i]["background"]["r"].asString()),ofToInt(configuration["players"][i]["background"]["g"].asString()),ofToInt(configuration["players"][i]["background"]["b"].asString())));
+                    player.setBackground(ofColor(ofToInt(configuration["players"][i]["background"]["r"]),ofToInt(configuration["players"][i]["background"]["g"]),ofToInt(configuration["players"][i]["background"]["b"])));
                     for(int m=0; m<configuration["players"][i]["contents"].size(); m++){
                         Media * media;
-                        if(configuration["players"][i]["contents"][m]["type"].asString() == "image"){
+                        if(configuration["players"][i]["contents"][m]["type"] == "image"){
                             ofLogNotice("ofApp::applyConfiguration") << "Adding image content.";
                             MediaImage * image = player.addContent<MediaImage>();
-                            image->load(configuration["players"][i]["contents"][m]["load"].asString());
+                            string file = configuration["players"][i]["contents"][m]["load"];
+                            image->ofImage::load(file);
                             media = image;
                         }
-                        else if(configuration["players"][i]["contents"][m]["type"].asString() == "video"){
+                        else if(configuration["players"][i]["contents"][m]["type"] == "video"){
                             ofLogNotice("ofApp::applyConfiguration") << "Adding video content.";
                             MediaVideo * video = player.addContent<MediaVideo>();
-                            video->load(configuration["players"][i]["contents"][m]["load"].asString());
+                            video->ofVideoPlayer::load(configuration["players"][i]["contents"][m]["load"]);
                             media = video;
                         }
-                        else if(configuration["players"][i]["contents"][m]["type"].asString() == "web"){
+                        else if(configuration["players"][i]["contents"][m]["type"] == "web"){
                             ofLogNotice("ofApp::applyConfiguration") << "Adding web content.";
                             MediaWeb * web = player.addContent<MediaWeb>();
-                            web->ofxAwesomium::setup(player.width,player.height);
-                            web->load(configuration["players"][i]["contents"][m]["load"].asString(),configuration["players"][i]["contents"][m]["reload"].asBool());
+                            web->ofxAwesomiumPlus::setup(player.width,player.height,"VideoWall");
+                            web->load(configuration["players"][i]["contents"][m]["load"],configuration["players"][i]["contents"][m]["reload"]);
                             WebPlayer webPlayer; webPlayer.web = web; webPlayer.player = &player;
                             webs.push_back(webPlayer);
                             media = web;
                         }
-                        else if(configuration["players"][i]["contents"][m]["type"].asString() == "youtube"){
+                        else if(configuration["players"][i]["contents"][m]["type"] == "youtube"){
                             ofLogNotice("ofApp::applyConfiguration") << "Adding youtube content";
                             MediaWeb * web = player.addContent<MediaWeb>();
-                            web->ofxAwesomium::setup(player.width,player.height);
-                            string videoId = configuration["players"][i]["contents"][m]["load"].asString();
+                            web->ofxAwesomiumPlus::setup(player.width,player.height,"VideoWall");
+                            string videoId = configuration["players"][i]["contents"][m]["load"];
                             if(videoId.substr(0,2) == "PL") //Youtube playlist
                                 web->load("https://www.youtube.com/embed?listType=playlist&list="+ videoId + "&version=3&autoplay=1&loop=1&controls=0&modestbranding=1&showinfo=0");
                             else //Youtube video in loop mode
@@ -175,11 +177,11 @@ void ofApp::applyConfiguration(bool save){
                             image->load("logo.png");
                             media = image;
                         }
-                        if(configuration["players"][i]["contents"][m]["loop"].asString() == "time"){
-                            media->setup(LOOP_BY_TIME,ofToFloat(configuration["players"][i]["contents"][m]["time"].asString()));
+                        if(configuration["players"][i]["contents"][m]["loop"] == "time"){
+                            media->setup(LOOP_BY_TIME,ofToFloat(configuration["players"][i]["contents"][m]["time"]));
                         }
-                        else if(configuration["players"][i]["contents"][m]["loop"].asString() == "repetitions"){
-                            media->setup(LOOP_BY_REP,ofToInt(configuration["players"][i]["contents"][m]["repetitions"].asString()));
+                        else if(configuration["players"][i]["contents"][m]["loop"] == "repetitions"){
+                            media->setup(LOOP_BY_REP,ofToInt(configuration["players"][i]["contents"][m]["repetitions"]));
                         }
                         else{
                             media->setup(PLAY_ONCE,0);
@@ -193,7 +195,7 @@ void ofApp::applyConfiguration(bool save){
         }
         
         if(save)
-            configuration.save(configurationFile, true);
+            ofSavePrettyJson(configurationFile,configuration);
         
     }
 }
@@ -246,7 +248,7 @@ void ofApp::draw(){
     for(int r=1; r<rows; r++)
         ofDrawLine(0, r*ofGetHeight()/rows, ofGetWidth(), r*ofGetHeight()/rows);
     
-    ofDrawBitmapStringHighlight("See " + server.getURL(), 10, 16);
+    ofDrawBitmapStringHighlight("See " + server.url(), 10, 16);
     ofDrawBitmapStringHighlight("colDisplacement " + ofToString(colDisplacement), 10, 32);
     ofDrawBitmapStringHighlight("rowDisplacement " + ofToString(rowDisplacement), 10, 48);
 }
@@ -258,7 +260,7 @@ void ofApp::keyPressed(int key){
         ofShowCursor();
     }
     for(int i=0; i<webs.size(); i++){
-        webs[i].web->ofxAwesomium::keyPressed(key);
+        webs[i].web->ofxAwesomiumPlus::keyPressed(key);
     }
     
     if(key==OF_KEY_UP){
@@ -281,7 +283,7 @@ void ofApp::keyPressed(int key){
 //--------------------------------------------------------------
 void ofApp::keyReleased(int key){
     for(int i=0; i<webs.size(); i++){
-        webs[i].web->ofxAwesomium::keyReleased(key);
+        webs[i].web->ofxAwesomiumPlus::keyReleased(key);
     }
 }
 
@@ -289,7 +291,7 @@ void ofApp::keyReleased(int key){
 void ofApp::mouseMoved(int x, int y ){
     for(int i=0; i<webs.size(); i++){
         ofPoint webPos(webs[i].player->pos);
-        webs[i].web->ofxAwesomium::mouseMoved(x-webPos.x,y-webPos.y);
+        webs[i].web->ofxAwesomiumPlus::mouseMoved(x-webPos.x,y-webPos.y);
     }
 }
 
@@ -297,7 +299,7 @@ void ofApp::mouseMoved(int x, int y ){
 void ofApp::mouseDragged(int x, int y, int button){
     for(int i=0; i<webs.size(); i++){
         ofPoint webPos(webs[i].player->pos);
-        webs[i].web->ofxAwesomium::mouseDragged(x-webPos.x,y-webPos.y,button);
+        webs[i].web->ofxAwesomiumPlus::mouseDragged(x-webPos.x,y-webPos.y,button);
     }
 }
 
@@ -305,7 +307,7 @@ void ofApp::mouseDragged(int x, int y, int button){
 void ofApp::mousePressed(int x, int y, int button){
     for(int i=0; i<webs.size(); i++){
         ofPoint webPos(webs[i].player->pos);
-        webs[i].web->ofxAwesomium::mousePressed(x-webPos.x,y-webPos.y,button);
+        webs[i].web->ofxAwesomiumPlus::mousePressed(x-webPos.x,y-webPos.y,button);
     }
 }
 
@@ -313,7 +315,7 @@ void ofApp::mousePressed(int x, int y, int button){
 void ofApp::mouseReleased(int x, int y, int button){
     for(int i=0; i<webs.size(); i++){
         ofPoint webPos(webs[i].player->pos);
-        webs[i].web->ofxAwesomium::mouseReleased(x-webPos.x,y-webPos.y,button);
+        webs[i].web->ofxAwesomiumPlus::mouseReleased(x-webPos.x,y-webPos.y,button);
     }
 }
 
@@ -329,7 +331,7 @@ void ofApp::onHTTPPostEvent(ofx::HTTP::PostEventArgs& args){
             ofLogError("ofApp::onHTTPPostEvent")  << "Failed to parse configuration" << endl;
         }
     }
-    Poco::Net::HTTPServerResponse& response(args.getResponse());
+    Poco::Net::HTTPServerResponse& response(args.response());
     response.setReason(ofToString(ofGetFrameRate(),2));
     response.send();
 }

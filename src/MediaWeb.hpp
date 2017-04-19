@@ -10,9 +10,9 @@
 
 #include "ofMain.h"
 #include "Media.hpp"
-#include "ofxAwesomium.h"
+#include "ofxAwesomiumPlus.h"
 
-class MediaWeb : public Media, public ofxAwesomium {
+class MediaWeb : public Media, public ofxAwesomiumPlus {
     
 public:
     void setup(LoopType l, float p){
@@ -21,20 +21,19 @@ public:
     
     void update(float dt){
         Media::updatePlaytime(dt);
-        ofxAwesomium::updateCore();
-        ofxAwesomium::update();
+        ofxAwesomiumPlus::update();
     }
     
     void load(string u,bool r=false){
         URL=u;
-        ofxAwesomium::loadURL(URL);
+        ofxAwesomiumPlus::loadURL(URL);
         reload=r;
     }
     
     void play(){
         Media::startPlaytime();
         if(reload)
-            ofxAwesomium::loadURL(URL);
+            ofxAwesomiumPlus::reload(true);
     }
     
     void stop(){
@@ -42,7 +41,7 @@ public:
     }
     
     void draw(){
-        ofxAwesomium::draw(0,0);
+        ofxAwesomiumPlus::draw(0,0);
     }
     
     bool isDone(){
@@ -59,8 +58,8 @@ public:
         return done;
     }
     
-    float getWidth(){return ofxAwesomium::getWidth();}
-    float getHeight(){return ofxAwesomium::getHeight();}
+    float getWidth(){return ofxAwesomiumPlus::getWidth();}
+    float getHeight(){return ofxAwesomiumPlus::getHeight();}
     
     bool reload;
     string URL;
