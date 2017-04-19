@@ -10,15 +10,15 @@ export class DataBaseService {
 	    title: string, 
 	    active: boolean,
 	    fullscreen: boolean,
-	    width: number,
-	    height: number,
-	    background: { r: number, g: number, b: number },
-	    rows: number,
-	    cols: number,
+	    width: string,
+	    height: string,
+	    background: { r: string, g: string, b: string },
+	    rows: string,
+	    cols: string,
 	    zones: number[][],
 	    players: Array<{
 	      id: number,
-	      background:{ r: number, g: number, b: number },
+	      background:{ r: string, g: string, b: string },
 	      contents: Array<{
 	        id: number,
 	        title: string,
@@ -26,8 +26,8 @@ export class DataBaseService {
 	        load: string,
 	        reload: boolean,
 	        loop: string,
-	        time: number,
-	        repetitions: number
+	        time: string,
+	        repetitions: string
 	      }>
 	    }>
 	  }>;

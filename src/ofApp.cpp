@@ -324,12 +324,8 @@ void ofApp::onHTTPPostEvent(ofx::HTTP::PostEventArgs& args){
     ofLogNotice("ofApp::onHTTPPostEvent") << "Data: " << args.getBuffer().getText();
     // Now try to parse the configuration
     if(!args.getBuffer().getText().empty()){
-        if (configuration.parse(args.getBuffer().getText())){
-            newConfiguration = true;
-        }
-        else{
-            ofLogError("ofApp::onHTTPPostEvent")  << "Failed to parse configuration" << endl;
-        }
+        configuration = nlohmann::json::parse(args.getBuffer().getText());
+        newConfiguration = true;
     }
     Poco::Net::HTTPServerResponse& response(args.response());
     response.setReason(ofToString(ofGetFrameRate(),2));

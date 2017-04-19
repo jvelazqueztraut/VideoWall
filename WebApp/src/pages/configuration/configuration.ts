@@ -26,7 +26,7 @@ export class ConfigPage {
     config.players.push({
       id: config.players.length,
       zones : [ 0, 0, 0, 0, 0, 0, 0, 0, 0],
-      background:{ r: 255, g: 255, b: 255 },
+      background:{ r: "255", g: "255", b: "255" },
       contents: [ {
         id: 0,
         title: "Content 0",
@@ -34,8 +34,8 @@ export class ConfigPage {
         load: "logo.png",
         reload: false,
         loop: "none",
-        time: 0,
-        repetitions: 0
+        time: "0",
+        repetitions: "0"
       } ]
     });
   }
@@ -75,8 +75,8 @@ export class ConfigPage {
       load: "logo.png",
       reload: false,
       loop: "none",
-      time: 0,
-      repetitions: 0
+      time: "0",
+      repetitions: "0"
     });
     this.navCtrl.push(ContentPage,{
       content: player.contents[player.contents.length-1]

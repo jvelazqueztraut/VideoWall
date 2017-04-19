@@ -55,15 +55,15 @@ export class ListPage {
         title: 'Configuration ' + this.configurations.length,
         active: false,
         fullscreen: true,
-        width: 1920,
-        height: 1080,
-        background: { r: 0, g: 0, b: 0 },
-        rows: 3,
-        cols: 3,
+        width: "1920",
+        height: "1080",
+        background: { r: "0", g: "0", b: "0" },
+        rows: "3",
+        cols: "3",
         zones: [ [ 0, 0, 0], [0, 0, 0], [0 , 0, 0] ],
         players: [ {
           id: 0,
-          background:{ r: 255, g: 255, b: 255 },
+          background:{ r: "255", g: "255", b: "255" },
           contents: [ {
             id: 0,
             title: "Content 0",
@@ -71,8 +71,8 @@ export class ListPage {
             load: "logo.png",
             reload: false,
             loop: "none",
-            time: 0,
-            repetitions: 0
+            time: "0",
+            repetitions: "0"
           } ] 
         } ]
       });
