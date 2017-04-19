@@ -1,32 +1,55 @@
 {
-    "id": 0,
-    "title": "Configuration 0",
     "active": true,
+    "background": {
+        "b": "0",
+        "g": "0",
+        "r": "0"
+    },
+    "cols": "3",
     "fullscreen": false,
-    "width": 500,
-    "height": 400,
-    "background":{ "r": 0, "g": 0, "b": 0 },
-    "rows": 3,
-    "cols": 3,
-    "rowDisplacement": 10,
-    "colDisplacement": 10,
-    "zones": [ [ 0, 0, 0], [0, 0, 0], [0 , 0, 0] ],
+    "height": "400",
+    "id": 1,
     "players": [
         {
-            "id": 0,
-            "background":{ "r": 255, "g": 255, "b": 255 },
+            "background": {
+                "b": "255",
+                "g": "255",
+                "r": "255"
+            },
             "contents": [
                 {
                     "id": 0,
-                    "title": "Content 0",
-                    "type": "image",
                     "load": "logo.png",
-                    "reload": false,
                     "loop": "none",
-                    "time": 0,
-                    "repetitions": 0
+                    "reload": false,
+                    "repetitions": "0",
+                    "time": "0",
+                    "title": "Content 0",
+                    "type": "image"
                 }
-            ]
+            ],
+            "id": 0
         }
+    ],
+    "rowDisplacement": null,
+    "rows": "3",
+    "title": "A3 Institucional",
+    "width": "600",
+    "zones": [
+        [
+            0,
+            0,
+            0
+        ],
+        [
+            0,
+            0,
+            0
+        ],
+        [
+            0,
+            0,
+            0
+        ]
     ]
 }
