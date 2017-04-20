@@ -8,6 +8,8 @@
 
 #pragma once
 
+#define OF_DEBUG
+
 typedef enum{
     PLAY_ONCE=0,
     LOOP_BY_REP,

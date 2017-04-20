@@ -48,12 +48,29 @@ public:
         query.setTracks(tracks);
         
         // Start filter query.
+#ifdef OF_DEBUG
         //client.filter(query);
+#else
+        client.filter(query);
+#endif
         
-        text.setText("Tweet show\n"+track);
-        text.setAlignment(ofxParagraph::Alignment::ALIGN_CENTER);
-        text.setWidth(width*0.9);
-        text.setFont("font.ttf",height*0.1,"default");
+        status.setText("Tweet show\n"+track);
+        status.setAlignment(ofxParagraph::Alignment::ALIGN_CENTER);
+        status.setWidth(width*0.9);
+        status.setFont("font.ttf",height*0.05,"font_status");
+        status.setSpacing(height*0.05*.5);
+        
+        user.setText("");
+        user.setAlignment(ofxParagraph::Alignment::ALIGN_RIGHT);
+        user.setWidth(width*0.7);
+        user.setFont("font.ttf",height*0.05,"font_user");
+        user.setSpacing(height*0.05*.5);
+        
+        location.setText("");
+        location.setAlignment(ofxParagraph::Alignment::ALIGN_RIGHT);
+        location.setWidth(width*0.7);
+        location.setFont("font.ttf",height*0.05*0.75,"font_location");
+        location.setSpacing(height*0.05*0.75*.5);
     }
     
     void setup(LoopType l, float p){
@@ -61,7 +78,9 @@ public:
     }
     
     void setTextColor(ofColor c){
-        text.setColor(c);
+        status.setColor(c);
+        user.setColor(ofColor(c,c.a-20));
+        location.setColor(ofColor(c,c.a-20));
     }
     
     void update(float dt){
@@ -77,7 +96,9 @@ public:
     }
     
     void draw(){
-        text.draw((width-text.getWidth())*0.5,(height-text.getHeight())*0.5);
+        status.draw((width-status.getWidth())*0.5,(height-status.getHeight())*0.5);
+        user.draw(width*0.85-user.getWidth(),(height+status.getHeight())*0.5+height*0.03);
+        location.draw(width*0.85-user.getWidth(),(height+status.getHeight())*0.5+user.getHeight()+height*0.04);
     }
     
     bool isDone(){
@@ -107,11 +128,15 @@ public:
     }
     
     
-    void onStatus(const ofxTwitter::Status& status){
+    void onStatus(const ofxTwitter::Status& tweet){
         count++;
-        ofLogNotice("onStatus") << "Text: " << status.text();
-        ofLogNotice("onStatus") << "Coordinates: " << (status.coordinates() ? ofToString(status.coordinates()) : "NONE");
-        ofLogNotice("onStatus") << "Place: " << (status.place() ? ofToString(status.place()->fullName()) : "NONE");
+        ofLogNotice("onStatus") << "Text: " << tweet.text();
+        ofLogNotice("onStatus") << "Coordinates: " << (tweet.coordinates() ? ofToString(tweet.coordinates()) : "NONE");
+        ofLogNotice("onStatus") << "Place: " << (tweet.place() ? ofToString(tweet.place()->fullName()) : "NONE");
+        
+        status.setText(tweet.text());
+        user.setText(tweet.user()->name());
+        location.setText((tweet.place() ? ofToString(tweet.place()->fullName()) : ""));
     }
     
     
@@ -164,7 +189,7 @@ public:
     uint64_t count = 0;
     uint64_t countMissed = 0;
     
-    ofxParagraph text;
+    ofxParagraph status,user,location;
     
     float width,height;
 };

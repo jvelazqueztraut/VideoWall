@@ -263,6 +263,7 @@ void ofApp::draw(){
         shader.end();
     }
     
+#ifdef OF_DEBUG
     ofSetColor(255,0,255);
     for(int c=1; c<cols; c++)
         ofDrawLine(c*ofGetWidth()/cols, 0, c*ofGetWidth()/cols, ofGetHeight());
@@ -272,6 +273,7 @@ void ofApp::draw(){
     ofDrawBitmapStringHighlight("See " + server.url(), 10, 16);
     ofDrawBitmapStringHighlight("colDisplacement " + ofToString(colDisplacement), 10, 32);
     ofDrawBitmapStringHighlight("rowDisplacement " + ofToString(rowDisplacement), 10, 48);
+#end
 }
 
 //--------------------------------------------------------------
