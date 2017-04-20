@@ -11,25 +11,25 @@ export class ColorPopover {
 
   colors = {
     white: {
-      'r': 255,
-      'g': 255,
-      'b': 255
+      'r': "255",
+      'g': "255",
+      'b': "255"
     },
     tan: {
-      'r': 249,
-      'g': 241,
-      'b': 228
+      'r': "249",
+      'g': "241",
+      'b': "228"
     },
     grey: {
-      'r': 76,
-      'g': 75,
-      'b': 80
+      'r': "76",
+      'g': "75",
+      'b': "80"
     },
     black: {
-      'r': 0,
-      'g': 0,
-      'b': 0
-    },
+      'r': "0",
+      'g': "0",
+      'b': "0"
+    }
   };
 
   constructor(public navParams: NavParams, public viewCtrl: ViewController) {
@@ -52,7 +52,7 @@ export class ColorPopover {
     let d = 0;
     
     // Counting the perceptive luminance - human eye favors green color...
-    let a = 1 - ( 0.299 * color.r + 0.587 * color.g + 0.114 * color.b)/255;
+    let a = 1 - ( 0.299 * +color.r + 0.587 * +color.g + 0.114 * +color.b)/255;
     
     if (a < 0.5)
         d = 0; // bright colors - black font

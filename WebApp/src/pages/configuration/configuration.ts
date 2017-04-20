@@ -23,8 +23,18 @@ export class ConfigPage {
   }
 
   addPlayer(event, config) {
+    let id = 0;
+    let used = false;
+    do{
+      if(used) id++;
+      used = false;
+      for(let i=0; i<config.players.length; i++){
+        if(config.players[i].id == id)
+          used=true;
+      }
+    }while(used);
     config.players.push({
-      id: config.players.length,
+      id: id,
       zones : [ 0, 0, 0, 0, 0, 0, 0, 0, 0],
       background:{ r: "255", g: "255", b: "255" },
       contents: [ {
@@ -68,9 +78,19 @@ export class ConfigPage {
   }
 
   addContent(event, player) {
+    let id = 0;
+    let used = false;
+    do{
+      if(used) id++;
+      used = false;
+      for(let i=0; i<player.contents.length; i++){
+        if(player.contents[i].id == id)
+          used=true;
+      }
+    }while(used);
     player.contents.push({
-      id: player.contents.length,
-      title: 'Content ' + player.contents.length,
+      id: id,
+      title: 'Content ' + id,
       type: "image",
       load: "logo.png",
       reload: false,
