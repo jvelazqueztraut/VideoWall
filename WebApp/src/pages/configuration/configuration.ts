@@ -125,9 +125,15 @@ export class ConfigPage {
   }
 
   changeZonePlayer(c,r) {
-    this.selectedConfig.zones[r][c]++;
-    if(this.selectedConfig.zones[r][c]>=this.selectedConfig.players.length)
-      this.selectedConfig.zones[r][c]=0;
+    for(let i=0; i<this.selectedConfig.players.length; i++){
+      if(this.selectedConfig.players[i].id == this.selectedConfig.zones[r][c]){
+        if((i+1)<this.selectedConfig.players.length){
+          this.selectedConfig.zones[r][c] = this.selectedConfig.players[i+1].id;
+          return;
+        }
+      }
+    }
+    this.selectedConfig.zones[r][c] = this.selectedConfig.players[0].id;
   }
 
   getPlayerZones(player) {
