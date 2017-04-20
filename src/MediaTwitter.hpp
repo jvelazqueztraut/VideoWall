@@ -19,6 +19,7 @@
 #include "ofMain.h"
 #include "Media.hpp"
 #include "ofxTwitter.h"
+#include "ofxParagraph.h"
 
 class MediaTwitter : public Media {
     
@@ -38,21 +39,29 @@ public:
         // Create a filter query.
         ofxTwitter::FilterQuery query;
         
-        //query.setLocations({ buenosAiresBounds });
+        query.setLocations({ buenosAiresBounds });
         
         // Track two emoji.
         // Read more about query terms here:
         // https://dev.twitter.com/streaming/overview/request-parameters
         vector<string> tracks = ofSplitString(track,",");
-        //query.setTracks(tracks);
         query.setTracks(tracks);
         
         // Start filter query.
-        client.filter(query);
+        //client.filter(query);
+        
+        text.setText("Tweet show\n"+track);
+        text.setAlignment(ofxParagraph::Alignment::ALIGN_CENTER);
+        text.setWidth(width*0.9);
+        text.setFont("font.ttf",height*0.1,"default");
     }
     
     void setup(LoopType l, float p){
         Media::setupPlaytime(l,p);
+    }
+    
+    void setTextColor(ofColor c){
+        text.setColor(c);
     }
     
     void update(float dt){
@@ -68,7 +77,7 @@ public:
     }
     
     void draw(){
-        
+        text.draw((width-text.getWidth())*0.5,(height-text.getHeight())*0.5);
     }
     
     bool isDone(){
@@ -154,6 +163,8 @@ public:
     ofxTwitter::StreamingClient client;
     uint64_t count = 0;
     uint64_t countMissed = 0;
+    
+    ofxParagraph text;
     
     float width,height;
 };

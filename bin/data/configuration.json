@@ -12,9 +12,9 @@
     "players": [
         {
             "background": {
-                "b": "255",
-                "g": "255",
-                "r": "255"
+                "b": "30",
+                "g": "180",
+                "r": "30"
             },
             "contents": [
                 {
@@ -24,7 +24,7 @@
                     "reload": false,
                     "repetitions": "0",
                     "time": "0",
-                    "title": "Content 0",
+                    "title": "Hashtag #boca",
                     "type": "twitter"
                 }
             ],
@@ -33,7 +33,7 @@
     ],
     "rowDisplacement": null,
     "rows": "3",
-    "title": "A3 Institucional",
+    "title": "Tweet Show",
     "width": "600",
     "zones": [
         [

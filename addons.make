@@ -4,6 +4,8 @@ ofxHTTP
 ofxIO
 ofxMediaType
 ofxNetworkUtils
+ofxParagraph
 ofxPoco
 ofxSSLManager
+ofxSmartFont
 ofxTwitter

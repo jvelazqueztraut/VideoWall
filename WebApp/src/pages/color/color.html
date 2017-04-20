@@ -1,4 +1,7 @@
 <ion-list class="popover-page">
+  <ion-item>
+    <button ion-button block (click)="dismiss()" [style.background-color]="getColor(color)" [style.color]="getComplementaryColor(color)">OK</button>
+  </ion-item>
   <ion-row class="row-dots">
     <ion-col>
       <button ion-button="dot" (click)="changeColor(colors.white)" class="dot-white"></button>

@@ -1,5 +1,19 @@
 #include "ofApp.h"
 
+ofColor complementaryColor(ofColor back){
+    int d = 0;
+    
+    // Counting the perceptive luminance - human eye favors green color...
+    double a = 1 - ( 0.299 * back.r + 0.587 * back.g + 0.114 * back.b)/255;
+    
+    if (a < 0.5)
+        d = 0; // bright colors - black font
+    else
+        d = 255; // dark colors - white font
+    
+    return  ofColor(d);
+}
+
 //--------------------------------------------------------------
 void ofApp::setup(){
     ofSetFrameRate(30);
@@ -175,6 +189,7 @@ void ofApp::applyConfiguration(bool save){
                             ofLogNotice("ofApp::applyConfiguration") << "Adding twitter content";
                             MediaTwitter * twitter = player.addContent<MediaTwitter>();
                             twitter->load(configuration["players"][i]["contents"][m]["load"],player.width,player.height);
+                            twitter->setTextColor(complementaryColor(player.back));
                             media = twitter;
                         }
                         else{
