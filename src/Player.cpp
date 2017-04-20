@@ -37,6 +37,7 @@ void Player::update(float dt){
     fbo.begin();
     ofClear(back);
     ofSetColor(255);
+    ofEnableAlphaBlending();
     if(current>=0){
         ofPushMatrix();
         float scale = 1.0f;

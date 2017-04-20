@@ -49,7 +49,22 @@ public:
         
         // Start filter query.
 #ifdef OF_DEBUG
-        //client.filter(query);
+        Tweet tweet0;
+        tweet0.status="Este es un tweet de 140 caracteres exactamente, ni uno mas ni uno menos. Por eso en verdad no dice nada, sino que es solamente un tweet, ok?";
+        tweet0.user="user";
+        tweet0.location="Buenos Aires, Argentina";
+        tweet0.timeout = 5.0;
+        tweets.push_back(tweet0);
+        
+        Tweet tweet1;
+        tweet1.status="eStE es OtRO tÍPIco tweet!!!¡¡";
+        tweet1.user="userMUYextrañoooooo";
+        tweet1.location="";
+        tweet1.timeout = 3.0;
+        tweets.push_back(tweet1);
+        
+        currentTweet = -1;
+        timer = 2.0;
 #else
         client.filter(query);
 #endif
@@ -79,12 +94,26 @@ public:
     
     void setTextColor(ofColor c){
         status.setColor(c);
-        user.setColor(ofColor(c,c.a-20));
-        location.setColor(ofColor(c,c.a-20));
+        user.setColor(ofColor(c,c.a-50));
+        location.setColor(ofColor(c,c.a-100));
     }
     
     void update(float dt){
         Media::updatePlaytime(dt);
+        
+#ifdef OF_DEBUG
+        if(timer<0){
+            currentTweet++;
+            if(currentTweet>=tweets.size())
+                currentTweet=0;
+            status.setText(tweets[currentTweet].status);
+            user.setText(tweets[currentTweet].user);
+            location.setText(tweets[currentTweet].location);
+            timer=tweets[currentTweet].timeout;
+        }else{
+            timer-=dt;
+        }
+#endif
     }
     
     void play(){
@@ -192,4 +221,16 @@ public:
     ofxParagraph status,user,location;
     
     float width,height;
+    
+#ifdef OF_DEBUG
+    typedef struct{
+        string status;
+        string user;
+        string location;
+        float timeout;
+    }Tweet;
+    vector<Tweet> tweets;
+    int currentTweet;
+    float timer;
+#endif
 };

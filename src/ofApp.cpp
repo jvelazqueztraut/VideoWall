@@ -248,7 +248,7 @@ void ofApp::update(){
 //--------------------------------------------------------------
 void ofApp::draw(){
     ofSetColor(255);
-    
+    ofEnableAlphaBlending();
     if(applyShader){
         shader.begin();
         shader.setUniform1f("colInterval", ofGetWidth()/(float)cols);
@@ -273,7 +273,7 @@ void ofApp::draw(){
     ofDrawBitmapStringHighlight("See " + server.url(), 10, 16);
     ofDrawBitmapStringHighlight("colDisplacement " + ofToString(colDisplacement), 10, 32);
     ofDrawBitmapStringHighlight("rowDisplacement " + ofToString(rowDisplacement), 10, 48);
-#end
+#endif
 }
 
 //--------------------------------------------------------------

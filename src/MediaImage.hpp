@@ -31,6 +31,7 @@ public:
     }
     
     void draw(){
+        ofSetColor(255,100);
         ofImage::draw(0,0);
     }
     
