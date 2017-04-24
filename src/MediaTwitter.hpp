@@ -72,19 +72,19 @@ public:
         status.setText("Tweet show\n"+track);
         status.setAlignment(ofxParagraph::Alignment::ALIGN_CENTER);
         status.setWidth(width*0.9);
-        status.setFont("font.ttf",height*0.05,"font_status");
+        status.setFont("font_status.ttf",height*0.05,"font_status");
         status.setSpacing(height*0.05*.5);
         
         user.setText("");
         user.setAlignment(ofxParagraph::Alignment::ALIGN_RIGHT);
         user.setWidth(width*0.7);
-        user.setFont("font.ttf",height*0.05,"font_user");
+        user.setFont("font_user.ttf",height*0.05,"font_user");
         user.setSpacing(height*0.05*.5);
         
         location.setText("");
         location.setAlignment(ofxParagraph::Alignment::ALIGN_RIGHT);
         location.setWidth(width*0.7);
-        location.setFont("font.ttf",height*0.05*0.75,"font_location");
+        location.setFont("font_user.ttf",height*0.05*0.75,"font_location");
         location.setSpacing(height*0.05*0.75*.5);
     }
     
