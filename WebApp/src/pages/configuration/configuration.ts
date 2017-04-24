@@ -45,7 +45,8 @@ export class ConfigPage {
         reload: false,
         loop: "none",
         time: "0",
-        repetitions: "0"
+        repetitions: "0",
+        qty: "0"
       } ]
     });
   }
@@ -96,7 +97,8 @@ export class ConfigPage {
       reload: false,
       loop: "none",
       time: "0",
-      repetitions: "0"
+      repetitions: "0",
+      qty: "0"
     });
     this.navCtrl.push(ContentPage,{
       content: player.contents[player.contents.length-1]

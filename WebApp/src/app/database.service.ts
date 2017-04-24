@@ -27,7 +27,8 @@ export class DataBaseService {
 	        reload: boolean,
 	        loop: string,
 	        time: string,
-	        repetitions: string
+	        repetitions: string,
+	        qty: string
 	      }>
 	    }>
 	  }>;

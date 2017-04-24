@@ -22,7 +22,7 @@ public:
         loader.stopThread();
     }
     
-    void load(){
+    void load(string load="liked",int qty=20){
         ofJson credentials;
 
         ofFile file("credentials_instagram.json");
@@ -31,7 +31,10 @@ public:
         instagram.setup(credentials["auth_token"],credentials["clientID"]);
         instagram.setCertFileLocation(ofToDataPath("ca-bundle.crt",false));
         
-        instagram.getUserLikedMedia(20);
+        //if(load=="liked")
+            instagram.getUserLikedMedia(qty);
+        //else
+        //    instagram.getUserFeed(qty);
         
         timer=0;
         current=-1;
@@ -67,6 +70,9 @@ public:
     }
     
     void draw(){
+#ifdef OF_DEBUG
+        instagram.drawJSON(0);
+#endif
         ofImage::draw(0,0);
     }
     

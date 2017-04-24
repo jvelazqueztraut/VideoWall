@@ -21,9 +21,10 @@
         <ion-option value="web">Web</ion-option>
         <ion-option value="youtube">Youtube</ion-option>
         <ion-option value="twitter">Twitter</ion-option>
+        <ion-option value="instagram">Instagram</ion-option>
       </ion-select>
     </ion-item>
-    <ion-item>
+    <ion-item *ngIf="selectedContent.type!='instagram'">
       <ion-label *ngIf="selectedContent.type=='image'">File</ion-label>
       <ion-label *ngIf="selectedContent.type=='video'">File</ion-label>
       <ion-label *ngIf="selectedContent.type=='web'">URL</ion-label>
@@ -31,9 +32,20 @@
       <ion-label *ngIf="selectedContent.type=='twitter'">Tracks/Hashtags</ion-label>
       <ion-input type="text" [(ngModel)]="selectedContent.load"></ion-input>
     </ion-item>
+    <ion-item *ngIf="selectedContent.type=='instagram'">
+      <ion-label>Content load</ion-label>
+      <ion-select [(ngModel)]="selectedContent.load" interface='action-sheet'>
+        <ion-option value="feed">User feed</ion-option>
+        <ion-option value="liked">Liked content</ion-option>
+      </ion-select>
+    </ion-item>
     <ion-item *ngIf="selectedContent.type=='web'">
       <ion-label>Reload</ion-label>
       <ion-toggle [(ngModel)]="selectedContent.reload"></ion-toggle>
+    </ion-item>
+    <ion-item *ngIf="selectedContent.type=='instagram'">
+      <ion-label>Photo quantity</ion-label>
+      <ion-input type="number" [(ngModel)]="selectedContent.qty"></ion-input>
     </ion-item>
     <ion-item>
       <ion-label>Loop</ion-label>

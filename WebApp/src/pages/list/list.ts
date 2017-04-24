@@ -81,7 +81,8 @@ export class ListPage {
           reload: false,
           loop: "none",
           time: "0",
-          repetitions: "0"
+          repetitions: "0",
+          qty: "0"
         } ] 
       } ]
     });

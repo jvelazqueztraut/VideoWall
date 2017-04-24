@@ -72,6 +72,7 @@
           <ion-icon *ngIf="content.type=='web'" name="globe" item-left></ion-icon>
           <ion-icon *ngIf="content.type=='youtube'" name="videocam" item-left></ion-icon>
           <ion-icon *ngIf="content.type=='twitter'" name="twitter" item-left></ion-icon>
+          <ion-icon *ngIf="content.type=='instagram'" name="instagram" item-left></ion-icon>
           <h2>{{content.title}}</h2>
           <p *ngIf="content.loop=='none'">{{content.load}} · No loop</p>
           <p *ngIf="content.loop=='time'">{{content.load}} · {{content.time}} seconds</p>

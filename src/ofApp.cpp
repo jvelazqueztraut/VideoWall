@@ -195,7 +195,7 @@ void ofApp::applyConfiguration(bool save){
                         else if(configuration["players"][i]["contents"][m]["type"] == "instagram"){
                             ofLogNotice("ofApp::applyConfiguration") << "Adding instagram content";
                             MediaInstagram * instagram = player.addContent<MediaInstagram>();
-                            instagram->load();
+                            instagram->load(configuration["players"][i]["contents"][m]["load"],ofToInt(configuration["players"][i]["contents"][m]["qty"]));
                             media = instagram;
                         }
                         else{
