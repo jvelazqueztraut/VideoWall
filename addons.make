@@ -2,10 +2,13 @@ ofxAwesomiumPlus
 ofxGeo
 ofxHTTP
 ofxIO
+ofxInstagram
+ofxJSON
 ofxMediaType
 ofxNetworkUtils
 ofxParagraph
 ofxPoco
 ofxSSLManager
 ofxSmartFont
+ofxThreadedImageLoader
 ofxTwitter

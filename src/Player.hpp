@@ -13,6 +13,7 @@
 #include "MediaVideo.hpp"
 #include "MediaWeb.hpp"
 #include "MediaTwitter.hpp"
+#include "MediaInstagram.hpp"
 
 class Player {
     

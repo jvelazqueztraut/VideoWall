@@ -192,6 +192,12 @@ void ofApp::applyConfiguration(bool save){
                             twitter->setTextColor(complementaryColor(player.back));
                             media = twitter;
                         }
+                        else if(configuration["players"][i]["contents"][m]["type"] == "instagram"){
+                            ofLogNotice("ofApp::applyConfiguration") << "Adding instagram content";
+                            MediaInstagram * instagram = player.addContent<MediaInstagram>();
+                            instagram->load();
+                            media = instagram;
+                        }
                         else{
                             ofLogNotice("ofApp::applyConfiguration") << "Adding NULL player.";
                             MediaImage * image = player.addContent<MediaImage>();

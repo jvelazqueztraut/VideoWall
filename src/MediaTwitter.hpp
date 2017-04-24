@@ -28,7 +28,7 @@ public:
         width=w;
         height=h;
         
-        client.setCredentialsFromFile("credentials.json");
+        client.setCredentialsFromFile("credentials_twitter.json");
 
         client.registerStreamingEvents(this);
         
