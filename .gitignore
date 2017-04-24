@@ -76,3 +76,4 @@ ipch/
 
 # Project specific
 bin/data/SessionData/*
+bin/data/credentials.json
