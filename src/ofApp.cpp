@@ -357,6 +357,7 @@ void ofApp::onHTTPPostEvent(ofx::HTTP::PostEventArgs& args){
         newConfiguration = true;
     }
     Poco::Net::HTTPServerResponse& response(args.response());
+    response.HTTPResponse::HTTPMessage::MessageHeader::NameValueCollection::add("Access-Control-Allow-Origin","*");
     response.setReason(ofToString(ofGetFrameRate(),2));
     response.send();
 }
