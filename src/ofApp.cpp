@@ -58,7 +58,9 @@ void ofApp::setup(){
     // Start the server.
     server.start();
     
+#ifndef OF_DEBUG
     ofHideCursor();
+#endif
     
     time=ofGetElapsedTimef();
 }
@@ -320,6 +322,8 @@ void ofApp::keyReleased(int key){
 void ofApp::mouseMoved(int x, int y ){
     for(int i=0; i<webs.size(); i++){
         ofPoint webPos(webs[i].player->pos);
+        webPos.x-=colDisplacement*floor(webPos.x/(ofGetWidth()/cols));
+        webPos.y-=rowDisplacement*floor(webPos.y/(ofGetHeight()/rows));
         webs[i].web->ofxAwesomiumPlus::mouseMoved(x-webPos.x,y-webPos.y);
     }
 }
@@ -328,6 +332,8 @@ void ofApp::mouseMoved(int x, int y ){
 void ofApp::mouseDragged(int x, int y, int button){
     for(int i=0; i<webs.size(); i++){
         ofPoint webPos(webs[i].player->pos);
+        webPos.x-=colDisplacement*floor(webPos.x/(ofGetWidth()/cols));
+        webPos.y-=rowDisplacement*floor(webPos.y/(ofGetHeight()/rows));
         webs[i].web->ofxAwesomiumPlus::mouseDragged(x-webPos.x,y-webPos.y,button);
     }
 }
@@ -336,6 +342,8 @@ void ofApp::mouseDragged(int x, int y, int button){
 void ofApp::mousePressed(int x, int y, int button){
     for(int i=0; i<webs.size(); i++){
         ofPoint webPos(webs[i].player->pos);
+        webPos.x-=colDisplacement*floor(webPos.x/(ofGetWidth()/cols));
+        webPos.y-=rowDisplacement*floor(webPos.y/(ofGetHeight()/rows));
         webs[i].web->ofxAwesomiumPlus::mousePressed(x-webPos.x,y-webPos.y,button);
     }
 }
@@ -344,6 +352,8 @@ void ofApp::mousePressed(int x, int y, int button){
 void ofApp::mouseReleased(int x, int y, int button){
     for(int i=0; i<webs.size(); i++){
         ofPoint webPos(webs[i].player->pos);
+        webPos.x-=colDisplacement*floor(webPos.x/(ofGetWidth()/cols));
+        webPos.y-=rowDisplacement*floor(webPos.y/(ofGetHeight()/rows));
         webs[i].web->ofxAwesomiumPlus::mouseReleased(x-webPos.x,y-webPos.y,button);
     }
 }
