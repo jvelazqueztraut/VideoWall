@@ -124,8 +124,8 @@ void ofApp::applyConfiguration(bool save){
                             if(!taken[rr][cc] && (z==(int)configuration["zones"][rr][cc])){
                                 if(((rr-1)>=0 && z==(int)configuration["zones"][rr-1][cc]) || ((cc-1)>=0 && z==(int)configuration["zones"][rr][cc-1])){
                                     taken[rr][cc] = true;
-                                    newPlayers.back().width = cc-c+1;
-                                    newPlayers.back().height = rr-r+1;
+                                    newPlayers.back().width = max(cc-c+1,newPlayers.back().width);
+                                    newPlayers.back().height = max(rr-r+1,newPlayers.back().height);
                                 }
                             }
                         }

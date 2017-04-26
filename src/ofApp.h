@@ -13,7 +13,7 @@ typedef struct{
 typedef struct{
     int playerId;
     float x,y;
-    float width, height;
+    int width, height;
     bool added;
 }PlayerSize;
 
