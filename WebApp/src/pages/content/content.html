@@ -43,6 +43,10 @@
       <ion-label>Reload</ion-label>
       <ion-toggle [(ngModel)]="selectedContent.reload"></ion-toggle>
     </ion-item>
+    <ion-item *ngIf="selectedContent.type=='youtube'">
+      <ion-label>Playlist</ion-label>
+      <ion-toggle [(ngModel)]="selectedContent.reload"></ion-toggle>
+    </ion-item>
     <ion-item *ngIf="selectedContent.type=='instagram'">
       <ion-label>Photo quantity</ion-label>
       <ion-input type="number" [(ngModel)]="selectedContent.qty"></ion-input>
@@ -52,7 +56,7 @@
       <ion-select [(ngModel)]="selectedContent.loop" interface='action-sheet'>
         <ion-option value="none">None</ion-option>
         <ion-option value="time">By time</ion-option>
-        <ion-option value="repetitions">By repetitions</ion-option>
+        <ion-option *ngIf="selectedContent.type=='video'" value="repetitions">By repetitions</ion-option>
       </ion-select>
     </ion-item>
     <ion-item *ngIf="selectedContent.loop=='time'">

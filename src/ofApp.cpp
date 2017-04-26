@@ -177,7 +177,7 @@ void ofApp::applyConfiguration(bool save){
                             MediaWeb * web = player.addContent<MediaWeb>();
                             web->ofxAwesomiumPlus::setup(player.width,player.height,"VideoWall");
                             string videoId = configuration["players"][i]["contents"][m]["load"];
-                            if(videoId.substr(0,2) == "PL") //Youtube playlist
+                            if(configuration["players"][i]["contents"][m]["reload"] || videoId.substr(0,2)=="PL") //Youtube playlist
                                 web->load("https://www.youtube.com/embed?listType=playlist&list="+ videoId + "&version=3&autoplay=1&loop=1&controls=0&modestbranding=1&showinfo=0");
                             else //Youtube video in loop mode
                                 web->load("https://www.youtube.com/embed/"+ videoId + "?version=3&playlist=" + videoId + "&autoplay=1&loop=1&controls=0&modestbranding=1&showinfo=0");

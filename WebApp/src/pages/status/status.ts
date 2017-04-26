@@ -12,14 +12,22 @@ export class StatusPage {
 	framerate: string;
 	players: number;
 
+  polling: any;
+
   constructor(public dataBase: DataBaseService, public http: Http) {
     dataBase.dataBase.subscribe(data => {
       this.server = dataBase.server;
     });
     this.server = dataBase.server;
+  }
 
+  ionViewDidLoad(){
     this.getStatus();
-    setInterval(() => this.getStatus(), 5000);
+    this.polling = setInterval(() => this.getStatus(), 5000);
+  }
+
+  ionViewDidLeave(){
+    clearInterval(this.polling);
   }
 
   getStatus() {
