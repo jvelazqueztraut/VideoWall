@@ -124,7 +124,7 @@ void ofApp::applyConfiguration(bool save){
                     for(int rr=r; rr<rows; rr++){
                         for(int cc=c; cc<cols; cc++){
                             if(!taken[rr][cc] && (z==(int)configuration["zones"][rr][cc])){
-                                if(((rr-1)>=0 && z==(int)configuration["zones"][rr-1][cc]) || ((cc-1)>=0 && z==(int)configuration["zones"][rr][cc-1])){
+                                if(((rr-1)>=0 && z==(int)configuration["zones"][rr-1][cc]) || ((cc-1)>=0 && z==(int)configuration["zones"][rr][cc-1]) || ((rr+1)<rows && z==(int)configuration["zones"][rr+1][cc]) || ((cc+1)<cols && z==(int)configuration["zones"][rr][cc+1])){
                                     taken[rr][cc] = true;
                                     newPlayers.back().width = max(cc-c+1,newPlayers.back().width);
                                     newPlayers.back().height = max(rr-r+1,newPlayers.back().height);

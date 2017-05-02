@@ -42,9 +42,7 @@
   </ion-item-divider>
   <ion-grid class="videowall-grid">
     <ion-row *ngFor="let groupZone of selectedConfig.zones; let y=index">
-      <ion-col col-3>
-      </ion-col>
-      <ion-col col-2 *ngFor="let zone of groupZone; let x=index">
+      <ion-col align='center' *ngFor="let zone of groupZone; let x=index">
         <a (click)="changeZonePlayer(x,y)">{{ zone }}</a>
       </ion-col>
     </ion-row>
