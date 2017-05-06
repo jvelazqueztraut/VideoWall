@@ -47,11 +47,11 @@
       </ion-col>
     </ion-row>
   </ion-grid>
-  <ion-item-divider color="light">Players</ion-item-divider>
+  <ion-item-divider color="light">Playlists</ion-item-divider>
   <ion-list *ngFor="let player of selectedConfig.players">
     <ion-item-sliding>
       <ion-item>
-        <h2>Player {{player.id}}</h2>
+        <h2>Playlist <b>{{player.id}}</b></h2>
         <p>TVs: {{getPlayerZones(player.id)}}</p>
         <button ion-button item-right (click)="chooseColor($event,player.background)" [style.background-color]="getColor(player.background)">&emsp;</button>
       </ion-item>
@@ -93,6 +93,7 @@
     <ion-icon name="add" item-left></ion-icon>
     <h2>New player</h2>
   </button>
+  <ion-item></ion-item>
 </ion-content>
 <ion-footer>
   <ion-toolbar *ngIf="selectedConfig.active">
