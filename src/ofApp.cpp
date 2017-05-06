@@ -200,6 +200,15 @@ void ofApp::applyConfiguration(bool save){
                             instagram->load(configuration["players"][i]["contents"][m]["load"],ofToInt(configuration["players"][i]["contents"][m]["qty"]));
                             media = instagram;
                         }
+                        else if(configuration["players"][i]["contents"][m]["type"] == "countdown"){
+                            ofLogNotice("ofApp::applyConfiguration") << "Adding countdown";
+                            MediaCountdown * countdown = player.addContent<MediaCountdown>();
+                            countdown->load(2017,5,6,10,50,40,player.width,player.height);
+                            countdown->setTopText("FALTAN");
+                            countdown->setBottomText("para el evento de #A3");
+                            countdown->setTextColor(complementaryColor(player.back));
+                            media = countdown;
+                        }
                         else{
                             ofLogNotice("ofApp::applyConfiguration") << "Adding NULL player.";
                             MediaImage * image = player.addContent<MediaImage>();
