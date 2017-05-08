@@ -203,9 +203,9 @@ void ofApp::applyConfiguration(bool save){
                         else if(configuration["players"][i]["contents"][m]["type"] == "countdown"){
                             ofLogNotice("ofApp::applyConfiguration") << "Adding countdown";
                             MediaCountdown * countdown = player.addContent<MediaCountdown>();
-                            countdown->load(2017,5,6,10,50,40,player.width,player.height);
-                            countdown->setTopText("FALTAN");
-                            countdown->setBottomText("para el evento de #A3");
+                            countdown->load(configuration["players"][i]["contents"][m]["date"]["year"],configuration["players"][i]["contents"][m]["date"]["month"],configuration["players"][i]["contents"][m]["date"]["day"],configuration["players"][i]["contents"][m]["date"]["hour"],configuration["players"][i]["contents"][m]["date"]["minute"],0,player.width,player.height);
+                            countdown->setTopText(configuration["players"][i]["contents"][m]["top"]);
+                            countdown->setBottomText(configuration["players"][i]["contents"][m]["bottom"]);
                             countdown->setTextColor(complementaryColor(player.back));
                             media = countdown;
                         }

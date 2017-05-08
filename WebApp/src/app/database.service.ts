@@ -18,12 +18,15 @@ export class DataBaseService {
 	    zones: number[][],
 	    players: Array<{
 	      id: number,
-	      background:{ r: string, g: string, b: string },
+	      background: { r: string, g: string, b: string },
 	      contents: Array<{
 	        id: number,
 	        title: string,
 	        type: string,
 	        load: string,
+	        top: string,
+	        bottom: string,
+	        date: { year: number, month: number, day: number, hour: number, minute: number },
 	        reload: boolean,
 	        loop: string,
 	        time: string,

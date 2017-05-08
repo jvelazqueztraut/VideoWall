@@ -27,28 +27,19 @@ export class ListPage {
   }
 
   deleteConfiguration(event, config) {
-    if(this.configurations.length>1){
-      var index = -1;
-      for(let i=0; i<this.configurations.length; i++){
-        if(this.configurations[i].id == config.id)
-          index=i;
-      }
-      if (index > -1) {
-        this.configurations.splice(index, 1);
-      }
+    var index = -1;
+    for(let i=0; i<this.configurations.length; i++){
+      if(this.configurations[i].id == config.id)
+        index=i;
     }
-    else{
-      let alert = this.alertCtrl.create({
-        title: "Cannot delete all configurations",
-        subTitle: "Sorry ;)",
-        buttons: ["OK"]
-      });
-      alert.present();
+    if (index > -1) {
+      this.configurations.splice(index, 1);
     }
     this.dataBase.saveConfigurations(this.configurations);
   }
 
   addConfiguration(event){
+    let now = new Date();
     let id = 0;
     let used = false;
     do{
@@ -72,12 +63,15 @@ export class ListPage {
       zones: [ [ 0, 0, 0], [0, 0, 0], [0 , 0, 0] ],
       players: [ {
         id: 0,
-        background:{ r: "255", g: "255", b: "255" },
+        background: { r: "255", g: "255", b: "255" },
         contents: [ {
           id: 0,
           title: "Content 0",
           type: "image",
           load: "logo.png",
+          top: "",
+          bottom: "",
+          date: { year: now.getFullYear(), month: now.getMonth(), day: now.getDate() , hour: now.getHours(), minute: 0 },
           reload: false,
           loop: "none",
           time: "0",

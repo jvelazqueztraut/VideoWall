@@ -22,6 +22,7 @@
         <ion-option value="youtube">Youtube</ion-option>
         <ion-option value="twitter">Twitter</ion-option>
         <ion-option value="instagram">Instagram</ion-option>
+        <ion-option value="countdown">Countdown</ion-option>
       </ion-select>
     </ion-item>
     <ion-item *ngIf="selectedContent.type!='instagram'">
@@ -38,6 +39,18 @@
         <ion-option value="feed">User feed</ion-option>
         <ion-option value="liked">Liked content</ion-option>
       </ion-select>
+    </ion-item>
+    <ion-item *ngIf="selectedContent.type=='countdown'">
+      <ion-label>Target date</ion-label>
+      <ion-datetime pickerFormat="MMM DD YYYY HH:mm" [(ngModel)]="date" (ionChange)="parseDate($event)"></ion-datetime>
+    </ion-item>
+    <ion-item *ngIf="selectedContent.type=='countdown'">
+      <ion-label>Top text</ion-label>
+      <ion-input type="text" [(ngModel)]="selectedContent.top"></ion-input>
+    </ion-item>
+    <ion-item *ngIf="selectedContent.type=='countdown'">
+      <ion-label>Bottom text</ion-label>
+      <ion-input type="text" [(ngModel)]="selectedContent.bottom"></ion-input>
     </ion-item>
     <ion-item *ngIf="selectedContent.type=='web'">
       <ion-label>Reload</ion-label>
