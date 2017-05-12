@@ -102,10 +102,11 @@ void ofApp::applyConfiguration(bool save){
         ///////////////////////////////////////////////////
         int rows = ofToInt(configuration["rows"]);
         int cols = ofToInt(configuration["cols"]);
-        bool taken[rows][cols];
+        vector< vector<bool> > taken;
         for(int r=0; r<rows; r++){
+			taken.push_back(vector<bool>());
             for(int c=0; c<cols; c++){
-                taken[r][c]=false;
+                taken.back().push_back(false);
             }
         }
         vector<PlayerSize> newPlayers;

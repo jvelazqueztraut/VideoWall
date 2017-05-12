@@ -48,6 +48,8 @@ icon.rc
 *.suo
 *.opensdf
 ipch/
+*.VC.db
+*.VC.opendb
 
 #XCode files
 *.plist
