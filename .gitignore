@@ -50,6 +50,7 @@ icon.rc
 ipch/
 *.VC.db
 *.VC.opendb
+.vs/*
 
 #XCode files
 *.plist
