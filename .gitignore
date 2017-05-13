@@ -48,6 +48,9 @@ icon.rc
 *.suo
 *.opensdf
 ipch/
+*.VC.db
+*.VC.opendb
+.vs/*
 
 #XCode files
 *.plist

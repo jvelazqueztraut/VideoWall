@@ -51,10 +51,10 @@ public:
         repetitions=0;
     }
     
-    virtual float getWidth(){}
-    virtual float getHeight(){}
+	virtual float getWidth() { return 0; }
+	virtual float getHeight() { return 0; }
     
-    virtual bool isDone(){}
+	virtual bool isDone() { return false; }
     
     LoopType loop;
     float loopParameter;
