@@ -169,7 +169,7 @@ void ofApp::applyConfiguration(bool save){
                         else if(configuration["players"][i]["contents"][m]["type"] == "web"){
                             ofLogNotice("ofApp::applyConfiguration") << "Adding web content.";
                             MediaWeb * web = player.addContent<MediaWeb>();
-                            web->ofxAwesomiumPlus::setup(player.width,player.height,"VideoWall");
+                            web->ofxAwesomium::setup(player.width,player.height,"VideoWall");
                             web->load(configuration["players"][i]["contents"][m]["load"],configuration["players"][i]["contents"][m]["reload"]);
                             WebPlayer webPlayer; webPlayer.web = web; webPlayer.player = &player;
                             webs.push_back(webPlayer);
@@ -178,7 +178,7 @@ void ofApp::applyConfiguration(bool save){
                         else if(configuration["players"][i]["contents"][m]["type"] == "youtube"){
                             ofLogNotice("ofApp::applyConfiguration") << "Adding youtube content";
                             MediaWeb * web = player.addContent<MediaWeb>();
-                            web->ofxAwesomiumPlus::setup(player.width,player.height,"VideoWall");
+                            web->ofxAwesomium::setup(player.width,player.height,"VideoWall");
                             string videoId = configuration["players"][i]["contents"][m]["load"];
                             if(configuration["players"][i]["contents"][m]["reload"] || videoId.substr(0,2)=="PL") //Youtube playlist
                                 web->load("https://www.youtube.com/embed?listType=playlist&list="+ videoId + "&version=3&autoplay=1&loop=1&controls=0&modestbranding=1&showinfo=0");
@@ -301,7 +301,7 @@ void ofApp::keyPressed(int key){
         ofShowCursor();
     }
     for(int i=0; i<webs.size(); i++){
-        webs[i].web->ofxAwesomiumPlus::keyPressed(key);
+        webs[i].web->ofxAwesomium::keyPressed(key);
     }
     
     if(key==OF_KEY_UP){
@@ -324,7 +324,7 @@ void ofApp::keyPressed(int key){
 //--------------------------------------------------------------
 void ofApp::keyReleased(int key){
     for(int i=0; i<webs.size(); i++){
-        webs[i].web->ofxAwesomiumPlus::keyReleased(key);
+        webs[i].web->ofxAwesomium::keyReleased(key);
     }
 }
 
@@ -334,7 +334,7 @@ void ofApp::mouseMoved(int x, int y ){
         ofPoint webPos(webs[i].player->pos);
         webPos.x-=colDisplacement*floor(webPos.x/(ofGetWidth()/cols));
         webPos.y-=rowDisplacement*floor(webPos.y/(ofGetHeight()/rows));
-        webs[i].web->ofxAwesomiumPlus::mouseMoved(x-webPos.x,y-webPos.y);
+        webs[i].web->ofxAwesomium::mouseMoved(x-webPos.x,y-webPos.y);
     }
 }
 
@@ -344,7 +344,7 @@ void ofApp::mouseDragged(int x, int y, int button){
         ofPoint webPos(webs[i].player->pos);
         webPos.x-=colDisplacement*floor(webPos.x/(ofGetWidth()/cols));
         webPos.y-=rowDisplacement*floor(webPos.y/(ofGetHeight()/rows));
-        webs[i].web->ofxAwesomiumPlus::mouseDragged(x-webPos.x,y-webPos.y,button);
+        webs[i].web->ofxAwesomium::mouseDragged(x-webPos.x,y-webPos.y,button);
     }
 }
 
@@ -354,7 +354,7 @@ void ofApp::mousePressed(int x, int y, int button){
         ofPoint webPos(webs[i].player->pos);
         webPos.x-=colDisplacement*floor(webPos.x/(ofGetWidth()/cols));
         webPos.y-=rowDisplacement*floor(webPos.y/(ofGetHeight()/rows));
-        webs[i].web->ofxAwesomiumPlus::mousePressed(x-webPos.x,y-webPos.y,button);
+        webs[i].web->ofxAwesomium::mousePressed(x-webPos.x,y-webPos.y,button);
     }
 }
 
@@ -364,7 +364,7 @@ void ofApp::mouseReleased(int x, int y, int button){
         ofPoint webPos(webs[i].player->pos);
         webPos.x-=colDisplacement*floor(webPos.x/(ofGetWidth()/cols));
         webPos.y-=rowDisplacement*floor(webPos.y/(ofGetHeight()/rows));
-        webs[i].web->ofxAwesomiumPlus::mouseReleased(x-webPos.x,y-webPos.y,button);
+        webs[i].web->ofxAwesomium::mouseReleased(x-webPos.x,y-webPos.y,button);
     }
 }
 
