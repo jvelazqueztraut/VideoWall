@@ -15,6 +15,8 @@
 
 #define DAYS_PER_MONTH {31,28,31,30,31,30,31,31,30,31,30,31}
 #define DAYS_PER_MONTH_LEAP {31,29,31,30,31,30,31,31,30,31,30,31}
+#define DAYS_PER_YEAR 365
+#define DAYS_PER_YEAR_LEAP 366
 
 typedef struct{
     int year;

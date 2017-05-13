@@ -18,7 +18,10 @@ ofColor complementaryColor(ofColor back){
 void ofApp::setup(){
     ofSetFrameRate(30);
     ofBackground(0);
+    ofSetCircleResolution(100);
+#ifdef OF_DEBUG
     ofSetLogLevel(OF_LOG_VERBOSE);
+#endif
     
     if(ofIsGLProgrammableRenderer()){
         ofLogNotice("ofApp::setup") << "Programmable Renderer available";
@@ -31,8 +34,8 @@ void ofApp::setup(){
     applyShader=true;
     rows=3;
     cols=3;
-    rowDisplacement=10;
-    colDisplacement=10;
+    rowDisplacement=0;
+    colDisplacement=0;
     screen.allocate(ofGetWidth() + colDisplacement*(cols-1),ofGetHeight() + rowDisplacement*(rows-1));
     
     ofx::HTTP::SimplePostServerSettings settings;
@@ -197,7 +200,8 @@ void ofApp::applyConfiguration(bool save){
                         else if(configuration["players"][i]["contents"][m]["type"] == "instagram"){
                             ofLogNotice("ofApp::applyConfiguration") << "Adding instagram content";
                             MediaInstagram * instagram = player.addContent<MediaInstagram>();
-                            instagram->load(configuration["players"][i]["contents"][m]["load"],ofToInt(configuration["players"][i]["contents"][m]["qty"]));
+                            instagram->load(player.width, player.height, configuration["players"][i]["contents"][m]["load"],ofToInt(configuration["players"][i]["contents"][m]["qty"]));
+                            instagram->setTextColor(complementaryColor(player.back));
                             media = instagram;
                         }
                         else if(configuration["players"][i]["contents"][m]["type"] == "countdown"){
