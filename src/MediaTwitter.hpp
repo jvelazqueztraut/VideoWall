@@ -19,6 +19,7 @@
 #include "ofMain.h"
 #include "Media.hpp"
 #include "ofxTwitter.h"
+#include "ofxGeo.h"
 #include "ofxParagraph.h"
 
 class MediaTwitter : public Media {
@@ -57,7 +58,7 @@ public:
         tweets.push_back(tweet0);
         
         Tweet tweet1;
-        tweet1.status="eStE es OtRO tÍPIco tweet!!!¡¡";
+        tweet1.status="eStE es OtRO tipico tweet!!";
         tweet1.user="userMUYextrañoooooo";
         tweet1.location="";
         tweet1.timeout = 3.0;
