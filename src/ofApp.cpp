@@ -23,20 +23,22 @@ void ofApp::setup(){
     ofSetLogLevel(OF_LOG_VERBOSE);
 #endif
     
-    if(ofIsGLProgrammableRenderer()){
-        ofLogNotice("ofApp::setup") << "Programmable Renderer available";
-    }
-    shader.load("shadersGL2/shader");
-    
     fullscreen=false;
     background.set(0);
 
-    applyShader=true;
     rows=3;
     cols=3;
-    rowDisplacement=0;
-    colDisplacement=0;
+
+#ifdef BEZEL_MANAGEMENT
+	if (ofIsGLProgrammableRenderer()) {
+		ofLogNotice("ofApp::setup") << "Programmable Renderer available";
+	}
+	shader.load("shadersGL2/shader");
+	applyShader = true;
+	rowDisplacement=10;
+    colDisplacement=10;
     screen.allocate(ofGetWidth() + colDisplacement*(cols-1),ofGetHeight() + rowDisplacement*(rows-1));
+#endif
     
     ofx::HTTP::SimplePostServerSettings settings;
     // Many other settings are available.
@@ -89,18 +91,23 @@ void ofApp::applyConfiguration(bool save){
         rows = ofToInt(configuration["rows"]);
         cols = ofToInt(configuration["cols"]);
     }
-    
-    if(!configuration["rowDisplacement"].is_null() && !configuration["colDisplacement"].is_null()){
+	float virtualWidth = ofGetWidth();
+	float virtualHeight = ofGetHeight();
+
+#ifdef BEZEL_MANAGEMENT
+	if(!configuration["rowDisplacement"].is_null() && !configuration["colDisplacement"].is_null()){
         rowDisplacement = ofToFloat(configuration["rowDisplacement"]);
         colDisplacement = ofToFloat(configuration["colDisplacement"]);
     }
-    
-    screen.allocate(ofGetWidth() + colDisplacement*(cols-1),ofGetHeight() + rowDisplacement*(rows-1));
+	virtualWidth += colDisplacement*(cols - 1);
+	virtualHeight += rowDisplacement*(rows - 1);
+	screen.allocate(virtualWidth, virtualHeight);
+#endif
     
     if(!configuration["players"].is_null()){
         
-        float width = screen.getWidth();
-        float height = screen.getHeight();
+        float width = virtualWidth;
+        float height = virtualHeight;
         
         ///////////////////////////////////////////////////
         int rows = ofToInt(configuration["rows"]);
@@ -258,19 +265,23 @@ void ofApp::update(){
         players[i].update(dt);
     }
     
-    screen.begin();
+#ifdef BEZEL_MANAGEMENT
+	screen.begin();
     ofClear(background);
     ofSetColor(255);
     for(int i=0; i<players.size(); i++){
         players[i].draw();
     }
     screen.end();
+#endif
 }
 
 //--------------------------------------------------------------
 void ofApp::draw(){
     ofSetColor(255);
     ofEnableAlphaBlending();
+
+#ifdef BEZEL_MANAGEMENT
     if(applyShader){
         shader.begin();
         shader.setUniform1f("colInterval", ofGetWidth()/(float)cols);
@@ -284,6 +295,11 @@ void ofApp::draw(){
     if(applyShader){
         shader.end();
     }
+#else
+	for (int i = 0; i<players.size(); i++) {
+		players[i].draw();
+	}
+#endif
     
 #ifdef OF_DEBUG
     ofSetColor(255,0,255);
@@ -308,7 +324,8 @@ void ofApp::keyPressed(int key){
         webs[i].web->ofxAwesomium::keyPressed(key);
     }
     
-    if(key==OF_KEY_UP){
+#ifdef BEZEL_MANAGEMENT
+	if(key==OF_KEY_UP){
         rowDisplacement+=1;
     }
     else if(key==OF_KEY_DOWN){
@@ -323,6 +340,7 @@ void ofApp::keyPressed(int key){
     if(key=='s'){
         applyShader=!applyShader;
     }
+#endif
 }
 
 //--------------------------------------------------------------
@@ -336,8 +354,10 @@ void ofApp::keyReleased(int key){
 void ofApp::mouseMoved(int x, int y ){
     for(int i=0; i<webs.size(); i++){
         ofPoint webPos(webs[i].player->pos);
-        webPos.x-=colDisplacement*floor(webPos.x/(ofGetWidth()/cols));
-        webPos.y-=rowDisplacement*floor(webPos.y/(ofGetHeight()/rows));
+#ifdef BEZEL_MANAGEMENT
+		webPos.x -= colDisplacement*floor(webPos.x / (ofGetWidth() / cols));
+		webPos.y -= rowDisplacement*floor(webPos.y / (ofGetHeight() / rows));
+#endif
         webs[i].web->ofxAwesomium::mouseMoved(x-webPos.x,y-webPos.y);
     }
 }
@@ -346,8 +366,10 @@ void ofApp::mouseMoved(int x, int y ){
 void ofApp::mouseDragged(int x, int y, int button){
     for(int i=0; i<webs.size(); i++){
         ofPoint webPos(webs[i].player->pos);
-        webPos.x-=colDisplacement*floor(webPos.x/(ofGetWidth()/cols));
-        webPos.y-=rowDisplacement*floor(webPos.y/(ofGetHeight()/rows));
+#ifdef BEZEL_MANAGEMENT
+		webPos.x -= colDisplacement*floor(webPos.x / (ofGetWidth() / cols));
+		webPos.y -= rowDisplacement*floor(webPos.y / (ofGetHeight() / rows));
+#endif
         webs[i].web->ofxAwesomium::mouseDragged(x-webPos.x,y-webPos.y,button);
     }
 }
@@ -356,8 +378,10 @@ void ofApp::mouseDragged(int x, int y, int button){
 void ofApp::mousePressed(int x, int y, int button){
     for(int i=0; i<webs.size(); i++){
         ofPoint webPos(webs[i].player->pos);
-        webPos.x-=colDisplacement*floor(webPos.x/(ofGetWidth()/cols));
-        webPos.y-=rowDisplacement*floor(webPos.y/(ofGetHeight()/rows));
+#ifdef BEZEL_MANAGEMENT
+		webPos.x -= colDisplacement*floor(webPos.x / (ofGetWidth() / cols));
+		webPos.y -= rowDisplacement*floor(webPos.y / (ofGetHeight() / rows));
+#endif
         webs[i].web->ofxAwesomium::mousePressed(x-webPos.x,y-webPos.y,button);
     }
 }
@@ -366,8 +390,10 @@ void ofApp::mousePressed(int x, int y, int button){
 void ofApp::mouseReleased(int x, int y, int button){
     for(int i=0; i<webs.size(); i++){
         ofPoint webPos(webs[i].player->pos);
-        webPos.x-=colDisplacement*floor(webPos.x/(ofGetWidth()/cols));
-        webPos.y-=rowDisplacement*floor(webPos.y/(ofGetHeight()/rows));
+#ifdef BEZEL_MANAGEMENT
+		webPos.x -= colDisplacement*floor(webPos.x / (ofGetWidth() / cols));
+		webPos.y -= rowDisplacement*floor(webPos.y / (ofGetHeight() / rows));
+#endif
         webs[i].web->ofxAwesomium::mouseReleased(x-webPos.x,y-webPos.y,button);
     }
 }
