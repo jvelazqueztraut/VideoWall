@@ -21,7 +21,8 @@ public:
     
     void update(float dt){
         Media::updatePlaytime(dt);
-        ofxAwesomium::update();
+		ofxAwesomium::updateCore(); 
+		ofxAwesomium::update();
     }
     
     void load(string u,bool r=false){
