@@ -50,6 +50,4 @@ public:
     ofPoint pos;
     float width,height;
     ofColor back;
-    
-    ofFbo fbo;
 };

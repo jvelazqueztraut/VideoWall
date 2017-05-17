@@ -10,7 +10,6 @@
 
 void Player::setup(int w, int h){
     width=w;height=h;
-    fbo.allocate(width,height);
     current = -1;
 }
 
@@ -33,32 +32,6 @@ void Player::update(float dt){
             contents[current]->play();
         }
     }
-    
-    fbo.begin();
-    ofClear(back);
-    ofSetColor(255);
-    ofEnableAlphaBlending();
-    if(current>=0){
-        ofPushMatrix();
-        float scale = 1.0f;
-        float x=0.0f;
-        float y=0.0f;
-        if(contents[current]->getWidth()!=width || contents[current]->getHeight()!=height){
-            if(contents[current]->getWidth()/contents[current]->getHeight() > width/height){
-                scale = width/contents[current]->getWidth();
-                y = (height-scale*contents[current]->getHeight())*0.5f;
-            }
-            else{
-                scale = height/contents[current]->getHeight();
-                x = (width-scale*contents[current]->getWidth())*0.5f;
-            }
-        }
-        ofTranslate(x,y);
-        ofScale(scale,scale);
-        contents[current]->draw();
-        ofPopMatrix();
-    }
-    fbo.end();
 }
 
 void Player::play(){
@@ -74,5 +47,31 @@ void Player::stop(){
 }
 
 void Player::draw(){
-    fbo.draw(pos.x,pos.y);
+    ofPushStyle();
+    ofFill();
+    ofSetColor(back);
+    ofDrawRectangle(pos.x,pos.y,width,height);
+    ofSetColor(255);
+    ofEnableAlphaBlending();
+    if(current>=0){
+        ofPushMatrix();
+        float scale = 1.0f;
+        float x=pos.x;
+        float y=pos.y;
+        if(contents[current]->getWidth()!=width || contents[current]->getHeight()!=height){
+            if(contents[current]->getWidth()/contents[current]->getHeight() > width/height){
+                scale = width/contents[current]->getWidth();
+                y += (height-scale*contents[current]->getHeight())*0.5f;
+            }
+            else{
+                scale = height/contents[current]->getHeight();
+                x += (width-scale*contents[current]->getWidth())*0.5f;
+            }
+        }
+        ofTranslate(x,y);
+        ofScale(scale,scale);
+        contents[current]->draw();
+        ofPopMatrix();
+    }
+    ofPopStyle();
 }
