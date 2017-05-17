@@ -16,7 +16,7 @@ class MediaVideo : public ofVideoPlayer, public Media {
 public:
     void setup(LoopType l, float p){
         Media::setupPlaytime(l,p);
-        ofVideoPlayer::setLoopState(ofLoopType::OF_LOOP_NONE);
+        ofVideoPlayer::setLoopState(ofLoopType::OF_LOOP_NORMAL);
     }
     
     void update(float dt){
