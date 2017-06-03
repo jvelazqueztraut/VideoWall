@@ -309,8 +309,12 @@ void ofApp::draw(){
         ofDrawLine(0, r*ofGetHeight()/rows, ofGetWidth(), r*ofGetHeight()/rows);
     
     ofDrawBitmapStringHighlight("See " + server.url(), 10, 16);
-    ofDrawBitmapStringHighlight("colDisplacement " + ofToString(colDisplacement), 10, 32);
+
+#ifdef BEZEL_MANAGEMENT
+	ofDrawBitmapStringHighlight("colDisplacement " + ofToString(colDisplacement), 10, 32);
     ofDrawBitmapStringHighlight("rowDisplacement " + ofToString(rowDisplacement), 10, 48);
+#endif
+
 #endif
 }
 
