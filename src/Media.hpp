@@ -10,6 +10,8 @@
 
 #define OF_DEBUG
 
+//#define BEZEL_MANAGEMENT
+
 typedef enum{
     PLAY_ONCE=0,
     LOOP_BY_REP,

@@ -169,9 +169,9 @@ public:
         ofLogNotice("onStatus") << "Coordinates: " << (tweet.coordinates() ? ofToString(tweet.coordinates()) : "NONE");
         ofLogNotice("onStatus") << "Place: " << (tweet.place() ? ofToString(tweet.place()->fullName()) : "NONE");
         
-        status.setText(tweet.text());
-        user.setText(tweet.user()->name());
-        location.setText((tweet.place() ? ofToString(tweet.place()->fullName()) : ""));
+        status.setText(simpleString(tweet.text()));
+        user.setText(simpleString(tweet.user()->name()));
+        location.setText(simpleString((tweet.place() ? ofToString(tweet.place()->fullName()) : "")));
     }
     
     
@@ -239,4 +239,12 @@ public:
     int currentTweet;
     float timer;
 #endif
+
+	string simpleString(string s) {
+		for (int i = 0; i < s.size(); i++) {
+			if (s.at(i) < 0 && s.at(i) > 255)
+				s.at(i) = 45;
+		}
+		return s;
+	}
 };

@@ -40,13 +40,14 @@ class ofApp : public ofBaseApp{
     
     vector< WebPlayer > webs;
     
-    ofFbo screen;
+#ifdef BEZEL_MANAGEMENT
+	ofFbo screen;
     ofShader shader;
     bool applyShader;
-    
-    int rows,cols;
     float rowDisplacement,colDisplacement;
-    
+#endif
+	int rows, cols;
+
     ofColor background;
     bool fullscreen;
     float time;
