@@ -25,6 +25,11 @@
 class MediaTwitter : public Media {
     
 public:
+    ~MediaTwitter(){
+        ofLogWarning()<< "Closing MediaTwitter" << endl;
+        client.stop();
+    }
+
     void load(string track, float w, float h){
         width=w;
         height=h;
