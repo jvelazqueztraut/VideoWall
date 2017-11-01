@@ -78,6 +78,7 @@ ipch/
 !.gitignore
 
 # Project specific
+bin/data/Logs
 bin/data/SessionData/*
 bin/data/credentials.json
 bin/data/credentials_twitter.json
