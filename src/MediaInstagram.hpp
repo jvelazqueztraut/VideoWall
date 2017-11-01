@@ -101,12 +101,12 @@ public:
                 loader.loadFromURL(image, instagram.getImageURL()[current]);
                 loader.loadFromURL(profile,instagram.getProfilePicture()[current]);
                 basicData data = instagram.getBasicData()[current];
-                user.setText(data.user);
+                user.setText(simpleString(data.user));
                 
                 for(int i=0;i<data.caption.size();i++){
                     if(data.caption.at(i)=='\n') data.caption.at(i)=' ';
                 }
-                caption.setText(data.caption);
+				caption.setText(simpleString(data.caption));
                 
                 
                 int days = ofToInt(data.created_at)/60/60/24;

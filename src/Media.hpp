@@ -8,7 +8,7 @@
 
 #pragma once
 
-#define OF_DEBUG
+//#define OF_DEBUG
 
 //#define BEZEL_MANAGEMENT
 
@@ -62,4 +62,12 @@ public:
     float loopParameter;
     float playtime;
     unsigned int repetitions;
+
+	string simpleString(string s) {
+		for (int i = 0; i < s.size(); i++) {
+			if (s.at(i) < 0 || s.at(i) > 512)
+				s.at(i) = ' ';
+		}
+		return s;
+	}
 };

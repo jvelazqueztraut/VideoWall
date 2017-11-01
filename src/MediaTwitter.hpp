@@ -239,12 +239,4 @@ public:
     int currentTweet;
     float timer;
 #endif
-
-	string simpleString(string s) {
-		for (int i = 0; i < s.size(); i++) {
-			if (s.at(i) < 0 && s.at(i) > 255)
-				s.at(i) = 45;
-		}
-		return s;
-	}
 };
