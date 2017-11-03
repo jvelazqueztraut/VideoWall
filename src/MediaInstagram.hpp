@@ -16,7 +16,7 @@
 #include "MediaCountdown.hpp"
 
 
-#define INSTAGRAM_TRANSITION_TIMER 5
+#define INSTAGRAM_TRANSITION_TIMER 10
 
 #define INSTAGRAM_USER_SIZE (height*0.035)
 #define INSTAGRAM_DATE_SIZE (height*0.025)
