@@ -47,10 +47,10 @@ public:
         instagram.setup(credentials["auth_token"],credentials["clientID"]);
         instagram.setCertFileLocation(ofToDataPath("ca-bundle.crt",false));
         
-        //if(load=="liked")
+        if(load=="liked")
             instagram.getUserLikedMedia(qty);
-        //else
-        //    instagram.getUserFeed(qty);
+        else
+            instagram.getUserFeed(qty);
         
         profileMasked.allocate(INSTAGRAM_PROFILE_WIDTH,INSTAGRAM_PROFILE_HEIGHT);
         ofPixels img;
