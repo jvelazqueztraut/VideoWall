@@ -80,21 +80,21 @@ public:
         status.setText("Tweet show\n"+track);
         status.setAlignment(ofxParagraph::Alignment::ALIGN_CENTER);
         status.setWidth(width*0.9);
-        status.setFont("font_status.ttf",TWITTER_FONT_SIZE,"font_status");
+        status.setFont("fonts/Raleway-Medium.ttf",TWITTER_FONT_SIZE,"font_Medium");
         status.setIndent(0);
         status.setSpacing(TWITTER_FONT_SIZE*.5);
         
         user.setText("");
         user.setAlignment(ofxParagraph::Alignment::ALIGN_RIGHT);
         user.setWidth(width*0.7);
-        user.setFont("font_user.ttf",TWITTER_FONT_SIZE,"font_user");
+        user.setFont("fonts/Raleway-Bold.ttf",TWITTER_FONT_SIZE,"font_bold");
         user.setIndent(0);
         user.setSpacing(TWITTER_FONT_SIZE*.5);
         
         location.setText("");
         location.setAlignment(ofxParagraph::Alignment::ALIGN_RIGHT);
         location.setWidth(width*0.7);
-        location.setFont("font_user.ttf",TWITTER_FONT_SIZE*0.75,"font_location");
+        location.setFont("fonts/Raleway-Regular.ttf",TWITTER_FONT_SIZE*0.75,"font_regular");
         location.setIndent(0);
         location.setSpacing(TWITTER_FONT_SIZE*0.75*.5);
     }

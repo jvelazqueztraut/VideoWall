@@ -12,7 +12,7 @@
 #include "ofxParagraph.h"
 
 #define CLOCK_SIZE (height*0.22)
-#define CLOCK_BOTTOM_SIZE (height*0.05)
+#define CLOCK_BOTTOM_SIZE (height*0.1)
 
 class MediaClock : public Media {
     
@@ -24,13 +24,13 @@ public:
         clock.setText("--:--:--");
         clock.setAlignment(ofxParagraph::Alignment::ALIGN_CENTER);
         clock.setWidth(width);
-        clock.setFont("font_status.ttf",CLOCK_SIZE,"font_clock");
+        clock.setFont("fonts/Raleway-Bold.ttf",CLOCK_SIZE,"font_bold");
         clock.setSpacing(CLOCK_SIZE*.5);
         
         bottom.setText("");
         bottom.setAlignment(ofxParagraph::Alignment::ALIGN_CENTER);
         bottom.setWidth(width*0.9);
-        bottom.setFont("font_user.ttf",CLOCK_BOTTOM_SIZE,"font_bottom");
+        bottom.setFont("fonts/Raleway-Medium.ttf",CLOCK_BOTTOM_SIZE,"font_medium");
         bottom.setSpacing(CLOCK_BOTTOM_SIZE*.5);
     }
     

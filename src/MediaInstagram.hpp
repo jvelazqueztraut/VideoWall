@@ -61,21 +61,21 @@ public:
         user.setText("user");
         user.setAlignment(ofxParagraph::Alignment::ALIGN_LEFT);
         user.setWidth(width*0.3);
-        user.setFont("font_status.ttf",INSTAGRAM_USER_SIZE,"font_user");
+        user.setFont("fonts/Raleway-Bold.ttf",INSTAGRAM_USER_SIZE,"font_bold");
         user.setIndent(0);
         user.setSpacing(INSTAGRAM_USER_SIZE/2);
 
         date.setText("date");
         date.setAlignment(ofxParagraph::Alignment::ALIGN_LEFT);
         date.setWidth(width*0.3);
-        date.setFont("font_user.ttf",INSTAGRAM_DATE_SIZE,"font_date");
+        date.setFont("fonts/Raleway-Regular.ttf",INSTAGRAM_DATE_SIZE,"font_regular");
         date.setIndent(0);
         date.setSpacing(INSTAGRAM_DATE_SIZE/2);
 
         caption.setText("");
         caption.setAlignment(ofxParagraph::Alignment::ALIGN_LEFT);
         caption.setWidth(width*0.4);
-        caption.setFont("font_user.ttf",INSTAGRAM_CAPTION_SIZE,"font_caption");
+        caption.setFont("fonts/Raleway-Medium.ttf",INSTAGRAM_CAPTION_SIZE,"font_medium");
         caption.setIndent(0);
         caption.setSpacing(INSTAGRAM_CAPTION_SIZE/2);
 

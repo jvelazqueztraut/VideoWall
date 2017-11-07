@@ -44,19 +44,19 @@ public:
         top.setText("Countdown");
         top.setAlignment(ofxParagraph::Alignment::ALIGN_CENTER);
         top.setWidth(width*0.9);
-        top.setFont("font_status.ttf",height*0.075,"font_top");
+        top.setFont("fonts/Raleway-Medium.ttf",height*0.075,"font_medium");
         top.setSpacing(height*0.05*.5);
         
         bottom.setText("");
         bottom.setAlignment(ofxParagraph::Alignment::ALIGN_CENTER);
         bottom.setWidth(width*0.9);
-        bottom.setFont("font_user.ttf",height*0.075,"font_bottom");
+        bottom.setFont("fonts/Raleway-Bold.ttf",height*0.075,"font_bold");
         bottom.setSpacing(height*0.05*.5);
         
         count.setText("");
         count.setAlignment(ofxParagraph::Alignment::ALIGN_CENTER);
         count.setWidth(width*0.9);
-        count.setFont("font_status.ttf",height*0.1,"font_countdown");
+        count.setFont("fonts/Raleway-Regular.ttf",height*0.1,"font_regular");
         count.setSpacing(height*0.05*0.75*.5);
 
     }

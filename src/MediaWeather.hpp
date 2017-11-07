@@ -14,8 +14,8 @@
 
 #define ZERO_KELVIN (-273.15f)
 #define WEATHER_UPDATE_TIMER 60
-#define WEATHER_TEMPERATURE_SIZE (height*0.22)
-#define WEATHER_BOTTOM_SIZE (height*0.1)
+#define WEATHER_TEMPERATURE_SIZE (height*0.24)
+#define WEATHER_BOTTOM_SIZE (height*0.05)
 
 class MediaWeather : public Media {
     
@@ -32,13 +32,13 @@ public:
         temperature.setText("--.-°");
         temperature.setAlignment(ofxParagraph::Alignment::ALIGN_RIGHT);
         temperature.setWidth(width*0.4);
-        temperature.setFont("font_status.ttf",WEATHER_TEMPERATURE_SIZE,"font_temperature");
+        temperature.setFont("fonts/Raleway-Bold.ttf",WEATHER_TEMPERATURE_SIZE,"font_bold");
         temperature.setSpacing(WEATHER_TEMPERATURE_SIZE*.5);
         
         bottom.setText("");
         bottom.setAlignment(ofxParagraph::Alignment::ALIGN_CENTER);
         bottom.setWidth(width*0.9);
-        bottom.setFont("font_user.ttf",WEATHER_BOTTOM_SIZE,"font_bottom");
+        bottom.setFont("fonts/Raleway-Medium.ttf",WEATHER_BOTTOM_SIZE,"font_medium");
         bottom.setSpacing(WEATHER_BOTTOM_SIZE*.5);
         
         svg.load(ofToDataPath("weather/na.svg"));
@@ -108,12 +108,12 @@ public:
     }
     
     void draw(){
-        temperature.draw(width*0.20,height*0.55);
+        temperature.draw(width*0.18,height*0.55);
         bottom.draw((width-bottom.getWidth())*0.5,height*0.5+height*0.3);
         
         ofPushMatrix();
         //ofTranslate(ofGetMouseX(),ofGetMouseY());
-        ofTranslate(width*0.5,height*0.1);
+        ofTranslate(width*0.55,height*0.1);
         float scale = ofMap(height, 0, 1000, 0, 1);
         ofScale(scale, scale, scale);
         svg.draw();
