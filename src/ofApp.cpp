@@ -221,6 +221,20 @@ void ofApp::applyConfiguration(bool save){
                             countdown->setTextColor(complementaryColor(player.back));
                             media = countdown;
                         }
+                        else if(configuration["players"][i]["contents"][m]["type"] == "weather"){
+                            ofLogNotice("ofApp::applyConfiguration") << "Adding weather";
+                            MediaWeather * weather = player.addContent<MediaWeather>();
+                            weather->load(player.width,player.height);
+                            weather->setTextColor(complementaryColor(player.back));
+                            media = weather;
+                        }
+                        else if(configuration["players"][i]["contents"][m]["type"] == "clock"){
+                            ofLogNotice("ofApp::applyConfiguration") << "Adding clock";
+                            MediaClock * clock = player.addContent<MediaClock>();
+                            clock->load(player.width,player.height);
+                            clock->setTextColor(complementaryColor(player.back));
+                            media = clock;
+                        }
                         else{
                             ofLogNotice("ofApp::applyConfiguration") << "Adding NULL player.";
                             MediaImage * image = player.addContent<MediaImage>();

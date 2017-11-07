@@ -14,6 +14,8 @@
 #include "MediaTwitter.hpp"
 #include "MediaInstagram.hpp"
 #include "MediaCountdown.hpp"
+#include "MediaWeather.hpp"
+#include "MediaClock.hpp"
 
 //Leave this one last
 #include "MediaWeb.hpp"

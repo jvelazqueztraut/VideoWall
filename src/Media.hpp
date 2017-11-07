@@ -8,7 +8,7 @@
 
 #pragma once
 
-//#define OF_DEBUG
+#define OF_DEBUG
 
 //#define BEZEL_MANAGEMENT
 
