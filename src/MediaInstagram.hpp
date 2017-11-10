@@ -25,8 +25,8 @@
 #define INSTAGRAM_PROFILE_WIDTH (width*0.11)
 #define INSTAGRAM_PROFILE_HEIGHT (width*0.11)
 #define INSTAGRAM_PROFILE_MARGIN (width*0.015)
-#define INSTAGRAM_PROFILE_X ((width*0.55)+INSTAGRAM_PROFILE_MARGIN)
-#define INSTAGRAM_PROFILE_Y (height*0.2)
+#define INSTAGRAM_PROFILE_X ((width*0.525)+INSTAGRAM_PROFILE_MARGIN)
+#define INSTAGRAM_PROFILE_Y (height*0.1)
 
 class MediaInstagram : public Media{
     
@@ -60,7 +60,7 @@ public:
         
         user.setText("user");
         user.setAlignment(ofxParagraph::Alignment::ALIGN_LEFT);
-        user.setWidth(width*0.3);
+        user.setWidth(width*0.4);
         user.setFont("fonts/Raleway-Bold.ttf",INSTAGRAM_USER_SIZE,"font_bold");
         user.setIndent(0);
         user.setSpacing(INSTAGRAM_USER_SIZE/2);
@@ -74,7 +74,7 @@ public:
 
         caption.setText("");
         caption.setAlignment(ofxParagraph::Alignment::ALIGN_LEFT);
-        caption.setWidth(width*0.4);
+        caption.setWidth(width*0.45);
         caption.setFont("fonts/Raleway-Medium.ttf",INSTAGRAM_CAPTION_SIZE,"font_medium");
         caption.setIndent(0);
         caption.setSpacing(INSTAGRAM_CAPTION_SIZE/2);
@@ -167,10 +167,10 @@ public:
 #ifdef OF_DEBUG
         instagram.drawJSON(0);
 #endif
-        float imageResizeWidth = width*0.5;
+        float imageResizeWidth = width*0.45;
         float imageResizeHeigth = height*0.8;
         float imageScale = 1.0f;
-        float imageX=width*0.05;
+        float imageX=width*0.025;
         float imageY=height*0.1;
         ofPushMatrix();
         if(image.getHeight()>0 && image.getWidth()/image.getHeight() > imageResizeWidth/imageResizeHeigth){
@@ -190,7 +190,7 @@ public:
         profileBorder.draw(INSTAGRAM_PROFILE_X-INSTAGRAM_PROFILE_WIDTH*0.06,INSTAGRAM_PROFILE_Y-INSTAGRAM_PROFILE_HEIGHT*0.06,INSTAGRAM_PROFILE_WIDTH*1.12,INSTAGRAM_PROFILE_HEIGHT*1.12);
         user.draw(INSTAGRAM_PROFILE_X + INSTAGRAM_PROFILE_WIDTH + INSTAGRAM_PROFILE_MARGIN, INSTAGRAM_PROFILE_Y + INSTAGRAM_USER_SIZE + INSTAGRAM_PROFILE_MARGIN);
         date.draw(INSTAGRAM_PROFILE_X+ INSTAGRAM_PROFILE_WIDTH + INSTAGRAM_PROFILE_MARGIN, INSTAGRAM_PROFILE_Y + INSTAGRAM_USER_SIZE + INSTAGRAM_DATE_SIZE + 2*INSTAGRAM_PROFILE_MARGIN);
-        caption.draw(INSTAGRAM_PROFILE_X , INSTAGRAM_PROFILE_Y + INSTAGRAM_PROFILE_HEIGHT + INSTAGRAM_CAPTION_SIZE + 2*INSTAGRAM_PROFILE_MARGIN);
+        caption.draw(INSTAGRAM_PROFILE_X , INSTAGRAM_PROFILE_Y + INSTAGRAM_PROFILE_HEIGHT + INSTAGRAM_CAPTION_SIZE + INSTAGRAM_PROFILE_MARGIN);
     }
     
     bool isDone(){
