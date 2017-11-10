@@ -64,10 +64,10 @@ public:
     unsigned int repetitions;
 
 	string simpleString(string s) {
-		for (int i = 0; i < s.size(); i++) {
+		/*for (int i = 0; i < s.size(); i++) {
 			if (s.at(i) < 0 || s.at(i) > 512)
 				s.at(i) = ' ';
-		}
+		}*/
 		return s;
 	}
 };
