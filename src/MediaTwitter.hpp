@@ -29,16 +29,19 @@ class MediaTwitter : public Media {
 public:
     ~MediaTwitter(){
         ofLogWarning()<< "Closing MediaTwitter" << endl;
-        client.stop();
+		client->stopAndJoin();
+        client->unregisterStreamingEvents(this);
+		delete client;
     }
 
     void load(string track, float w, float h){
         width=w;
         height=h;
         
-        client.setCredentialsFromFile("credentials_twitter.json");
+		client = new ofxTwitter::StreamingClient();
+		client->setCredentialsFromFile("credentials_twitter.json");
 
-        client.registerStreamingEvents(this);
+        client->registerStreamingEvents(this);
         
         // Create a bounding box for Buenos Aires
         ofxGeo::CoordinateBounds buenosAiresBounds(ofxGeo::Coordinate(-34.418239163, -58.1485748291),
@@ -74,7 +77,7 @@ public:
         currentTweet = -1;
         timer = 2.0;
 #else
-        client.filter(query);
+        client->filter(query);
 #endif
         
         status.setText("Tweet show\n"+track);
@@ -225,7 +228,7 @@ public:
         // Ignoring the raw message.
     }
     
-    ofxTwitter::StreamingClient client;
+    ofxTwitter::StreamingClient * client;
     uint64_t count = 0;
     uint64_t countMissed = 0;
     
